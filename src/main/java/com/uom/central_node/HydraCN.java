@@ -34,7 +34,7 @@ public class HydraCN extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("AddressApp");
+        this.primaryStage.setTitle("HydraCN");
 
         initRootLayout();
 
@@ -45,6 +45,12 @@ public class HydraCN extends Application {
 		registerDeviceServer.start();
 	}
 
+	@Override
+	public void stop() throws Exception {
+		// TODO Auto-generated method stub
+		RegisterDeviceServer.stopServer();
+	}
+	
 	public void initRootLayout() {
         try {
             // Load root layout from fxml file.

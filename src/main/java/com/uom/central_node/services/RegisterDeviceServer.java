@@ -14,7 +14,7 @@ public class RegisterDeviceServer extends Thread {
 
 	public static RegisterDeviceHandler handler;
 	public static RegisterDeviceService.Processor processor;
-	
+	private static TServer server;
 	@Override
 	public void run() {
 		try {
@@ -30,9 +30,18 @@ public class RegisterDeviceServer extends Thread {
 	public static void simple(RegisterDeviceService.Processor processor) {
 		try {
 			TServerTransport serverTransport = new TServerSocket(9091);
-			TServer server = new TSimpleServer(new Args(serverTransport).processor(processor));
+			server = new TSimpleServer(new Args(serverTransport).processor(processor));
 			
 			server.serve();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void stopServer() {
+		try {
+			server.stop();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
