@@ -1,10 +1,11 @@
 package com.uom.central_node;
 
 import java.io.IOException;
-
 import com.uom.central_node.model.Device;
+import com.uom.central_node.model.ProcessInfo;
 import com.uom.central_node.services.RegisterDeviceHandler;
 import com.uom.central_node.services.RegisterDeviceServer;
+import com.uom.central_node.view.DataViewerController;
 import com.uom.central_node.view.DeviceOverviewController;
 
 import javafx.application.Application;
@@ -14,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class HydraCN extends Application {
@@ -22,9 +24,18 @@ public class HydraCN extends Application {
     private BorderPane rootLayout;
     
 	private ObservableList<Device> deviceData = FXCollections.observableArrayList();
+	private ObservableList<ProcessInfo> infoData = FXCollections.observableArrayList();
 	
 	public ObservableList<Device> getDeviceData() {
         return deviceData;
+    }
+	
+	public void setInfoData(ObservableList<ProcessInfo> infoData) {
+        this.infoData = infoData;
+    }
+	
+	public ObservableList<ProcessInfo> getInfoData() {
+        return infoData;
     }
 	
 	public HydraCN() {
@@ -33,7 +44,9 @@ public class HydraCN extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) {
+		//set primary stage
 		this.primaryStage = primaryStage;
+		//set title
         this.primaryStage.setTitle("HydraCN");
 
         initRootLayout();
@@ -85,6 +98,33 @@ public class HydraCN extends Application {
             e.printStackTrace();
         }
     }
+	
+	public void showDataViewer(){
+		try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(HydraCN.class.getResource("view/DataViewer.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Data Viewer");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Set the person into the controller.
+            DataViewerController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
 	
 	public static void main(String[] args) {
 		launch(args);

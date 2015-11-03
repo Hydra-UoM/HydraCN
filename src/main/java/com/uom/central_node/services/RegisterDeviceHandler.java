@@ -15,6 +15,7 @@ public class RegisterDeviceHandler implements RegisterDeviceService.Iface {
 		com.uom.central_node.model.Device device = new com.uom.central_node.model.Device(
 				deviceDetails.deviceId, deviceDetails.IPAddress, deviceDetails.type);
 		
+		//add device to observableList of device table
 		hydraCN.getDeviceData().add(device);
 	}
 	

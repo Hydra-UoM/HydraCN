@@ -9,8 +9,8 @@ public class Device {
 	private final StringProperty IPAddress;
 	private final StringProperty type;
 	
-	public final static String TYPE_ANDROID = "ANDROID_DEVICE";
-	public final static String TYPE_WINDOWS = "WINDOWS_DEVICE";
+	public final static String TYPE_ANDROID = "Android";
+	public final static String TYPE_WINDOWS = "Windows";
 	
 	public Device(String deviceId, String IPaddress, String type) {
 		this.deviceId = new SimpleStringProperty(deviceId);

@@ -8,12 +8,11 @@ import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransport;
 
-import com.uom.central_node.android_agent_services.AndroidAgentService;
-import com.uom.central_node.android_agent_services.DeviceOverallInfo;
 
 public class ProcessStatsClient {
-	public static DeviceOverallInfo getDeviceOverallInfo(String IPAddress) {
-		DeviceOverallInfo overallInfo = null;
+	public static WindowsDeviceOverallInfo getDeviceOverallInfo(String IPAddress) {
+		
+		WindowsDeviceOverallInfo overallInfo = null;
 		try {
 			TTransport transport;
 
@@ -33,15 +32,20 @@ public class ProcessStatsClient {
 		return overallInfo;
 	}
 	
-	private static DeviceOverallInfo getDeviceOverallInfoFromService(ProcessStats.Client client)
+	private static WindowsDeviceOverallInfo getDeviceOverallInfoFromService(ProcessStats.Client client)
 			throws TException {
 
-		//List<String> overallInfo = client.recv_getAllProcesses();
 		double cpuUsage = client.getTotalCPU();
 		double ramUsedUsage = client.getTotalMemory();
 		double networkUpload = client.getTotalNetUpload();
 		double networkDownload = client.getTotalNetDownload();
 
-		return null;
+		WindowsDeviceOverallInfo overallInfo = new WindowsDeviceOverallInfo();
+		overallInfo.setCpuUsage(cpuUsage);
+		overallInfo.setNetworkDownload(networkDownload);
+		overallInfo.setNetworkUpload(networkUpload);
+		overallInfo.getRamUsedUsage();
+		
+		return overallInfo;
 	}
 }
