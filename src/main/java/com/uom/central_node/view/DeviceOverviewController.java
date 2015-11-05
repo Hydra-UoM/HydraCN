@@ -30,7 +30,7 @@ import javafx.scene.control.Tooltip;
 
 public class DeviceOverviewController {
 	@FXML
-	private TableView<Device> deviceTable;
+	public TableView<Device> deviceTable;
 	@FXML
 	private TableColumn<Device, String> deviceIdColumn;
 	@FXML
