@@ -115,7 +115,7 @@ public class AndroidAgentServiceClient {
 	}
 
 	public static List<TProcessInfo> getAllRunningProcessWithInfo(String IPAddress, 
-			double cpu, double ram, String process) {
+			String cpu, String ram, String process) {
 		List<TProcessInfo> info = null;
 		try {
 			TTransport transport;
@@ -134,6 +134,27 @@ public class AndroidAgentServiceClient {
 		}
 
 		return info;
+	}
+	
+	public static List<SensorDetails> getSensorDetails(String IPAddress) {
+		List<SensorDetails> processes = null;
+		try {
+			TTransport transport;
+
+			transport = new TSocket(IPAddress, 9090);
+			transport.open();
+
+			TProtocol protocol = new TBinaryProtocol(transport);
+			AndroidAgentService.Client client = new AndroidAgentService.Client(protocol);
+
+			processes = getSensorDetailsFromService(client);
+
+			transport.close();
+		} catch (TException x) {
+			x.printStackTrace();
+		}
+
+		return processes;
 	}
 	
 	private static List<TProcessInfo> getAllRunningProcessFromService(AndroidAgentService.Client client)
@@ -175,9 +196,18 @@ public class AndroidAgentServiceClient {
 	}
 	
 	private static List<TProcessInfo> getAllRunningProcessesWithInfoFromService(AndroidAgentService.Client client,
-			double cpu, double ram, String process)throws TException {
+			String cpu, String ram, String process) throws TException {
 	
-		List<TProcessInfo> processes = client.getAllRunningProcessesWithInfo();
+		List<TProcessInfo> processes = client.getFilteredProcessInfo(cpu + "", ram + "", process + "");
+		//List<TProcessInfo> processes = client.getAllRunningProcessesWithInfo();
+		
+		return processes;
+	}
+	
+	private static List<SensorDetails> getSensorDetailsFromService(AndroidAgentService.Client client)
+			throws TException {
+	
+		List<SensorDetails> processes = client.getSensorDetails();
 		
 		return processes;
 	}

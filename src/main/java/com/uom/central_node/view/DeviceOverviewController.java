@@ -1,10 +1,15 @@
 package com.uom.central_node.view;
 
+import java.util.List;
+
 import com.uom.central_node.HydraCN;
 import com.uom.central_node.android_agent_services.AndroidAgentServiceClient;
 import com.uom.central_node.android_agent_services.DeviceOverallInfo;
+import com.uom.central_node.android_agent_services.SensorDetails;
 import com.uom.central_node.commands.CommandStrings;
 import com.uom.central_node.model.Device;
+import com.uom.central_node.model.ProcessInfo;
+import com.uom.central_node.model.Sensor;
 import com.uom.central_node.windows_agent_services.ProcessStatsClient;
 import com.uom.central_node.windows_agent_services.WindowsDeviceOverallInfo;
 
@@ -34,7 +39,7 @@ public class DeviceOverviewController {
 	private TableColumn<Device, String> typeColumn;
 
 	@FXML
-	private Label headerLabel;
+	private TitledPane basicInfoPane;
 	@FXML
 	private Label firstRowLabel;
 	@FXML
@@ -68,7 +73,7 @@ public class DeviceOverviewController {
 	@FXML
 	private ChoiceBox<String> commandChoiceBox;
 	@FXML
-	private Label sendCommandLabel;
+	private TitledPane sendCommandPane;
 	@FXML
 	private Button sendCommandBtn;
 
@@ -87,6 +92,15 @@ public class DeviceOverviewController {
 	private CheckBox ramCheck;
 	@FXML
 	private CheckBox processesCheck;
+
+	private ObservableList<Sensor> sensorData = FXCollections.observableArrayList();
+
+	@FXML
+	private TableView<Sensor> sensorTable;
+	@FXML
+	private TableColumn<Sensor, String> sensorNameColumn;
+	@FXML
+	private TableColumn<Sensor, String> sensorAvailabiltyColumn;
 
 	// flags for commands
 	public static boolean BASIC_INFO_FLAG = false;
@@ -124,13 +138,13 @@ public class DeviceOverviewController {
 				.addListener((observable, oldValue, newValue) -> commandChanged(newValue));
 
 		deviceOverviewController = this;
-		
+
 		final Tooltip tooltip1 = new Tooltip("Enable CPU Filter");
 		cpuCheck.setTooltip(tooltip1);
-		
+
 		final Tooltip tooltip2 = new Tooltip("Enable RAM Filter");
 		ramCheck.setTooltip(tooltip2);
-		
+
 		final Tooltip tooltip3 = new Tooltip("Enable Process Filter");
 		processesCheck.setTooltip(tooltip3);
 	}
@@ -141,6 +155,9 @@ public class DeviceOverviewController {
 
 		// clear basic info showing grid
 		clearBasicInfoGrid();
+
+		// hide sensortable
+		hideSensorTable();
 
 		// change selected device
 		this.selectedDevice = device;
@@ -156,13 +173,13 @@ public class DeviceOverviewController {
 
 		populateCommandChoiceBox();
 		commandChoiceBox.setVisible(true);
-		sendCommandLabel.setVisible(true);
+		sendCommandPane.setVisible(true);
 		sendCommandBtn.setVisible(true);
 	}
 
 	public void hideCommandBox() {
 		commandChoiceBox.setVisible(false);
-		sendCommandLabel.setVisible(false);
+		sendCommandPane.setVisible(false);
 		sendCommandBtn.setVisible(false);
 	}
 
@@ -200,7 +217,16 @@ public class DeviceOverviewController {
 				PROCESSES_INFO_FLAG = true;
 				showDataViewer();
 			}
+
+			if (command.equals(CommandStrings.GET_SENSOR_DETAILS)) {
+				PROCESSES_INFO_FLAG = true;
+				updateSensorTable();
+			}
 		}
+	}
+
+	public void updateSensorTable() {
+		showSensorTable();
 	}
 
 	public void showDeviceBasicInfo() {
@@ -270,7 +296,7 @@ public class DeviceOverviewController {
 
 	private void showAndroidOverallinfo(DeviceOverallInfo overallInfo) {
 
-		headerLabel.setText("Basic Information");
+		basicInfoPane.setVisible(true);
 
 		firstRowLabel.setText("Device Type");
 		secondRowLabel.setText("IP Address");
@@ -281,11 +307,25 @@ public class DeviceOverviewController {
 		seventhRowLabel.setText("CPU Usage");
 
 		if (overallInfo != null) {
-			cpuLabel.setText(overallInfo.cpuUsage);
+
+			double cpuUsage = Double.parseDouble(overallInfo.cpuUsage);
+			// double ramFreeMemory =
+			// Double.parseDouble(overallInfo.ramFreeMemory);
+			// double ramUsedMemory =
+			// Double.parseDouble(overallInfo.ramUsedMemory);
+
+			double cpuUsageRoundOff = (double) Math.round(cpuUsage * 100);
+			// double ramFreeMemoryRoundOff = Math.round(ramFreeMemory * 100) /
+			// 100.f;
+			// double ramUsedMemoryRoundOff = Math.round(ramUsedMemory * 100) /
+			// 100.f;
+
+			cpuLabel.setText(cpuUsageRoundOff + " %");
 			ramFreeLabel.setText(overallInfo.ramFreeMemory);
 			ramUsedLabel.setText(overallInfo.ramUsedMemory);
 			batteryLifeLabel.setText(overallInfo.battery);
 		} else {
+			basicInfoPane.setVisible(true);
 			cpuLabel.setText("loading..");
 			ramFreeLabel.setText("loading..");
 			ramUsedLabel.setText("loading..");
@@ -295,7 +335,7 @@ public class DeviceOverviewController {
 
 	private void showWindowsBasicDetails(WindowsDeviceOverallInfo overallInfo) {
 
-		headerLabel.setText("Basic Information");
+		basicInfoPane.setVisible(true);
 
 		firstRowLabel.setText("Device Type");
 		secondRowLabel.setText("IP Address");
@@ -306,10 +346,20 @@ public class DeviceOverviewController {
 		seventhRowLabel.setText("CPU Usage");
 
 		if (overallInfo != null) {
-			cpuLabel.setText(overallInfo.getCpuUsage());
-			ramFreeLabel.setText(overallInfo.getNetworkDownload());
-			ramUsedLabel.setText(overallInfo.getRamUsedUsage());
-			batteryLifeLabel.setText(overallInfo.getNetworkUpload());
+			double cpuUsage = Double.parseDouble(overallInfo.getCpuUsage());
+			double ramFreeMemory = Double.parseDouble(overallInfo.getRamUsedUsage());
+			double upload = Double.parseDouble(overallInfo.getNetworkUpload());
+			double download = Double.parseDouble(overallInfo.getNetworkDownload());
+
+			double cpuUsageRoundOff = (double) Math.round(cpuUsage * 100);
+			double ramFreeMemoryRoundOff = Math.round(ramFreeMemory * 100) / 1024;
+			double uploadRoundOff = Math.round(upload * 100) / 1024;
+			double downloadRoundOff = Math.round(download * 100) / 1024;
+
+			cpuLabel.setText(cpuUsageRoundOff + " %");
+			ramFreeLabel.setText(downloadRoundOff + " MB");
+			ramUsedLabel.setText(ramFreeMemoryRoundOff + " MB");
+			batteryLifeLabel.setText(uploadRoundOff + " MB");
 		} else {
 			cpuLabel.setText("loading..");
 			ramFreeLabel.setText("loading..");
@@ -319,7 +369,8 @@ public class DeviceOverviewController {
 	}
 
 	private void clearBasicInfoGrid() {
-		headerLabel.setText("");
+		//basicPane.setVisible(false);
+		basicInfoPane.setVisible(false);
 
 		firstRowLabel.setText("");
 		secondRowLabel.setText("");
@@ -349,6 +400,40 @@ public class DeviceOverviewController {
 		processTxt.setText("");
 	}
 
+	public void hideSensorTable() {
+		sensorTable.setVisible(false);
+	}
+
+	public void showSensorTable() {
+
+		sensorNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+		sensorAvailabiltyColumn.setCellValueFactory(cellData -> cellData.getValue().availabiltyProperty());
+		sensorData = FXCollections.observableArrayList();
+		sensorTable.setItems(sensorData);
+		
+		sensorData.add(new Sensor("loading..", false));
+		
+		Thread thread = new Thread() {
+			@Override
+			public void run() {
+				
+				List<SensorDetails> sensorDetails = AndroidAgentServiceClient.getSensorDetails
+						(selectedDevice.getIPAddress());
+				
+				sensorTable.getItems().remove(0);
+				
+				for(SensorDetails detail : sensorDetails){
+					sensorData.add(new Sensor(detail.sensorName, detail.availability));
+				}
+				
+			}
+		};
+
+		thread.start();
+		
+		sensorTable.setVisible(true);
+	}
+
 	public void setMainApp(HydraCN hydraCN) {
 		this.hydraCN = hydraCN;
 
@@ -366,6 +451,10 @@ public class DeviceOverviewController {
 		command.add(CommandStrings.GET_BASIC_INFO);
 		command.add(CommandStrings.GET_PROCESSES_WITH_INFORMATION);
 
+		if (selectedDevice.getType().equals(Device.TYPE_ANDROID)) {
+			command.add(CommandStrings.GET_SENSOR_DETAILS);
+		}
+
 		commandChoiceBox.setItems(command);
 	}
 
@@ -382,7 +471,7 @@ public class DeviceOverviewController {
 			cpuCheck.setTooltip(tooltip);
 
 		} else {
-			
+
 			cpuTxt.setDisable(false);
 
 			cpuTxt.setText("");
@@ -391,7 +480,7 @@ public class DeviceOverviewController {
 			cpuCheck.setTooltip(tooltip);
 		}
 	}
-	
+
 	@FXML
 	private void checkHandleRAM() {
 
@@ -405,7 +494,7 @@ public class DeviceOverviewController {
 			ramCheck.setTooltip(tooltip);
 
 		} else {
-			
+
 			ramTxt.setDisable(false);
 
 			ramTxt.setText("");
@@ -414,7 +503,7 @@ public class DeviceOverviewController {
 			ramCheck.setTooltip(tooltip);
 		}
 	}
-	
+
 	@FXML
 	private void checkHandleProcess() {
 
@@ -428,7 +517,7 @@ public class DeviceOverviewController {
 			processesCheck.setTooltip(tooltip);
 
 		} else {
-			
+
 			processTxt.setDisable(false);
 
 			processTxt.setText("");
