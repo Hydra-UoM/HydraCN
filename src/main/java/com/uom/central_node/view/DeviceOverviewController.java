@@ -14,10 +14,14 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
+import javafx.scene.control.Tooltip;
 
 public class DeviceOverviewController {
 	@FXML
@@ -61,13 +65,28 @@ public class DeviceOverviewController {
 	@FXML
 	private Label macAddressLabel;
 
-
 	@FXML
 	private ChoiceBox<String> commandChoiceBox;
 	@FXML
 	private Label sendCommandLabel;
 	@FXML
 	private Button sendCommandBtn;
+
+	@FXML
+	public TitledPane filterPane;
+	@FXML
+	public TextField cpuTxt;
+	@FXML
+	public TextField ramTxt;
+	@FXML
+	public TextField processTxt;
+
+	@FXML
+	private CheckBox cpuCheck;
+	@FXML
+	private CheckBox ramCheck;
+	@FXML
+	private CheckBox processesCheck;
 
 	// flags for commands
 	public static boolean BASIC_INFO_FLAG = false;
@@ -85,6 +104,8 @@ public class DeviceOverviewController {
 	public static Device selectedDevice;
 	public static String selectedCommand;
 
+	public static DeviceOverviewController deviceOverviewController;
+
 	@FXML
 	private void initialize() {
 		// Initialize the person table with the two columns.
@@ -94,12 +115,24 @@ public class DeviceOverviewController {
 
 		clearBasicInfoGrid();
 		hideCommandBox();
+		hideFilter();
 
 		deviceTable.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue, newValue) -> deviceChanged(newValue));
 
 		commandChoiceBox.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue, newValue) -> commandChanged(newValue));
+
+		deviceOverviewController = this;
+		
+		final Tooltip tooltip1 = new Tooltip("Enable CPU Filter");
+		cpuCheck.setTooltip(tooltip1);
+		
+		final Tooltip tooltip2 = new Tooltip("Enable RAM Filter");
+		ramCheck.setTooltip(tooltip2);
+		
+		final Tooltip tooltip3 = new Tooltip("Enable Process Filter");
+		processesCheck.setTooltip(tooltip3);
 	}
 
 	public void deviceChanged(Device device) {
@@ -114,6 +147,9 @@ public class DeviceOverviewController {
 
 		// show command box
 		showCommandBox();
+
+		// show filterbox
+		showFilter();
 	}
 
 	public void showCommandBox() {
@@ -146,12 +182,13 @@ public class DeviceOverviewController {
 	public void handleSendCommand() {
 		// stop all monitoring command
 		stopAllMonitoringCommands();
-		
-		//interprete the selected command
+
+		// interprete the selected command
 		interpreteCommand(selectedCommand);
 	}
 
 	public void interpreteCommand(String command) {
+		// DataViewerController.updateInfoTableRunningFlag = false;
 
 		if (command != null) {
 			if (command.equals(CommandStrings.GET_BASIC_INFO)) {
@@ -301,6 +338,17 @@ public class DeviceOverviewController {
 		macAddressLabel.setText("");
 	}
 
+	public void showFilter() {
+		filterPane.setVisible(true);
+	}
+
+	public void hideFilter() {
+		filterPane.setVisible(false);
+		cpuTxt.setText("");
+		ramTxt.setText("");
+		processTxt.setText("");
+	}
+
 	public void setMainApp(HydraCN hydraCN) {
 		this.hydraCN = hydraCN;
 
@@ -320,4 +368,74 @@ public class DeviceOverviewController {
 
 		commandChoiceBox.setItems(command);
 	}
+
+	@FXML
+	private void checkHandleCPU() {
+
+		if (!cpuCheck.isSelected()) {
+
+			cpuTxt.setDisable(true);
+
+			cpuTxt.setText("");
+
+			final Tooltip tooltip = new Tooltip("Enable CPU Filter");
+			cpuCheck.setTooltip(tooltip);
+
+		} else {
+			
+			cpuTxt.setDisable(false);
+
+			cpuTxt.setText("");
+
+			final Tooltip tooltip = new Tooltip("Disable CPU Filter");
+			cpuCheck.setTooltip(tooltip);
+		}
+	}
+	
+	@FXML
+	private void checkHandleRAM() {
+
+		if (!ramCheck.isSelected()) {
+
+			ramTxt.setDisable(true);
+
+			ramTxt.setText("");
+
+			final Tooltip tooltip = new Tooltip("Enable RAM Filter");
+			ramCheck.setTooltip(tooltip);
+
+		} else {
+			
+			ramTxt.setDisable(false);
+
+			ramTxt.setText("");
+
+			final Tooltip tooltip = new Tooltip("Disable RAM Filter");
+			ramCheck.setTooltip(tooltip);
+		}
+	}
+	
+	@FXML
+	private void checkHandleProcess() {
+
+		if (!processesCheck.isSelected()) {
+
+			processTxt.setDisable(true);
+
+			processTxt.setText("");
+
+			final Tooltip tooltip = new Tooltip("Enable Process Filter");
+			processesCheck.setTooltip(tooltip);
+
+		} else {
+			
+			processTxt.setDisable(false);
+
+			processTxt.setText("");
+
+			final Tooltip tooltip = new Tooltip("Disable Process Filter");
+			processesCheck.setTooltip(tooltip);
+		}
+	}
+
 }

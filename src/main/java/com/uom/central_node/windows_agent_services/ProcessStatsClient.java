@@ -1,5 +1,7 @@
 package com.uom.central_node.windows_agent_services;
 
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.thrift.TException;
@@ -8,10 +10,11 @@ import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransport;
 
+import com.uom.central_node.model.ProcessInfo;
 
 public class ProcessStatsClient {
 	public static WindowsDeviceOverallInfo getDeviceOverallInfo(String IPAddress) {
-		
+
 		WindowsDeviceOverallInfo overallInfo = null;
 		try {
 			TTransport transport;
@@ -31,7 +34,78 @@ public class ProcessStatsClient {
 
 		return overallInfo;
 	}
+
+	public static List<ProcessInfo> getProcessesInfo(String IPAddress) {
+
+		List<ProcessInfo> overallInfo = new LinkedList<ProcessInfo>();
+		try {
+			TTransport transport;
+
+			transport = new TSocket(IPAddress, 9090);
+			transport.open();
+
+			TProtocol protocol = new TBinaryProtocol(transport);
+			ProcessStats.Client client = new ProcessStats.Client(protocol);
+
+			List<String> overallInfoStr = getProcessInfoFromService(client);
+
+			for (int i = 0; i < overallInfoStr.size(); i++) {
+				if ((i + 4) < overallInfoStr.size()) {
+					String processName = overallInfoStr.get(i++);
+					String cpu = overallInfoStr.get(i++);
+					String usedMemory = overallInfoStr.get(i++);
+					String download = overallInfoStr.get(i++);
+					String upload = overallInfoStr.get(i++);
+					ProcessInfo info = new ProcessInfo(processName, cpu, usedMemory, "0.0", download, upload);
+					overallInfo.add(info);
+				}
+
+			}
+
+			transport.close();
+		} catch (TException x) {
+			x.printStackTrace();
+		}
+
+		return overallInfo;
+	}
 	
+	public static List<ProcessInfo> getProcessesInfo(String IPAddress, double cpu, double mem, double download,
+				double upload) {
+
+		List<ProcessInfo> overallInfo = new LinkedList<ProcessInfo>();
+		try {
+			TTransport transport;
+
+			transport = new TSocket(IPAddress, 9090);
+			transport.open();
+
+			TProtocol protocol = new TBinaryProtocol(transport);
+			ProcessStats.Client client = new ProcessStats.Client(protocol);
+
+			List<String> overallInfoStr = getProcessInfoFromService(client, cpu, mem, download, upload);
+
+			for (int i = 0; i < overallInfoStr.size(); i++) {
+				if ((i + 4) < overallInfoStr.size()) {
+					String processName = overallInfoStr.get(i++);
+					String cpuStr = overallInfoStr.get(i++);
+					String usedMemoryStr = overallInfoStr.get(i++);
+					String downloadStr = overallInfoStr.get(i++);
+					String uploadStr = overallInfoStr.get(i++);
+					ProcessInfo info = new ProcessInfo(processName, cpuStr, usedMemoryStr, "0.0", downloadStr, uploadStr);
+					overallInfo.add(info);
+				}
+
+			}
+
+			transport.close();
+		} catch (TException x) {
+			x.printStackTrace();
+		}
+
+		return overallInfo;
+	}
+
 	private static WindowsDeviceOverallInfo getDeviceOverallInfoFromService(ProcessStats.Client client)
 			throws TException {
 
@@ -44,8 +118,19 @@ public class ProcessStatsClient {
 		overallInfo.setCpuUsage(cpuUsage);
 		overallInfo.setNetworkDownload(networkDownload);
 		overallInfo.setNetworkUpload(networkUpload);
-		overallInfo.getRamUsedUsage();
-		
+		overallInfo.setRamUsedUsage(ramUsedUsage);
+
 		return overallInfo;
+	}
+
+	private static List<String> getProcessInfoFromService(ProcessStats.Client client) throws TException {
+		List<String> processes = client.filterAllProcesses(0, 0, 0, 0);
+		return processes;
+	}
+	
+	private static List<String> getProcessInfoFromService(ProcessStats.Client client, 
+			double cpu, double mem, double download,double upload) throws TException {
+		List<String> processes = client.filterAllProcesses(cpu, mem, download, upload);
+		return processes;
 	}
 }

@@ -114,6 +114,28 @@ public class AndroidAgentServiceClient {
 		return info;
 	}
 
+	public static List<TProcessInfo> getAllRunningProcessWithInfo(String IPAddress, 
+			double cpu, double ram, String process) {
+		List<TProcessInfo> info = null;
+		try {
+			TTransport transport;
+
+			transport = new TSocket(IPAddress, 9090);
+			transport.open();
+
+			TProtocol protocol = new TBinaryProtocol(transport);
+			AndroidAgentService.Client client = new AndroidAgentService.Client(protocol);
+
+			info = getAllRunningProcessesWithInfoFromService(client, cpu, ram, process);
+
+			transport.close();
+		} catch (TException x) {
+			x.printStackTrace();
+		}
+
+		return info;
+	}
+	
 	private static List<TProcessInfo> getAllRunningProcessFromService(AndroidAgentService.Client client)
 			throws TException {
 
@@ -146,6 +168,14 @@ public class AndroidAgentServiceClient {
 	
 	private static List<TProcessInfo> getAllRunningProcessesWithInfoFromService(AndroidAgentService.Client client)
 			throws TException {
+	
+		List<TProcessInfo> processes = client.getAllRunningProcessesWithInfo();
+		
+		return processes;
+	}
+	
+	private static List<TProcessInfo> getAllRunningProcessesWithInfoFromService(AndroidAgentService.Client client,
+			double cpu, double ram, String process)throws TException {
 	
 		List<TProcessInfo> processes = client.getAllRunningProcessesWithInfo();
 		

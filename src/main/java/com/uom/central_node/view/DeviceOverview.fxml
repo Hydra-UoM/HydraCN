@@ -26,6 +26,23 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
+                  <TitledPane fx:id="filterPane" animated="false" expanded="false" layoutX="20.0" layoutY="64.0" prefHeight="61.0" prefWidth="539.0" text="Filters">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="23.0" prefWidth="537.0">
+                           <children>
+                              <TextField fx:id="cpuTxt" disable="true" layoutX="57.0" layoutY="5.0" prefHeight="25.0" prefWidth="56.0" />
+                              <Label layoutX="14.0" layoutY="8.0" text="CPU %" />
+                              <Label layoutX="154.0" layoutY="8.0" text="RAM" />
+                              <Label layoutX="293.0" layoutY="9.0" text="Process name" />
+                              <TextField fx:id="processTxt" disable="true" layoutX="374.0" layoutY="5.0" prefHeight="25.0" prefWidth="120.0" />
+                              <TextField fx:id="ramTxt" disable="true" layoutX="186.0" layoutY="5.0" prefHeight="25.0" prefWidth="64.0" />
+                              <CheckBox fx:id="cpuCheck" layoutX="118.0" layoutY="8.0" mnemonicParsing="false" onAction="#checkHandleCPU" />
+                              <CheckBox fx:id="ramCheck" layoutX="255.0" layoutY="9.0" mnemonicParsing="false" onAction="#checkHandleRAM" />
+                              <CheckBox fx:id="processesCheck" layoutX="499.0" layoutY="8.0" mnemonicParsing="false" onAction="#checkHandleProcess" />
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </TitledPane>
                   <GridPane layoutX="20.0" layoutY="109.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="170.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -68,7 +85,7 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Button fx:id="sendCommandBtn" layoutX="577.0" layoutY="70.0" mnemonicParsing="false" onAction="#handleSendCommand" text="Send Command" />
+                  <Button fx:id="sendCommandBtn" layoutX="577.0" layoutY="65.0" mnemonicParsing="false" onAction="#handleSendCommand" text="Send Command" />
                </children></AnchorPane>
         </items>
       </SplitPane>
