@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.thrift.TException;
 
 import com.uom.central_node.HydraCN;
+import com.uom.central_node.android_agent_services.AndroidAgentServiceClient;
 import com.uom.central_node.model.Device;
 import com.uom.central_node.view.DeviceOverviewController;
 
@@ -38,7 +39,8 @@ public class RegisterDeviceHandler implements RegisterDeviceService.Iface {
 		
 		//add device to observableList of device table
 		hydraCN.getDeviceData().add(device);
-		
+		float bandwidth = AndroidAgentServiceClient.getNetworkBandwidth(device.getIPAddress());
+		return;
 		
 	}
 	

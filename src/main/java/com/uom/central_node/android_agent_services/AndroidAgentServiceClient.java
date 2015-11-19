@@ -241,7 +241,7 @@ public class AndroidAgentServiceClient {
 	private static float testNetworkFromService(AndroidAgentService.Client client) throws TException {
 
 		java.nio.ByteBuffer buff = java.nio.ByteBuffer.allocate(1024);
-		int sizeOfBytes = 5;
+		int sizeOfBytes = 100;
 
 		long totalDiff = 0;
 		for (int i = 0; i < sizeOfBytes; i++) {
@@ -252,7 +252,7 @@ public class AndroidAgentServiceClient {
 			totalDiff += diff;
 		}
 		
-		float bandwidth = sizeOfBytes / totalDiff; // kB/milliSec
+		float bandwidth = sizeOfBytes * 1.0f / totalDiff; // kB/milliSec
 		return bandwidth * 1000;
 	}
 
