@@ -1,5 +1,7 @@
 package com.uom.central_node.view;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import com.uom.central_node.HydraCN;
@@ -102,6 +104,17 @@ public class DeviceOverviewController {
 	@FXML
 	private TableColumn<Sensor, String> sensorAvailabiltyColumn;
 
+	private ObservableList<Sensor> loggedInUserData = FXCollections.observableArrayList();
+
+	@FXML
+	private TitledPane loggedInUserPane;
+	@FXML
+	private TableView<Sensor> loggedInUserTable;
+	@FXML
+	private TableColumn<Sensor, String> informationColumn;
+	@FXML
+	private TableColumn<Sensor, String> valueColumn;
+
 	// flags for commands
 	public static boolean BASIC_INFO_FLAG = false;
 	public static boolean PROCESSES_INFO_FLAG = false;
@@ -130,6 +143,7 @@ public class DeviceOverviewController {
 		clearBasicInfoGrid();
 		hideCommandBox();
 		hideFilter();
+		hideLoggedInUserTable();
 
 		deviceTable.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue, newValue) -> deviceChanged(newValue));
@@ -214,15 +228,25 @@ public class DeviceOverviewController {
 			}
 
 			if (command.equals(CommandStrings.GET_PROCESSES_WITH_INFORMATION)) {
-				PROCESSES_INFO_FLAG = true;
 				showDataViewer();
 			}
 
 			if (command.equals(CommandStrings.GET_SENSOR_DETAILS)) {
-				PROCESSES_INFO_FLAG = true;
 				updateSensorTable();
 			}
+
+			if (command.equals(CommandStrings.GET_CURRENT_LOGGEDIN_USER_INFORMATION)) {
+				showLoggedInUserTable();
+			}
+
+			if (command.equals(CommandStrings.FILTER_PROCESS_ALL_DEVICES)) {
+				showFilterViewer();
+			}
 		}
+	}
+
+	private void showFilterViewer() {
+		hydraCN.showAllDeviceFilter();
 	}
 
 	public void updateSensorTable() {
@@ -277,7 +301,6 @@ public class DeviceOverviewController {
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					Thread th = new Thread(task);
@@ -351,8 +374,8 @@ public class DeviceOverviewController {
 			double upload = Double.parseDouble(overallInfo.getNetworkUpload());
 			double download = Double.parseDouble(overallInfo.getNetworkDownload());
 
-			double cpuUsageRoundOff = (double) Math.round(cpuUsage * 100);
-			double ramFreeMemoryRoundOff = Math.round(ramFreeMemory * 100) / 1024;
+			double cpuUsageRoundOff = (double) Math.round(cpuUsage * 100) / 100;
+			double ramFreeMemoryRoundOff = Math.round(ramFreeMemory * 100) / (1024 * 1024);
 			double uploadRoundOff = Math.round(upload * 100) / 1024;
 			double downloadRoundOff = Math.round(download * 100) / 1024;
 
@@ -369,7 +392,7 @@ public class DeviceOverviewController {
 	}
 
 	private void clearBasicInfoGrid() {
-		//basicPane.setVisible(false);
+		// basicPane.setVisible(false);
 		basicInfoPane.setVisible(false);
 
 		firstRowLabel.setText("");
@@ -410,28 +433,110 @@ public class DeviceOverviewController {
 		sensorAvailabiltyColumn.setCellValueFactory(cellData -> cellData.getValue().availabiltyProperty());
 		sensorData = FXCollections.observableArrayList();
 		sensorTable.setItems(sensorData);
-		
+
 		sensorData.add(new Sensor("loading..", false));
-		
+
 		Thread thread = new Thread() {
 			@Override
 			public void run() {
-				
-				List<SensorDetails> sensorDetails = AndroidAgentServiceClient.getSensorDetails
-						(selectedDevice.getIPAddress());
-				
+
+				List<SensorDetails> sensorDetails = AndroidAgentServiceClient
+						.getSensorDetails(selectedDevice.getIPAddress());
+
 				sensorTable.getItems().remove(0);
-				
-				for(SensorDetails detail : sensorDetails){
+
+				for (SensorDetails detail : sensorDetails) {
 					sensorData.add(new Sensor(detail.sensorName, detail.availability));
 				}
-				
+
 			}
 		};
 
 		thread.start();
-		
+
 		sensorTable.setVisible(true);
+	}
+
+	public void hideLoggedInUserTable() {
+		loggedInUserPane.setVisible(false);
+	}
+
+	public void showLoggedInUserTable() {
+
+		informationColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+		valueColumn.setCellValueFactory(cellData -> cellData.getValue().availabiltyProperty());
+		loggedInUserData = FXCollections.observableArrayList();
+		loggedInUserTable.setItems(loggedInUserData);
+
+		loggedInUserData.add(new Sensor("loading..", false));
+
+		Thread thread = new Thread() {
+			@Override
+			public void run() {
+
+				List<String> details = ProcessStatsClient.getCurrentLoggedInUser(selectedDevice.getIPAddress());
+
+				loggedInUserTable.getItems().remove(0);
+
+				loggedInUserData.add(new Sensor("Name", details.get(0)));
+
+				String privStr = details.get(2);
+				String priv = "";
+
+				if (privStr.equals("0")) {
+					priv = "GUEST";
+				}
+
+				if (privStr.equals("1")) {
+					priv = "USER";
+				}
+
+				if (privStr.equals("2")) {
+					priv = "ADMIN";
+				}
+
+				loggedInUserData.add(new Sensor("Privillages", priv));
+
+				long dateLong = Long.parseLong(details.get(7));
+				Timestamp stamp = new Timestamp(dateLong * 1000);
+				long millis2 = stamp.getTime();
+				Date date = new Date(millis2);
+
+				loggedInUserData.add(new Sensor("Last LogOn", date + ""));
+				
+				String accExpire = "";
+				if (details.get(9).equals("-1")) {
+					accExpire = "NO EXPIRE";
+				}
+
+				loggedInUserData.add(new Sensor("Account Expires", accExpire));
+
+				String maxStorage = "";
+				if (details.get(9).equals("-1")) {
+					maxStorage = "NO LIMIT";
+				}
+
+				loggedInUserData.add(new Sensor("Maximum storage", maxStorage));
+				loggedInUserData.add(new Sensor("Bad password count", details.get(12)));
+				loggedInUserData.add(new Sensor("No Of LoggOns", details.get(13)));
+
+				String passExpire = "";
+				if (details.get(17).equals("0")) {
+					passExpire = "NO";
+				}
+				
+				if (details.get(17).equals("1")) {
+					passExpire = "YES";
+				}
+				
+				loggedInUserData.add(new Sensor("Password Expired", passExpire));
+
+			}
+		};
+
+		thread.start();
+
+		loggedInUserPane.setVisible(true);
 	}
 
 	public void setMainApp(HydraCN hydraCN) {
@@ -450,9 +555,14 @@ public class DeviceOverviewController {
 
 		command.add(CommandStrings.GET_BASIC_INFO);
 		command.add(CommandStrings.GET_PROCESSES_WITH_INFORMATION);
+		command.add(CommandStrings.FILTER_PROCESS_ALL_DEVICES);
 
 		if (selectedDevice.getType().equals(Device.TYPE_ANDROID)) {
 			command.add(CommandStrings.GET_SENSOR_DETAILS);
+		}
+
+		if (selectedDevice.getType().equals(Device.TYPE_WINDOWS)) {
+			command.add(CommandStrings.GET_CURRENT_LOGGEDIN_USER_INFORMATION);
 		}
 
 		commandChoiceBox.setItems(command);

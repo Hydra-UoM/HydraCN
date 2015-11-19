@@ -33,7 +33,6 @@ public class RegisterDeviceServer extends Thread {
 			server = new TSimpleServer(new Args(serverTransport).processor(processor));
 			
 			server.serve();
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

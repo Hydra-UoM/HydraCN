@@ -69,9 +69,9 @@ public class ProcessStatsClient {
 
 		return overallInfo;
 	}
-	
+
 	public static List<ProcessInfo> getProcessesInfo(String IPAddress, double cpu, double mem, double download,
-				double upload) {
+			double upload, String process) {
 
 		List<ProcessInfo> overallInfo = new LinkedList<ProcessInfo>();
 		try {
@@ -83,7 +83,7 @@ public class ProcessStatsClient {
 			TProtocol protocol = new TBinaryProtocol(transport);
 			ProcessStats.Client client = new ProcessStats.Client(protocol);
 
-			List<String> overallInfoStr = getProcessInfoFromService(client, cpu, mem, download, upload);
+			List<String> overallInfoStr = getProcessInfoFromService(client, cpu, mem, download, upload, process);
 
 			for (int i = 0; i < overallInfoStr.size(); i++) {
 				if ((i + 4) < overallInfoStr.size()) {
@@ -92,11 +92,33 @@ public class ProcessStatsClient {
 					String usedMemoryStr = overallInfoStr.get(i++);
 					String downloadStr = overallInfoStr.get(i++);
 					String uploadStr = overallInfoStr.get(i++);
-					ProcessInfo info = new ProcessInfo(processName, cpuStr, usedMemoryStr, "0.0", downloadStr, uploadStr);
+					ProcessInfo info = new ProcessInfo(processName, cpuStr, usedMemoryStr, "0.0", downloadStr,
+							uploadStr);
 					overallInfo.add(info);
 				}
 
 			}
+
+			transport.close();
+		} catch (TException x) {
+			x.printStackTrace();
+		}
+
+		return overallInfo;
+	}
+
+	public static List<String> getCurrentLoggedInUser(String IPAddress) {
+		List<String> overallInfo = new LinkedList<String>();
+		try {
+			TTransport transport;
+
+			transport = new TSocket(IPAddress, 9090);
+			transport.open();
+
+			TProtocol protocol = new TBinaryProtocol(transport);
+			ProcessStats.Client client = new ProcessStats.Client(protocol);
+
+			overallInfo = getCurrentLoggedInUserFromService(client);
 
 			transport.close();
 		} catch (TException x) {
@@ -124,13 +146,24 @@ public class ProcessStatsClient {
 	}
 
 	private static List<String> getProcessInfoFromService(ProcessStats.Client client) throws TException {
-		List<String> processes = client.filterAllProcesses(0, 0, 0, 0);
+
+		List<String> processes = client.filterAllProcesses(0, 0, 0, 0, "");
+
 		return processes;
 	}
-	
-	private static List<String> getProcessInfoFromService(ProcessStats.Client client, 
-			double cpu, double mem, double download,double upload) throws TException {
-		List<String> processes = client.filterAllProcesses(cpu, mem, download, upload);
+
+	private static List<String> getProcessInfoFromService(ProcessStats.Client client, double cpu, double mem,
+			double download, double upload, String process) throws TException {
+
+		List<String> processes = client.filterAllProcesses(cpu, mem, download, upload, process);
+
+		return processes;
+	}
+
+	private static List<String> getCurrentLoggedInUserFromService(ProcessStats.Client client) throws TException {
+
+		List<String> processes = client.getCurrentLoggedInUser();
+
 		return processes;
 	}
 }
