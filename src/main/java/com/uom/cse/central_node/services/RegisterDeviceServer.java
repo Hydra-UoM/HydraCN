@@ -15,6 +15,7 @@ public class RegisterDeviceServer extends Thread {
 	public static RegisterDeviceHandler handler;
 	public static RegisterDeviceService.Processor processor;
 	private static TServer server;
+	
 	@Override
 	public void run() {
 		try {

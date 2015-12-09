@@ -44,4 +44,10 @@ public class RegisterDeviceHandler implements RegisterDeviceService.Iface {
 		
 	}
 	
+	@Override
+	public void pushProcessesInfo(List<ThriftAgentProcessInfo> processes) throws TException {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }
