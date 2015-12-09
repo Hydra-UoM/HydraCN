@@ -10,7 +10,6 @@ import com.uom.central_node.android_agent_services.DeviceOverallInfo;
 import com.uom.central_node.android_agent_services.SensorDetails;
 import com.uom.central_node.commands.CommandStrings;
 import com.uom.central_node.model.Device;
-import com.uom.central_node.model.ProcessInfo;
 import com.uom.central_node.model.Sensor;
 import com.uom.central_node.windows_agent_services.ProcessStatsClient;
 import com.uom.central_node.windows_agent_services.WindowsDeviceOverallInfo;

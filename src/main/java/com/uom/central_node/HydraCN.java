@@ -8,6 +8,7 @@ import com.uom.central_node.services.RegisterDeviceServer;
 import com.uom.central_node.view.AllDeviceFilterController;
 import com.uom.central_node.view.DataViewerController;
 import com.uom.central_node.view.DeviceOverviewController;
+import com.uom.central_node.view.FilterDetailsController;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -145,6 +146,33 @@ public class HydraCN extends Application {
             // Set the person into the controller.
             AllDeviceFilterController controller = loader.getController();
             controller.setDialogStage(dialogStage);
+
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
+	
+	public void showFilterDetails(){
+		try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(HydraCN.class.getResource("view/FilterDetails.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Filter Viewer");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Set the person into the controller.
+            FilterDetailsController controller = loader.getController();
+            //controller.setDialogStage(dialogStage);
 
             // Show the dialog and wait until the user closes it
             dialogStage.showAndWait();
