@@ -47,9 +47,9 @@ public class ProcessInfoEventHandler implements InitializingBean{
         config.addEventTypeAutoName("com.uom.cse.central_node.event");
         epService = EPServiceProviderManager.getDefaultProvider(config);
         
-        String criticalEventExpression = "select mac,cpuUsage,ramUsage,sentData,receiveData from ApplicationEvent where cpuUsage > "+ filter.getCpuUsage() +" and ramUsage > " + filter.getRamUsage() + " and sentData > " + filter.getSentData()+" and receiveData > " + filter.getReceivedData();
+       // String criticalEventExpression = "select mac,cpuUsage,ramUsage,sentData,receiveData from ApplicationEvent where cpuUsage > "+ filter.getCpuUsage() +" and ramUsage > " + filter.getRamUsage() + " and sentData > " + filter.getSentData()+" and receiveData > " + filter.getReceivedData();
        
-        createCriticalEventCheckExpression(criticalEventExpression,criticalEventSubscriber);
+       // createCriticalEventCheckExpression(criticalEventExpression,criticalEventSubscriber);
         
     }
     

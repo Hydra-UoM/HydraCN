@@ -1,6 +1,7 @@
 package com.uom.cse.central_node.util;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -10,6 +11,7 @@ import com.uom.cse.central_node.event.ApplicationEvent;
 import com.uom.cse.central_node.handler.ProcessInfoEventHandler;
 import com.uom.cse.central_node.services.ThriftAgentProcessInfo;
 import com.uom.cse.central_node.subscriber.CriticalEventSubscriber;
+import com.uom.cse.central_node.subscriber.StatementSubscriber;
 
 public class EventFeeder {
 	
@@ -44,8 +46,33 @@ public class EventFeeder {
 		CriticalEventSubscriber customSubscriber = new CriticalEventSubscriber();
 		
 		ProcessInfoEventHandler processInfoEventHandler = new ProcessInfoEventHandler(customSubscriber,defaultFilter);
-		String customExpression = "select mac,cpuUsage,ramUsage,sentData,receiveData from ApplicationEvent where cpuUsage >" + 48.00 + " and ramUsage > "+ 46.00 +"and sentData > " + 1500.00 + " and receiveData > " + 1500.00;
+		
+		String customExpression = "select mac,cpuUsage,ramUsage,sentData,receiveData from ApplicationEvent where cpuUsage > 40.00 and ramUsage > 40.00 and sentData > 150.00 and receiveData > 150.00";
+		
 		processInfoEventHandler.createCriticalEventCheckExpression(customExpression, customSubscriber);
+		
+		customExpression = "select cpuUsage from ApplicationEvent where cpuUsage > 30";
+		
+		processInfoEventHandler.createCriticalEventCheckExpression(customExpression, new StatementSubscriber() {
+			
+			@Override
+			public String getStatement() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			 public void update(Map<String, ApplicationEvent> eventMap) {
+
+
+			        StringBuilder sb = new StringBuilder();
+			        sb.append("************************************************");
+			        sb.append("\n* [ALERT] : CRITICAL EVENT DETECTED BY ESPER UPdated! ");
+			        sb.append("\n* The CPU Usage of device 1 is above 20%; CPU Usage - " + eventMap.get("cpuUsage") );
+			        sb.append("\n**********************************************");
+			        System.out.println(sb.toString());
+			        
+			    }
+		});
 		
 		ExecutorService eventFeeder = Executors.newSingleThreadExecutor();
 		eventFeeder.submit(new Runnable() {
