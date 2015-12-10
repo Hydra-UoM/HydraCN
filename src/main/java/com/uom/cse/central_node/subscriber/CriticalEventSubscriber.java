@@ -12,11 +12,7 @@ import com.uom.cse.central_node.event.ApplicationEvent;
 @Component
 public class CriticalEventSubscriber implements StatementSubscriber {
 	
-	private Filter filter;
-
-	public CriticalEventSubscriber(Filter filter) {
-		this.filter = filter;
-	}
+	
     
     private static Logger LOG = LoggerFactory.getLogger(CriticalEventSubscriber.class);
       
@@ -24,8 +20,8 @@ public class CriticalEventSubscriber implements StatementSubscriber {
     	        
        // String crtiticalEventExpression = "select avg(cpuUsage) as avgCpu from ApplicationEvent.win:time_batch(10) having avg(cpuUsage) > 20";
         
-        String criticalEventExpression = "select mac,cpuUsage,ramUsage,sentData,receiveData from ApplicationEvent where cpuUsage > "+ filter.getCpuUsage() +" and ramUsage > " + filter.getRamUsage() + " and sentData > " + filter.getSentData()+" and receiveData > " + filter.getReceivedData();
-        return criticalEventExpression;
+       // String criticalEventExpression = "select mac,cpuUsage,ramUsage,sentData,receiveData from ApplicationEvent where cpuUsage > "+ filter.getCpuUsage() +" and ramUsage > " + filter.getRamUsage() + " and sentData > " + filter.getSentData()+" and receiveData > " + filter.getReceivedData();
+        return "";
     }
     
     
@@ -42,14 +38,7 @@ public class CriticalEventSubscriber implements StatementSubscriber {
     }
 
 
-	private Filter getFilter() {
-		return filter;
-	}
-
-
-	private void setFilter(Filter filter) {
-		this.filter = filter;
-	}
+	
 
     
 }

@@ -27,11 +27,13 @@ public class ProcessInfoEventHandler implements InitializingBean{
     
     private EPServiceProvider epService;
     private EPStatement criticalEventStatement;
+    private Filter filter;
     
     private StatementSubscriber criticalEventSubscriber;
     
-    public ProcessInfoEventHandler(StatementSubscriber statementSubscriber) {
-		criticalEventSubscriber = statementSubscriber;
+    public ProcessInfoEventHandler(StatementSubscriber statementSubscriber,Filter filter) {
+		this.criticalEventSubscriber = statementSubscriber;
+		this.filter = filter;
 		initService();
 	}
 
@@ -44,17 +46,19 @@ public class ProcessInfoEventHandler implements InitializingBean{
        // config.addEventType("ApplicationEvent", ApplicationEvent.class.getName());
         config.addEventTypeAutoName("com.uom.cse.central_node.event");
         epService = EPServiceProviderManager.getDefaultProvider(config);
-
-        createCriticalEventCheckExpression();
+        
+        String criticalEventExpression = "select mac,cpuUsage,ramUsage,sentData,receiveData from ApplicationEvent where cpuUsage > "+ filter.getCpuUsage() +" and ramUsage > " + filter.getRamUsage() + " and sentData > " + filter.getSentData()+" and receiveData > " + filter.getReceivedData();
+       
+        createCriticalEventCheckExpression(criticalEventExpression,criticalEventSubscriber);
         
     }
-
     
-    private void createCriticalEventCheckExpression() {
+    
+    public void createCriticalEventCheckExpression(String expression,StatementSubscriber subscriber) {
         
         LOG.debug("create Critical Event Check Expression");
-        criticalEventStatement = epService.getEPAdministrator().createEPL(criticalEventSubscriber.getStatement());
-        criticalEventStatement.setSubscriber(criticalEventSubscriber);
+        criticalEventStatement = epService.getEPAdministrator().createEPL(expression);
+        criticalEventStatement.setSubscriber(subscriber);
         
     }
 
@@ -71,6 +75,15 @@ public class ProcessInfoEventHandler implements InitializingBean{
         LOG.debug("Configuring..");
         initService();
     }
+    
+    public Filter getFilter() {
+		return filter;
+	}
+
+
+    public void setFilter(Filter filter) {
+		this.filter = filter;
+	}
 
 
 	
