@@ -1,10 +1,15 @@
 package com.uom.cse.central_node.view;
 
+import java.util.List;
+
+import com.uom.cse.central_node.data_objects.Filter;
+import com.uom.cse.central_node.data_objects.FilterTable;
 import com.uom.cse.central_node.model.FilterData;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 
 
 public class FilterDetailsController {
@@ -38,5 +43,15 @@ public class FilterDetailsController {
 		process.setCellValueFactory(cellData -> cellData.getValue().processesProperty());
 		eventId.setCellValueFactory(cellData -> cellData.getValue().eventIdProperty());
 		message.setCellValueFactory(cellData -> cellData.getValue().messageProperty());
+		
+		// Add observable list data to the table
+		populateFilterDataObservableArrayList();
+		
+		filterTable.setItems(DeviceOverviewController.hydraCN.getFilterData());
+	}
+	
+	private void populateFilterDataObservableArrayList(){
+		List<Filter> filterList = FilterTable.getAllFilters();
+		filterList.forEach((filter)->DeviceOverviewController.hydraCN.getFilterData().add(new FilterData(filter)));
 	}
 }

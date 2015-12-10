@@ -3,6 +3,7 @@ package com.uom.cse.central_node;
 import java.io.IOException;
 
 import com.uom.cse.central_node.model.Device;
+import com.uom.cse.central_node.model.FilterData;
 import com.uom.cse.central_node.model.ProcessInfo;
 import com.uom.cse.central_node.services.RegisterDeviceHandler;
 import com.uom.cse.central_node.services.RegisterDeviceServer;
@@ -28,9 +29,14 @@ public class HydraCN extends Application {
     
 	private ObservableList<Device> deviceData = FXCollections.observableArrayList();
 	private ObservableList<ProcessInfo> infoData = FXCollections.observableArrayList();
+	private ObservableList<FilterData> filterData = FXCollections.observableArrayList();
 	
 	public ObservableList<Device> getDeviceData() {
         return deviceData;
+    }
+	
+	public ObservableList<FilterData> getFilterData() {
+        return filterData;
     }
 	
 	public void setInfoData(ObservableList<ProcessInfo> infoData) {

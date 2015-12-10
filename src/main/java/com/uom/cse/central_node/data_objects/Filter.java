@@ -8,7 +8,8 @@ public class Filter {
 	private int id;
 	private double cpuUsage;
 	private double ramUsage;
-	private double networkUsage;
+	private double sentData;
+	private double receivedData;
 	private String filterName;
 
 	private int timeBound;
@@ -86,14 +87,21 @@ public class Filter {
 		this.ramUsage = ramUsage;
 	}
 	
-	public double getNetworkUsage() {
-		return networkUsage;
+	public double getReceivedData() {
+		return receivedData;
 	}
 	
-	public void setNetworkUsage(double networkUsage) {
-		this.networkUsage = networkUsage;
+	public void setReceivedData(double receivedData) {
+		this.receivedData = receivedData;
+	}
+
+	public double getSentData() {
+		return sentData;
 	}
 	
+	public void setSentData(double sentData) {
+		this.sentData = sentData;
+	}
 
 	public void addProcess(String value){
 		processes.add(value);

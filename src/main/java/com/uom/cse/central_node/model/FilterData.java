@@ -1,5 +1,8 @@
 package com.uom.cse.central_node.model;
 
+import com.uom.cse.central_node.data_objects.Filter;
+
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class FilterData {
@@ -14,6 +17,18 @@ public class FilterData {
 	private StringProperty message;
 	
 	private StringProperty processes;
+	
+	public FilterData(Filter filter) {
+		id = new SimpleStringProperty(filter.getId() + "");
+		cpuUsage = new SimpleStringProperty(filter.getCpuUsage() + "");
+		ramUsage = new SimpleStringProperty(filter.getRamUsage() + "");
+		//networkUsage = new SimpleStringProperty(filter.getNetworkUsage() + "");
+		filterName = new SimpleStringProperty(filter.getFilterName());
+		timeBound = new SimpleStringProperty(filter.getTimeBound() + "");
+		eventId = new SimpleStringProperty(filter.getEventId() + "");
+		message = new SimpleStringProperty(filter.getMessage() + "");
+		processes = new SimpleStringProperty(filter.getProcessesStr() + "");
+	}
 	
 	public int getId() {
         return Integer.parseInt(id.get());

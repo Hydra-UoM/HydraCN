@@ -6,47 +6,50 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FilterTable {
 	private static String dbURL = "jdbc:derby:filterDB;create=true;";
-	private static String TABLE_NAME = "Filter";
+	private static String TABLE_NAME = "filter";
 	// jdbc Connection
 	private static Connection conn = null;
 	private static Statement stmt = null;
 
 	// queries
 	private static String CREATE_FILTER_TABLE_QUERY = "CREATE TABLE " + TABLE_NAME
-			+ " (ID INTEGER not null primary key," + "CPU DOUBLE, RAM DOUBLE, NETWORK DOUBLE, PROCESSES VARCHAR(1000))";
+			+ " (ID INTEGER not null primary key "
+			+ "GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
+			+ "CPU DOUBLE, RAM DOUBLE, SENTDATA DOUBLE, RECEIVEDDATA DOUBLE, PROCESSES VARCHAR(1000), EVENTID INTEGER, "
+			+ "TIMEBOUND INTEGER, FILTERNAME VARCHAR(30), MESSAGE VARCHAR(1000))";
 
-	// initiate the database and table
-	{
+	private static void createConnection() {
 		try {
 			Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
-
 			// Get a connection
 			conn = DriverManager.getConnection(dbURL);
+			createFilterTable();
+		} catch (Exception except) {
+			except.printStackTrace();
+		}
+	}
 
-			// get metaData
-			DatabaseMetaData metas = conn.getMetaData();
-
-			// create statement
-			stmt = conn.createStatement();
-
+	private static void createFilterTable() {
+		try {
+			
 			// get filter table
-			ResultSet tables = metas.getTables(conn.getCatalog(), null, TABLE_NAME, null);
+			DatabaseMetaData metas = conn.getMetaData();
+			ResultSet tables = metas.getTables(conn.getCatalog(), null, TABLE_NAME.toUpperCase(), null);
 
 			// check table exists
 			if (!tables.next()) {
+				stmt = conn.createStatement();
 				stmt.execute(CREATE_FILTER_TABLE_QUERY);
+				stmt.close();
 			}
-
-			// close statement
-			stmt.close();
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
-
-			e.printStackTrace();
+		} catch (SQLException sqlExcept) {
+			sqlExcept.printStackTrace();
 		}
 	}
 
@@ -55,8 +58,11 @@ public class FilterTable {
 
 		try {
 			stmt = conn.createStatement();
-			stmt.execute("insert into " + TABLE_NAME + " values (" + filter.getCpuUsage() + ",'" + filter.getRamUsage()
-					+ "','" + filter.getNetworkUsage() + "','" + filter.getProcessesStr() + "')");
+			stmt.execute("insert into " + TABLE_NAME + "(CPU, RAM, SENTDATA, RECEIVEDDATA, PROCESSES, EVENTID, "
+					+ "TIMEBOUND, FILTERNAME, MESSAGE) values ("+ filter.getCpuUsage() + ",'" + filter.getRamUsage()
+					+ "','" + filter.getSentData() + "','" + filter.getReceivedData() + "','" + filter.getProcessesStr() 
+					+ "','" + filter.getEventId()+ "','" + filter.getTimeBound() + "','" + filter.getFilterName()
+					 + "','" + filter.getMessage() + "')");
 
 			// close statement
 			stmt.close();
@@ -81,8 +87,13 @@ public class FilterTable {
 				filter.setId(results.getInt(1));
 				filter.setCpuUsage(results.getDouble(2));
 				filter.setRamUsage(results.getDouble(3));
-				filter.setNetworkUsage(results.getDouble(4));
+				filter.setSentData(results.getDouble(4));
+				filter.setReceivedData(results.getDouble(5));
 				filter.setProcesses(results.getString(6));
+				filter.setEventId(results.getInt(7));
+				filter.setTimeBound(results.getInt(8));
+				filter.setFilterName(results.getString(9));
+				filter.setMessage(results.getString(10));
 
 				returnFilters.add(filter);
 			}
@@ -99,7 +110,9 @@ public class FilterTable {
 
 	public static List<Filter> getAllFilters() {
 		List<Filter> returnFilters = new ArrayList<Filter>();
-
+		
+		createConnection();
+		
 		try {
 			stmt = conn.createStatement();
 			ResultSet results = stmt.executeQuery("select * from " + TABLE_NAME);
@@ -111,8 +124,13 @@ public class FilterTable {
 				filter.setId(results.getInt(1));
 				filter.setCpuUsage(results.getDouble(2));
 				filter.setRamUsage(results.getDouble(3));
-				filter.setNetworkUsage(results.getDouble(4));
+				filter.setSentData(results.getDouble(4));
+				filter.setReceivedData(results.getDouble(5));
 				filter.setProcesses(results.getString(6));
+				filter.setEventId(results.getInt(7));
+				filter.setTimeBound(results.getInt(8));
+				filter.setFilterName(results.getString(9));
+				filter.setMessage(results.getString(10));
 
 				returnFilters.add(filter);
 			}
@@ -123,7 +141,23 @@ public class FilterTable {
 		} catch (SQLException sqlExcept) {
 			sqlExcept.printStackTrace();
 		}
+		
+		shutdown();
 
 		return returnFilters;
+	}
+	
+	private static void shutdown() {
+		try {
+			if (stmt != null) {
+				stmt.close();
+			}
+			if (conn != null) {
+				DriverManager.getConnection(dbURL + ";shutdown=true");
+				conn.close();
+			}
+		} catch (SQLException sqlExcept) {
+
+		}
 	}
 }
