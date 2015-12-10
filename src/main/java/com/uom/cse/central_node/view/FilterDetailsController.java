@@ -7,6 +7,7 @@ import java.util.concurrent.Executors;
 import com.uom.cse.central_node.data_objects.Filter;
 import com.uom.cse.central_node.data_objects.FilterTable;
 import com.uom.cse.central_node.model.FilterData;
+import com.uom.cse.central_node.util.EventFeeder;
 
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -33,11 +34,11 @@ public class FilterDetailsController {
 	@FXML
 	private TableColumn<FilterData, String> process;
 	@FXML
-	private TableColumn<FilterData, String> eventId;
-	@FXML
 	private TableColumn<FilterData, String> message;
 	
 	private Stage dialogStage;
+	
+	private FilterData selectedFilter;
 	
 	//executer for creating a thread pool
 	private Executor exec;
@@ -60,8 +61,10 @@ public class FilterDetailsController {
 		receivedData.setCellValueFactory(cellData -> cellData.getValue().receivedProperty());
 		timeBound.setCellValueFactory(cellData -> cellData.getValue().timeBoundProperty());
 		process.setCellValueFactory(cellData -> cellData.getValue().processesProperty());
-		eventId.setCellValueFactory(cellData -> cellData.getValue().eventIdProperty());
 		message.setCellValueFactory(cellData -> cellData.getValue().messageProperty());
+		
+		filterTable.getSelectionModel().selectedItemProperty()
+		.addListener((observable, oldValue, newValue) -> filterChanged(newValue));
 		
 		// Add observable list data to the table
 		populateFilterDataObservableArrayList();
@@ -69,6 +72,10 @@ public class FilterDetailsController {
 		filterTable.setItems(DeviceOverviewController.hydraCN.getFilterData());
 	}
 	
+	private void filterChanged(FilterData filterData) {
+		selectedFilter = filterData;
+	}
+
 	private void populateFilterDataObservableArrayList(){
 		
 		Task<List<Filter>> filterTask = new Task<List<Filter>>() {
@@ -77,17 +84,6 @@ public class FilterDetailsController {
                 return FilterTable.getAllFilters();
             }
         };
-//        Filter fi = new Filter();
-//    	fi.setCpuUsage(30);
-//    	fi.setRamUsage(150);
-//    	fi.setEventId(2000);
-//    	fi.setProcesses("dasdasd, dadasdsa, sdadasd");
-//    	fi.setMessage("sadsdsadsad");
-//    	fi.setSentData(20);
-//    	fi.setReceivedData(30);
-//    	fi.setFilterName("Filter 1");
-//    	
-//    	FilterTable.insertFilter(fi);
 
         filterTask.setOnSucceeded((e) ->{
         	List<Filter> filterList = filterTask.getValue();
@@ -110,5 +106,10 @@ public class FilterDetailsController {
 	@FXML
 	private void actionClose(){
 		dialogStage.close();
+	}
+	
+	@FXML
+	private void actionApplyFilter(){
+		EventFeeder.applyFilter(new Filter(selectedFilter));
 	}
 }

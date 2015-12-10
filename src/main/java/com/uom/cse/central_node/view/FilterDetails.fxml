@@ -17,7 +17,6 @@
             <TableColumn fx:id="receivedData" prefWidth="75.0" text="RECEIVED DATA" />
             <TableColumn fx:id="timeBound" prefWidth="75.0" text="TIME BOUND" />
             <TableColumn fx:id="process" prefWidth="75.0" text="SUSPICIOUS PROCESS" />
-            <TableColumn fx:id="eventId" prefWidth="75.0" text="EVENT ID" />
             <TableColumn fx:id="message" prefWidth="75.0" text="MESSAGE" />
         </columns>
          <columnResizePolicy>
@@ -31,5 +30,6 @@
             <Font size="22.0" />
          </font>
       </Label>
+      <Button layoutX="773.0" layoutY="561.0" mnemonicParsing="false" onAction="#actionApplyFilter" text="Apply" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="180.0" />
    </children>
 </AnchorPane>

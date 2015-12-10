@@ -32,8 +32,6 @@ public class FilterCreateFormController {
 	@FXML
 	private Slider sldTimeBound;
 	@FXML
-	private TextField txtEventId;
-	@FXML
 	private TextField txtProcessesName;
 	@FXML
 	private TextArea txtMessage;
@@ -96,7 +94,6 @@ public class FilterCreateFormController {
 		newFilter.setTimeBound((int) (sldTimeBound.valueProperty().get()));
 		newFilter.setMessage(txtMessage.getText());
 		newFilter.setProcesses(txtProcessesName.getText());
-		newFilter.setEventIdStr(txtEventId.getText());
 
 		Task<List<Filter>> insertFilterTask = new Task<List<Filter>>() {
 			@Override

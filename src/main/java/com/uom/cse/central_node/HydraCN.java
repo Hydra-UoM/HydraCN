@@ -200,7 +200,7 @@ public class HydraCN extends Application {
 
             // Create the filter Stage.
             Stage newFilterStage = new Stage();
-            newFilterStage.setTitle("New Rule");
+            newFilterStage.setTitle("Performance Data");
             newFilterStage.initModality(Modality.WINDOW_MODAL);
             newFilterStage.initOwner(filterStage);
             Scene scene = new Scene(page);

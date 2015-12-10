@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.uom.cse.central_node.model.FilterData;
+
 public class Filter {
 	private int id;
 	private double cpuUsage;
@@ -21,6 +23,21 @@ public class Filter {
 	public static final String PROCESS_DELIMETER = ",";
 	public static final String EVENT_DELIMETER = ",";
 	
+	public Filter() {
+		
+	}
+	
+	public Filter(FilterData data) {
+		cpuUsage = data.getCpuUsage();
+		ramUsage = data.getRamUsage();
+		sentData = data.getSendData();
+		receivedData = data.getReceivedData();
+		timeBound = data.getTimeBound();
+		message = data.getMessage();
+		processes = data.getProcesses();
+		filterName = data.getFilterName();
+	}
+
 	public String getFilterName() {
 		return filterName;
 	}
