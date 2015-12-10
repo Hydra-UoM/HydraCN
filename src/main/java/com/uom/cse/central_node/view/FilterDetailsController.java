@@ -11,10 +11,10 @@ import com.uom.cse.central_node.util.EventFeeder;
 
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
-
 
 public class FilterDetailsController {
 	@FXML
@@ -35,6 +35,8 @@ public class FilterDetailsController {
 	private TableColumn<FilterData, String> process;
 	@FXML
 	private TableColumn<FilterData, String> message;
+	@FXML
+	private Button btnApply;
 	
 	private Stage dialogStage;
 	
@@ -74,6 +76,7 @@ public class FilterDetailsController {
 	
 	private void filterChanged(FilterData filterData) {
 		selectedFilter = filterData;
+		btnApply.setDisable(false);
 	}
 
 	private void populateFilterDataObservableArrayList(){
@@ -111,5 +114,6 @@ public class FilterDetailsController {
 	@FXML
 	private void actionApplyFilter(){
 		EventFeeder.applyFilter(new Filter(selectedFilter));
+		//DeviceOverviewController.hydraCN.showAlertMessageBox("This is a warm alert!!");
 	}
 }

@@ -7,6 +7,7 @@ import com.uom.cse.central_node.model.FilterData;
 import com.uom.cse.central_node.model.ProcessInfo;
 import com.uom.cse.central_node.services.RegisterDeviceHandler;
 import com.uom.cse.central_node.services.RegisterDeviceServer;
+import com.uom.cse.central_node.view.AlertMessageBoxController;
 import com.uom.cse.central_node.view.AllDeviceFilterController;
 import com.uom.cse.central_node.view.DataViewerController;
 import com.uom.cse.central_node.view.DeviceOverviewController;
@@ -212,6 +213,34 @@ public class HydraCN extends Application {
 
             // Show the dialog and wait until the user closes it
             newFilterStage.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
+	
+	public void showAlertMessageBox(String msg){
+		try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(HydraCN.class.getResource("view/AlertMessageBox.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Create the filter Stage.
+            Stage msgStage = new Stage();
+            msgStage.setTitle("HYDRA Alert");
+            msgStage.initModality(Modality.WINDOW_MODAL);
+            msgStage.initOwner(filterStage);
+            Scene scene = new Scene(page);
+            msgStage.setScene(scene);
+
+            // Set the person into the controller.
+            AlertMessageBoxController controller = loader.getController();
+            controller.setDialogStage(msgStage);
+            controller.setMessage(msg);
+
+            // Show the dialog and wait until the user closes it
+            msgStage.showAndWait();
 
         } catch (IOException e) {
             e.printStackTrace();
