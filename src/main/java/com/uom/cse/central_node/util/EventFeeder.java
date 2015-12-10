@@ -18,7 +18,7 @@ public class EventFeeder {
 	static{
 		defaultFilter = new Filter();
 		defaultFilter.setFilterName("Default Filter");
-		defaultFilter.setCpuUsage(40);
+		defaultFilter.setCpuUsage(30);
 		defaultFilter.setRamUsage(41);
 		defaultFilter.setSentData(410);
 		defaultFilter.setReceivedData(420);
@@ -42,7 +42,11 @@ public class EventFeeder {
 	
 	public static void pushToCEP(List<ThriftAgentProcessInfo> processes){
 		
-		ProcessInfoEventHandler processInfoEventHandler = new ProcessInfoEventHandler(new CriticalEventSubscriber(),defaultFilter);
+		CriticalEventSubscriber customSubscriber = new CriticalEventSubscriber();
+		
+		ProcessInfoEventHandler processInfoEventHandler = new ProcessInfoEventHandler(customSubscriber,defaultFilter);
+		String customExpression = "select mac,cpuUsage,ramUsage,sentData,receiveData from ApplicationEvent where cpuUsage >" + 48.00 + " and ramUsage > "+ 46.00 +"and sentData > " + 1500.00 + " and receiveData > " + 1500.00;
+		processInfoEventHandler.createCriticalEventCheckExpression(customExpression, customSubscriber);
 		
 		ExecutorService eventFeeder = Executors.newSingleThreadExecutor();
 		eventFeeder.submit(new Runnable() {
