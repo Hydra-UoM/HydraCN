@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.uom.cse.central_node.handler.SampleEventHandler;
+import com.uom.cse.central_node.handler.ProcessInfoEventHandler;
 import com.uom.cse.central_node.event.ApplicationEvent;
 
 
@@ -22,7 +22,7 @@ public class RandomSampleEventGenerator {
 
     
     @Autowired
-    private SampleEventHandler sampleEventHandler;
+    private ProcessInfoEventHandler sampleEventHandler;
 
    
     public void startSendingEvents(final long noOfEvents) {
@@ -36,14 +36,10 @@ public class RandomSampleEventGenerator {
                 
                 int count = 0;
                 while (count < noOfEvents) {
-                    ApplicationEvent ve = new ApplicationEvent((new Random().nextInt(15)+4000), (new Random().nextInt(50)),(new Random().nextInt(3)));
-                    sampleEventHandler.handle(ve);
-                    count++;
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException e) {
-                        LOG.error("Thread Interrupted", e);
-                    }
+                	
+                  //  ApplicationEvent ve = new ApplicationEvent((new Random().nextInt(15)+4000), (new Random().nextInt(50)),(new Random().nextInt(3)));
+                 //   sampleEventHandler.handle(ve);
+                   
                 }
 
             }

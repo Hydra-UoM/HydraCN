@@ -1,5 +1,7 @@
 package com.uom.cse.central_node;
 
+import java.util.ArrayList;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanFactory;
@@ -7,6 +9,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.uom.cse.central_node.event.ApplicationEvent;
 import com.uom.cse.central_node.eventadapter.EventGenerator;
+import com.uom.cse.central_node.services.RegisterDeviceHandler;
 import com.uom.cse.central_node.util.RandomSampleEventGenerator;
 
 
@@ -19,7 +22,7 @@ public class StartEsper {
     	
     	EventGenerator eventgenerator = new EventGenerator();
     	ApplicationEvent event = eventgenerator.jsonToJava();
-    	System.out.println(event.getCpuUsage());
+    //	System.out.println(event.getCpuUsage());
 
         LOG.debug("Starting...");
         System.out.println("Starting...");
@@ -32,12 +35,14 @@ public class StartEsper {
         }
 
         // Load spring config
-        ClassPathXmlApplicationContext appContext = new ClassPathXmlApplicationContext(new String[] { "application-context.xml" });
-        BeanFactory factory = (BeanFactory) appContext;
+      //  ClassPathXmlApplicationContext appContext = new ClassPathXmlApplicationContext(new String[] { "application-context.xml" });
+      //  BeanFactory factory = (BeanFactory) appContext;
 
         // Start Demo
-        RandomSampleEventGenerator generator = (RandomSampleEventGenerator) factory.getBean("eventGenerator");
-        generator.startSendingEvents(noOfEvents);
+        //RandomSampleEventGenerator generator = (RandomSampleEventGenerator) factory.getBean("eventGenerator");
+        //generator.startSendingEvents(noOfEvents);
+        RegisterDeviceHandler deviceHandler = new RegisterDeviceHandler();
+        deviceHandler.pushProcessesInfo(new ArrayList<>());
         
     }
 
