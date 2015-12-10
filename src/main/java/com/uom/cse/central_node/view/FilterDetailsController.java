@@ -1,11 +1,14 @@
 package com.uom.cse.central_node.view;
 
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import com.uom.cse.central_node.data_objects.Filter;
 import com.uom.cse.central_node.data_objects.FilterTable;
 import com.uom.cse.central_node.model.FilterData;
 
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -32,8 +35,19 @@ public class FilterDetailsController {
 	@FXML
 	private TableColumn<FilterData, String> message;
 	
+	//executer for creating a thread pool
+	private Executor exec;
+	
 	@FXML
 	private void initialize() {
+		
+		// create executor that uses daemon threads:
+		exec = Executors.newCachedThreadPool(runnable -> {
+            Thread t = new Thread(runnable);
+            t.setDaemon(true);
+            return t ;
+        });
+		
 		// Initialize the person table with the two columns.
 		filterName.setCellValueFactory(cellData -> cellData.getValue().filterNameProperty());
 		cpu.setCellValueFactory(cellData -> cellData.getValue().cpuProperty());
@@ -51,7 +65,32 @@ public class FilterDetailsController {
 	}
 	
 	private void populateFilterDataObservableArrayList(){
-		List<Filter> filterList = FilterTable.getAllFilters();
-		filterList.forEach((filter)->DeviceOverviewController.hydraCN.getFilterData().add(new FilterData(filter)));
+		
+		Task<List<Filter>> filterTask = new Task<List<Filter>>() {
+            @Override
+            public List<Filter> call() throws Exception {
+                return FilterTable.getAllFilters();
+            }
+        };
+//        Filter fi = new Filter();
+//    	fi.setCpuUsage(30);
+//    	fi.setRamUsage(150);
+//    	fi.setEventId(2000);
+//    	fi.setProcesses("dasdasd, dadasdsa, sdadasd");
+//    	fi.setMessage("sadsdsadsad");
+//    	fi.setSentData(20);
+//    	fi.setReceivedData(30);
+//    	fi.setFilterName("Filter 1");
+//    	
+//    	FilterTable.insertFilter(fi);
+
+        filterTask.setOnSucceeded((e) ->{
+        	List<Filter> filterList = filterTask.getValue();
+    		filterList.forEach((filter)->DeviceOverviewController.hydraCN.getFilterData().add(new FilterData(filter)));
+        });
+        
+        // run the task using a thread from the thread pool:
+        exec.execute(filterTask);
+		
 	}
 }

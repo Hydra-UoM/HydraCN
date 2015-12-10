@@ -12,7 +12,7 @@ import java.util.List;
 
 public class FilterTable {
 	private static String dbURL = "jdbc:derby:filterDB;create=true;";
-	private static String TABLE_NAME = "filter";
+	private static String TABLE_NAME = "filterDetail";
 	// jdbc Connection
 	private static Connection conn = null;
 	private static Statement stmt = null;
@@ -24,6 +24,35 @@ public class FilterTable {
 			+ "CPU DOUBLE, RAM DOUBLE, SENTDATA DOUBLE, RECEIVEDDATA DOUBLE, PROCESSES VARCHAR(1000), EVENTID INTEGER, "
 			+ "TIMEBOUND INTEGER, FILTERNAME VARCHAR(30), MESSAGE VARCHAR(1000))";
 
+//	public static void main(String[] args) {
+//		selectRestaurants();
+//	}
+	private static void selectRestaurants() {
+		createConnection();
+		try {
+			stmt = conn.createStatement();
+			ResultSet results = stmt.executeQuery("select * from " + TABLE_NAME);
+			ResultSetMetaData rsmd = results.getMetaData();
+			int numberCols = rsmd.getColumnCount();
+			for (int i = 1; i <= numberCols; i++) {
+				// print Column Names
+				System.out.print(rsmd.getColumnLabel(i) + "\t\t");
+			}
+
+			System.out.println("\n-------------------------------------------------");
+
+			while (results.next()) {
+				int id = results.getInt(1);
+				String restName = results.getString(2);
+				String cityName = results.getString(3);
+				System.out.println(id + "\t\t" + restName + "\t\t" + cityName);
+			}
+			results.close();
+			stmt.close();
+		} catch (SQLException sqlExcept) {
+			sqlExcept.printStackTrace();
+		}
+	}
 	private static void createConnection() {
 		try {
 			Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
@@ -53,29 +82,35 @@ public class FilterTable {
 		}
 	}
 
-	public static boolean insertFilter(Filter filter) {
-		boolean returnFlag = false;
-
+	public static int insertFilter(Filter filter) {
+		int returnValue = -1;
+		createConnection();
 		try {
 			stmt = conn.createStatement();
 			stmt.execute("insert into " + TABLE_NAME + "(CPU, RAM, SENTDATA, RECEIVEDDATA, PROCESSES, EVENTID, "
-					+ "TIMEBOUND, FILTERNAME, MESSAGE) values ("+ filter.getCpuUsage() + ",'" + filter.getRamUsage()
-					+ "','" + filter.getSentData() + "','" + filter.getReceivedData() + "','" + filter.getProcessesStr() 
-					+ "','" + filter.getEventId()+ "','" + filter.getTimeBound() + "','" + filter.getFilterName()
-					 + "','" + filter.getMessage() + "')");
+					+ "TIMEBOUND, FILTERNAME, MESSAGE) values ("+ filter.getCpuUsage() + "," + filter.getRamUsage()
+					+ "," + filter.getSentData() + "," + filter.getReceivedData() + ",'" + filter.getProcessesStr() 
+					+ "'," + filter.getEventId()+ "," + filter.getTimeBound() + ",'" + filter.getFilterName()
+					 + "','" + filter.getMessage() + "')", Statement.RETURN_GENERATED_KEYS);
 
+			ResultSet rs = stmt.getGeneratedKeys();
+			
+			if (rs.next()){
+				returnValue = rs.getInt(1);
+			}
+			
 			// close statement
 			stmt.close();
 		} catch (SQLException sqlExcept) {
 			sqlExcept.printStackTrace();
 		}
-
-		return returnFlag;
+		shutdown();
+		return returnValue;
 	}
 
 	public static Filter getFilter(int id) {
 		List<Filter> returnFilters = new ArrayList<Filter>();
-
+		createConnection();
 		try {
 			stmt = conn.createStatement();
 			ResultSet results = stmt.executeQuery("select * from " + TABLE_NAME + "where ID = " + id);
@@ -104,7 +139,7 @@ public class FilterTable {
 		} catch (SQLException sqlExcept) {
 			sqlExcept.printStackTrace();
 		}
-
+		shutdown();
 		return null;
 	}
 
