@@ -21,7 +21,7 @@ public class FilterTable {
 	private static String CREATE_FILTER_TABLE_QUERY = "CREATE TABLE " + TABLE_NAME
 			+ " (ID INTEGER not null primary key "
 			+ "GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
-			+ "CPU DOUBLE, RAM DOUBLE, SENTDATA DOUBLE, RECEIVEDDATA DOUBLE, PROCESSES VARCHAR(1000), EVENTID INTEGER, "
+			+ "CPU DOUBLE, RAM DOUBLE, SENTDATA DOUBLE, RECEIVEDDATA DOUBLE, PROCESSES VARCHAR(1000), EVENTID VARCHAR(1000), "
 			+ "TIMEBOUND INTEGER, FILTERNAME VARCHAR(30), MESSAGE VARCHAR(1000))";
 
 //	public static void main(String[] args) {
@@ -87,11 +87,14 @@ public class FilterTable {
 		createConnection();
 		try {
 			stmt = conn.createStatement();
-			stmt.execute("insert into " + TABLE_NAME + "(CPU, RAM, SENTDATA, RECEIVEDDATA, PROCESSES, EVENTID, "
+			
+			String insertStatement = "insert into " + TABLE_NAME + "(CPU, RAM, SENTDATA, RECEIVEDDATA, PROCESSES, EVENTID, "
 					+ "TIMEBOUND, FILTERNAME, MESSAGE) values ("+ filter.getCpuUsage() + "," + filter.getRamUsage()
 					+ "," + filter.getSentData() + "," + filter.getReceivedData() + ",'" + filter.getProcessesStr() 
-					+ "'," + filter.getEventId()+ "," + filter.getTimeBound() + ",'" + filter.getFilterName()
-					 + "','" + filter.getMessage() + "')", Statement.RETURN_GENERATED_KEYS);
+					+ "','" + filter.getEventIdStr()+ "'," + filter.getTimeBound() + ",'" + filter.getFilterName()
+					 + "','" + filter.getMessage() + "')";
+			
+			stmt.execute(insertStatement, Statement.RETURN_GENERATED_KEYS);
 
 			ResultSet rs = stmt.getGeneratedKeys();
 			
@@ -125,7 +128,7 @@ public class FilterTable {
 				filter.setSentData(results.getDouble(4));
 				filter.setReceivedData(results.getDouble(5));
 				filter.setProcesses(results.getString(6));
-				filter.setEventId(results.getInt(7));
+				filter.setEventIdStr(results.getString(7));
 				filter.setTimeBound(results.getInt(8));
 				filter.setFilterName(results.getString(9));
 				filter.setMessage(results.getString(10));
@@ -162,7 +165,7 @@ public class FilterTable {
 				filter.setSentData(results.getDouble(4));
 				filter.setReceivedData(results.getDouble(5));
 				filter.setProcesses(results.getString(6));
-				filter.setEventId(results.getInt(7));
+				filter.setEventIdStr(results.getString(7));
 				filter.setTimeBound(results.getInt(8));
 				filter.setFilterName(results.getString(9));
 				filter.setMessage(results.getString(10));

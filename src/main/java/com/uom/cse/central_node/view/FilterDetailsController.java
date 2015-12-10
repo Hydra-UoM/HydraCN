@@ -25,7 +25,9 @@ public class FilterDetailsController {
 	@FXML
 	private TableColumn<FilterData, String> ram;
 	@FXML
-	private TableColumn<FilterData, String> network;
+	private TableColumn<FilterData, String> sentData;
+	@FXML
+	private TableColumn<FilterData, String> receivedData;
 	@FXML
 	private TableColumn<FilterData, String> timeBound;
 	@FXML
@@ -34,6 +36,8 @@ public class FilterDetailsController {
 	private TableColumn<FilterData, String> eventId;
 	@FXML
 	private TableColumn<FilterData, String> message;
+	
+	private Stage dialogStage;
 	
 	//executer for creating a thread pool
 	private Executor exec;
@@ -51,8 +55,9 @@ public class FilterDetailsController {
 		// Initialize the person table with the two columns.
 		filterName.setCellValueFactory(cellData -> cellData.getValue().filterNameProperty());
 		cpu.setCellValueFactory(cellData -> cellData.getValue().cpuProperty());
-		ram.setCellValueFactory(cellData -> cellData.getValue().timeBoundProperty());
-		network.setCellValueFactory(cellData -> cellData.getValue().ramProperty());
+		ram.setCellValueFactory(cellData -> cellData.getValue().ramProperty());
+		sentData.setCellValueFactory(cellData -> cellData.getValue().sentDataProperty());
+		receivedData.setCellValueFactory(cellData -> cellData.getValue().receivedProperty());
 		timeBound.setCellValueFactory(cellData -> cellData.getValue().timeBoundProperty());
 		process.setCellValueFactory(cellData -> cellData.getValue().processesProperty());
 		eventId.setCellValueFactory(cellData -> cellData.getValue().eventIdProperty());
@@ -91,6 +96,19 @@ public class FilterDetailsController {
         
         // run the task using a thread from the thread pool:
         exec.execute(filterTask);
-		
+	}
+	
+	@FXML
+	private void showFilterCreateForm() {
+		DeviceOverviewController.hydraCN.showFilterCreateForm();
+	}
+	
+	public void setDialogStage(Stage dialogStage) {
+		this.dialogStage = dialogStage;
+	}
+	
+	@FXML
+	private void actionClose(){
+		dialogStage.close();
 	}
 }

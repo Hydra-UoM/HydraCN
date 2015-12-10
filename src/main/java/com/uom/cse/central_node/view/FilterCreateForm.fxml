@@ -6,8 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.40">
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uom.cse.central_node.view.FilterCreateFormController">
    <children>
       <GridPane layoutX="100.0" layoutY="82.0" prefHeight="409.0" prefWidth="560.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0">
         <columnConstraints>
@@ -26,24 +25,84 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Filter Name" />
+            <Label text="Rule Name" />
             <Label text="CPU Threshold" GridPane.rowIndex="1" />
             <Label text="RAM Threshold" GridPane.rowIndex="2" />
             <Label text="Sent Data Threshold" GridPane.rowIndex="3" />
             <Label text="Received Data Threshold" GridPane.rowIndex="4" />
             <Label text="Time Bound" GridPane.rowIndex="5" />
-            <Label text="Suspicious Event Ids" GridPane.rowIndex="6" />
+            <Label text="Suspicious Event Ids (separate using comma&quot;,&quot;)" GridPane.rowIndex="6" />
             <Label text="Suspious Process Names (separate using comma&quot;,&quot;)" GridPane.rowIndex="7" />
             <Label text="Alert Message" GridPane.rowIndex="8" />
-            <TextField GridPane.columnIndex="1" />
-            <Slider GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Slider GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Slider GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Slider GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Slider GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <TextField fx:id="txtFilterName" GridPane.columnIndex="1" />
+            <TextField fx:id="txtEventId" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <TextField fx:id="txtProcessesName" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <TextArea fx:id="txtMessage" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="261.0" minWidth="10.0" prefWidth="226.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="134.0" minWidth="10.0" prefWidth="54.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Slider fx:id="sldCpuUsage" prefHeight="14.0" prefWidth="237.0" />
+                  <Label fx:id="lblCpuUsage" prefHeight="17.0" prefWidth="51.0" text="0%" textAlignment="RIGHT" GridPane.columnIndex="1" />
+               </children>
+            </GridPane>
+            <GridPane GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="261.0" minWidth="10.0" prefWidth="226.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="134.0" minWidth="10.0" prefWidth="54.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Slider fx:id="sldRamUsage" prefHeight="14.0" prefWidth="237.0" />
+                  <Label fx:id="lblRamUsage" prefHeight="17.0" prefWidth="51.0" text="0MB" textAlignment="RIGHT" GridPane.columnIndex="1" />
+               </children>
+            </GridPane>
+            <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="261.0" minWidth="10.0" prefWidth="226.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="134.0" minWidth="10.0" prefWidth="54.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Slider fx:id="sldSentData" prefHeight="14.0" prefWidth="237.0" />
+                  <Label fx:id="lblSentData" prefHeight="17.0" prefWidth="51.0" text="0MB" textAlignment="RIGHT" GridPane.columnIndex="1" />
+               </children>
+            </GridPane>
+            <GridPane GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="261.0" minWidth="10.0" prefWidth="226.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="134.0" minWidth="10.0" prefWidth="54.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Slider fx:id="sldReceivedData" prefHeight="14.0" prefWidth="237.0" />
+                  <Label fx:id="lblReceivedData" prefHeight="17.0" prefWidth="51.0" text="0MB" textAlignment="RIGHT" GridPane.columnIndex="1" />
+               </children>
+            </GridPane>
+            <GridPane GridPane.columnIndex="1" GridPane.rowIndex="5">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="261.0" minWidth="10.0" prefWidth="226.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="134.0" minWidth="10.0" prefWidth="54.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Slider fx:id="sldTimeBound" prefHeight="14.0" prefWidth="237.0" />
+                  <Label fx:id="lblTimeBound" prefHeight="17.0" prefWidth="51.0" text="0 min" textAlignment="RIGHT" GridPane.columnIndex="1" />
+               </children>
+            </GridPane>
          </children>
       </GridPane>
       <Label layoutX="20.0" layoutY="14.0" text="Add New Rule" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="14.0">
@@ -51,7 +110,7 @@
             <Font size="22.0" />
          </font>
       </Label>
-      <Button layoutX="528.0" layoutY="561.0" mnemonicParsing="false" text="Cancel" />
-      <Button layoutX="478.0" layoutY="561.0" mnemonicParsing="false" text="Save" />
+      <Button layoutX="528.0" layoutY="561.0" mnemonicParsing="false" onAction="#actionClose" text="Cancel" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="20.0" />
+      <Button layoutX="478.0" layoutY="561.0" mnemonicParsing="false" onAction="#actionSaveFilter" text="Save" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="81.0" />
    </children>
 </AnchorPane>

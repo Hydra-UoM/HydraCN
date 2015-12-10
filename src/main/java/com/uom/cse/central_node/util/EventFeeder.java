@@ -35,7 +35,7 @@ public class EventFeeder {
 		defaultFilter.setSentData(filter.getSentData());
 		defaultFilter.setReceivedData(filter.getReceivedData());
 		defaultFilter.setTimeBound(filter.getTimeBound());
-		defaultFilter.setEventId(filter.getEventId());
+		defaultFilter.setEventIdStr(filter.getEventId() + "");
 	    defaultFilter.setMessage(filter.getMessage());
 	    
 	}

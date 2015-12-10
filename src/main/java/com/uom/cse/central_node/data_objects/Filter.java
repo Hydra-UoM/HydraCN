@@ -13,16 +13,13 @@ public class Filter {
 	private String filterName;
 
 	private int timeBound;
-	private int eventId;
+	private String eventId;
 	private String message;
 	
-	private List<String> processes;
+	private String processes;
 	private String returnValue = "";
-	public static final String PROCESS_DELIMETER = "-";
-	
-	public Filter() {
-		processes = new ArrayList<String>();
-	}
+	public static final String PROCESS_DELIMETER = ",";
+	public static final String EVENT_DELIMETER = ",";
 	
 	public String getFilterName() {
 		return filterName;
@@ -40,11 +37,18 @@ public class Filter {
 		this.timeBound = timeBound;
 	}
 
-	public int getEventId() {
+	public String getEventIdStr() {
 		return eventId;
 	}
 
-	public void setEventId(int eventId) {
+	public List<Integer> getEventId() {
+		final List<Integer> events = new ArrayList<Integer>();
+		String[] parts = this.eventId.split(EVENT_DELIMETER);
+		Arrays.asList(parts).forEach((eventId) -> events.add(Integer.parseInt(eventId)));
+		return events;
+	}
+
+	public void setEventIdStr(String eventId) {
 		this.eventId = eventId;
 	}
 
@@ -102,31 +106,17 @@ public class Filter {
 	public void setSentData(double sentData) {
 		this.sentData = sentData;
 	}
-
-	public void addProcess(String value){
-		processes.add(value);
-	}
 	
 	public List<String> getProcesses() {
-		return processes;
-	}
-
-	public void setProcesses(List<String> processes) {
-		this.processes = processes;
+		String[] parts = processes.split(PROCESS_DELIMETER);
+		return Arrays.asList(parts);
 	}
 
 	public void setProcesses(String processes) {
-		String[] parts = processes.split(PROCESS_DELIMETER);
-		
-		this.processes = Arrays.asList(parts);
+		this.processes = processes;
 	}
 	
 	public String getProcessesStr(){
-		
-		this.processes.forEach((process)->{
-			returnValue += (PROCESS_DELIMETER + process);
-		});
-		
-		return returnValue;
+		return processes;
 	}
 }

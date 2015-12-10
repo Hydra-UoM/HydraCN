@@ -10,6 +10,7 @@ import com.uom.cse.central_node.services.RegisterDeviceServer;
 import com.uom.cse.central_node.view.AllDeviceFilterController;
 import com.uom.cse.central_node.view.DataViewerController;
 import com.uom.cse.central_node.view.DeviceOverviewController;
+import com.uom.cse.central_node.view.FilterCreateFormController;
 import com.uom.cse.central_node.view.FilterDetailsController;
 
 import javafx.application.Application;
@@ -25,6 +26,7 @@ import javafx.stage.Stage;
 public class HydraCN extends Application {
 	
 	private Stage primaryStage;
+	private Stage filterStage;
     private BorderPane rootLayout;
     
 	private ObservableList<Device> deviceData = FXCollections.observableArrayList();
@@ -169,20 +171,47 @@ public class HydraCN extends Application {
             loader.setLocation(HydraCN.class.getResource("view/FilterDetails.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
 
-            // Create the dialog Stage.
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("Filter Viewer");
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(primaryStage);
+            // Create the filter Stage.
+            filterStage = new Stage();
+            filterStage.setTitle("Rule Viewer");
+            filterStage.initModality(Modality.WINDOW_MODAL);
+            filterStage.initOwner(primaryStage);
             Scene scene = new Scene(page);
-            dialogStage.setScene(scene);
+            filterStage.setScene(scene);
 
             // Set the person into the controller.
             FilterDetailsController controller = loader.getController();
-            //controller.setDialogStage(dialogStage);
+            controller.setDialogStage(filterStage);
 
             // Show the dialog and wait until the user closes it
-            dialogStage.showAndWait();
+            filterStage.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
+	
+	public void showFilterCreateForm(){
+		try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(HydraCN.class.getResource("view/FilterCreateForm.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Create the filter Stage.
+            Stage newFilterStage = new Stage();
+            newFilterStage.setTitle("New Rule");
+            newFilterStage.initModality(Modality.WINDOW_MODAL);
+            newFilterStage.initOwner(filterStage);
+            Scene scene = new Scene(page);
+            newFilterStage.setScene(scene);
+
+            // Set the person into the controller.
+            FilterCreateFormController controller = loader.getController();
+            controller.setDialogStage(newFilterStage);
+
+            // Show the dialog and wait until the user closes it
+            newFilterStage.showAndWait();
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -9,7 +9,8 @@ public class FilterData {
 	private StringProperty id;
 	private StringProperty cpuUsage;
 	private StringProperty ramUsage;
-	private StringProperty networkUsage;
+	private StringProperty sentData;
+	private StringProperty reveivedData;
 	private StringProperty filterName;
 
 	private StringProperty timeBound;
@@ -22,10 +23,11 @@ public class FilterData {
 		id = new SimpleStringProperty(filter.getId() + "");
 		cpuUsage = new SimpleStringProperty(filter.getCpuUsage() + "");
 		ramUsage = new SimpleStringProperty(filter.getRamUsage() + "");
-		//networkUsage = new SimpleStringProperty(filter.getNetworkUsage() + "");
+		sentData = new SimpleStringProperty(filter.getSentData() + "");
+		reveivedData = new SimpleStringProperty(filter.getReceivedData() + "");
 		filterName = new SimpleStringProperty(filter.getFilterName());
 		timeBound = new SimpleStringProperty(filter.getTimeBound() + "");
-		eventId = new SimpleStringProperty(filter.getEventId() + "");
+		eventId = new SimpleStringProperty(filter.getEventIdStr() + "");
 		message = new SimpleStringProperty(filter.getMessage() + "");
 		processes = new SimpleStringProperty(filter.getProcessesStr() + "");
 	}
@@ -66,16 +68,28 @@ public class FilterData {
         return ramUsage;
     }
 
-	public double getNetworkUsage() {
-        return Double.parseDouble(networkUsage.get());
+	public double getSendData() {
+        return Double.parseDouble(sentData.get());
     }
 
-    public void setNetworkUsage(double network) {
-        this.networkUsage.set(network + "");
+    public void setSendData(double network) {
+        this.sentData.set(network + "");
     }
     
-    public StringProperty networkProperty() {
-        return networkUsage;
+    public StringProperty sentDataProperty() {
+        return sentData;
+    }
+    
+    public double getReceivedData() {
+        return Double.parseDouble(reveivedData.get());
+    }
+
+    public void setReceivedData(double network) {
+        this.reveivedData.set(network + "");
+    }
+    
+    public StringProperty receivedProperty() {
+        return reveivedData;
     }
     
     public int getTimeBound() {
