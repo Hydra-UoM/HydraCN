@@ -69,7 +69,9 @@ public class FilterDetailsController {
 		.addListener((observable, oldValue, newValue) -> filterChanged(newValue));
 		
 		// Add observable list data to the table
-		populateFilterDataObservableArrayList();
+		if(DeviceOverviewController.hydraCN.getFilterData().isEmpty()){
+			populateFilterDataObservableArrayList();	
+		}
 		
 		filterTable.setItems(DeviceOverviewController.hydraCN.getFilterData());
 	}

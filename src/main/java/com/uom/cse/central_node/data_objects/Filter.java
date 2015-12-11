@@ -129,6 +129,11 @@ public class Filter {
 		return Arrays.asList(parts);
 	}
 
+	public String[] getProcessesAsArray() {
+		String[] parts = processes.split(PROCESS_DELIMETER);
+		return parts;
+	}
+
 	public void setProcesses(String processes) {
 		this.processes = processes;
 	}
