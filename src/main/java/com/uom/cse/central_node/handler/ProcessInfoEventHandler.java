@@ -64,7 +64,7 @@ public class ProcessInfoEventHandler implements InitializingBean{
 
     
     public void handle(ApplicationEvent event) {
-//        System.out.println(event.toString());
+       System.out.println(event.toString());
         LOG.debug(event.toString());
         epService.getEPRuntime().sendEvent(event);
 

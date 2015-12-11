@@ -59,7 +59,7 @@ public class RegisterDeviceHandler implements RegisterDeviceService.Iface {
 		// TODO Auto-generated method stub
 		int count = 0;
     	
-    	while(count < 100){
+    	while(count < 1000){
     		processes.add(new ThriftAgentProcessInfo("name", "packageName", new Random().nextInt(50), new Random().nextInt(50), new Random().nextInt(2000), new Random().nextInt(2000), "15", "Android", "123:33:45:333"));
     		count++;
 		}
