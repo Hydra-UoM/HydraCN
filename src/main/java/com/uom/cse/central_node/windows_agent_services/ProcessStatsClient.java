@@ -128,6 +128,29 @@ public class ProcessStatsClient {
 		return overallInfo;
 	}
 
+
+	public static List<String> getAllAvgProcessInfo(String IPAddress, double cpu, double mem,
+			double download, double upload, long time) {
+		List<String> overallInfo = new LinkedList<String>();
+		try {
+			TTransport transport;
+
+			transport = new TSocket(IPAddress, 9090);
+			transport.open();
+
+			TProtocol protocol = new TBinaryProtocol(transport);
+			ProcessStats.Client client = new ProcessStats.Client(protocol);
+
+			overallInfo = getProcessAvgInfoFromService(client, cpu, mem, download, upload, time);
+
+			transport.close();
+		} catch (TException x) {
+			x.printStackTrace();
+		}
+
+		return overallInfo;
+	}
+
 	private static WindowsDeviceOverallInfo getDeviceOverallInfoFromService(ProcessStats.Client client)
 			throws TException {
 
@@ -166,4 +189,13 @@ public class ProcessStatsClient {
 
 		return processes;
 	}
+	
+	private static List<String> getProcessAvgInfoFromService(ProcessStats.Client client, double cpu, double mem,
+			double download, double upload, long time) throws TException {
+
+		List<String> processes = client.filterAllAvgProcesses(time, cpu, mem, download, upload);
+
+		return processes;
+	}
+	
 }

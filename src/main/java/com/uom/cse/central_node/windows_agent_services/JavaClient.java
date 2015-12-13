@@ -5,8 +5,6 @@
  */
 package com.uom.cse.central_node.windows_agent_services;
 
-
-import java.util.ArrayList;
 import java.util.List;
 import org.apache.thrift.TException;
 import org.apache.thrift.protocol.TBinaryProtocol;

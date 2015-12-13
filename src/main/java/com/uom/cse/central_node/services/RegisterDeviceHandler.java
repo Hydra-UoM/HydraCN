@@ -49,7 +49,7 @@ public class RegisterDeviceHandler implements RegisterDeviceService.Iface {
 		
 		//add device to observableList of device table
 		hydraCN.getDeviceData().add(device);
-		float bandwidth = AndroidAgentServiceClient.getNetworkBandwidth(device.getIPAddress());
+//		float bandwidth = AndroidAgentServiceClient.getNetworkBandwidth(device.getIPAddress());
 		return;
 		
 	}

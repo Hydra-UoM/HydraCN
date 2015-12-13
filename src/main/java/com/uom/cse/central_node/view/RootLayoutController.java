@@ -7,4 +7,9 @@ public class RootLayoutController {
 	private void showFilterList(){
 		DeviceOverviewController.hydraCN.showFilterDetails();
 	}
+	
+	@FXML
+	private void showWindowsLogViewer(){
+		DeviceOverviewController.hydraCN.showWindowsLogRuleViewer();
+	}
 }

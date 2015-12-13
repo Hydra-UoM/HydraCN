@@ -6,7 +6,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,36 +22,7 @@ public class FilterTable {
 			+ "GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
 			+ "CPU DOUBLE, RAM DOUBLE, SENTDATA DOUBLE, RECEIVEDDATA DOUBLE, PROCESSES VARCHAR(1000), EVENTID VARCHAR(1000), "
 			+ "TIMEBOUND INTEGER, FILTERNAME VARCHAR(30), MESSAGE VARCHAR(1000))";
-
-//	public static void main(String[] args) {
-//		selectRestaurants();
-//	}
-	private static void selectRestaurants() {
-		createConnection();
-		try {
-			stmt = conn.createStatement();
-			ResultSet results = stmt.executeQuery("select * from " + TABLE_NAME);
-			ResultSetMetaData rsmd = results.getMetaData();
-			int numberCols = rsmd.getColumnCount();
-			for (int i = 1; i <= numberCols; i++) {
-				// print Column Names
-				System.out.print(rsmd.getColumnLabel(i) + "\t\t");
-			}
-
-			System.out.println("\n-------------------------------------------------");
-
-			while (results.next()) {
-				int id = results.getInt(1);
-				String restName = results.getString(2);
-				String cityName = results.getString(3);
-				System.out.println(id + "\t\t" + restName + "\t\t" + cityName);
-			}
-			results.close();
-			stmt.close();
-		} catch (SQLException sqlExcept) {
-			sqlExcept.printStackTrace();
-		}
-	}
+	
 	private static void createConnection() {
 		try {
 			Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();

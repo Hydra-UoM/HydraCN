@@ -15,7 +15,7 @@
             <TableColumn fx:id="ram" prefWidth="75.0" text="RAM" />
             <TableColumn fx:id="sentData" prefWidth="75.0" text="SENT DATA" />
             <TableColumn fx:id="receivedData" prefWidth="75.0" text="RECEIVED DATA" />
-            <TableColumn fx:id="timeBound" prefWidth="75.0" text="TIME BOUND" />
+            <TableColumn fx:id="timeBound" prefWidth="75.0" text="TIME INTERVAL" />
             <TableColumn fx:id="process" prefWidth="75.0" text="SUSPICIOUS PROCESS" />
             <TableColumn fx:id="message" prefWidth="75.0" text="MESSAGE" />
         </columns>
@@ -24,8 +24,8 @@
          </columnResizePolicy>
       </TableView>
       <Button layoutX="934.0" layoutY="561.0" mnemonicParsing="false" onAction="#actionClose" text="Cancel" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
-      <Button layoutX="829.0" layoutY="561.0" mnemonicParsing="false" onAction="#showFilterCreateForm" text="Add New Filter" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="76.0" />
-      <Label layoutX="14.0" layoutY="9.0" text="Rule Viewer">
+      <Button layoutX="829.0" layoutY="561.0" mnemonicParsing="false" onAction="#showFilterCreateForm" text="Add New Rule" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="76.0" />
+      <Label layoutX="14.0" layoutY="9.0" text="Performance Rule Viewer">
          <font>
             <Font size="22.0" />
          </font>

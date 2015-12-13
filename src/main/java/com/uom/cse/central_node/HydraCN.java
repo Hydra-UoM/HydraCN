@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.uom.cse.central_node.model.Device;
 import com.uom.cse.central_node.model.FilterData;
 import com.uom.cse.central_node.model.ProcessInfo;
+import com.uom.cse.central_node.model.WindowsLogData;
 import com.uom.cse.central_node.services.RegisterDeviceHandler;
 import com.uom.cse.central_node.services.RegisterDeviceServer;
 import com.uom.cse.central_node.view.AlertMessageBoxController;
@@ -13,6 +14,8 @@ import com.uom.cse.central_node.view.DataViewerController;
 import com.uom.cse.central_node.view.DeviceOverviewController;
 import com.uom.cse.central_node.view.FilterCreateFormController;
 import com.uom.cse.central_node.view.FilterDetailsController;
+import com.uom.cse.central_node.view.WindowsLogRuleCreateFormController;
+import com.uom.cse.central_node.view.WindowsLogRulesViewerController;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -33,6 +36,9 @@ public class HydraCN extends Application {
 	private ObservableList<Device> deviceData = FXCollections.observableArrayList();
 	private ObservableList<ProcessInfo> infoData = FXCollections.observableArrayList();
 	private ObservableList<FilterData> filterData = FXCollections.observableArrayList();
+	private ObservableList<WindowsLogData> windowsLogData = FXCollections.observableArrayList();
+	
+	private Stage windowsLogRuleViewer;
 	
 	public ObservableList<Device> getDeviceData() {
         return deviceData;
@@ -40,6 +46,10 @@ public class HydraCN extends Application {
 	
 	public ObservableList<FilterData> getFilterData() {
         return filterData;
+    }
+
+	public ObservableList<WindowsLogData> getWindowsLogData() {
+        return windowsLogData;
     }
 	
 	public void setInfoData(ObservableList<ProcessInfo> infoData) {
@@ -209,6 +219,61 @@ public class HydraCN extends Application {
 
             // Set the person into the controller.
             FilterCreateFormController controller = loader.getController();
+            controller.setDialogStage(newFilterStage);
+
+            // Show the dialog and wait until the user closes it
+            newFilterStage.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
+	
+
+	public void showWindowsLogRuleViewer(){
+		try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(HydraCN.class.getResource("view/WindowsLogRulesViewer.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Create the filter Stage.
+            windowsLogRuleViewer = new Stage();
+            windowsLogRuleViewer.setTitle("Windows Log Rules");
+            windowsLogRuleViewer.initModality(Modality.WINDOW_MODAL);
+            windowsLogRuleViewer.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            windowsLogRuleViewer.setScene(scene);
+
+            // Set the person into the controller.
+            WindowsLogRulesViewerController controller = loader.getController();
+            controller.setDialogStage(windowsLogRuleViewer);
+
+            // Show the dialog and wait until the user closes it
+            windowsLogRuleViewer.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
+	
+	public void showWindowsLogRuleCreateForm(){
+		try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(HydraCN.class.getResource("view/WindowsLogRuleCreateForm.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Create the filter Stage.
+            Stage newFilterStage = new Stage();
+            newFilterStage.setTitle("Performance Data");
+            newFilterStage.initModality(Modality.WINDOW_MODAL);
+            newFilterStage.initOwner(windowsLogRuleViewer);
+            Scene scene = new Scene(page);
+            newFilterStage.setScene(scene);
+
+            // Set the person into the controller.
+            WindowsLogRuleCreateFormController controller = loader.getController();
             controller.setDialogStage(newFilterStage);
 
             // Show the dialog and wait until the user closes it

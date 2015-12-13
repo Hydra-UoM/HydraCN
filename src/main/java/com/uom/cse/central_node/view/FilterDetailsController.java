@@ -8,6 +8,8 @@ import com.uom.cse.central_node.data_objects.Filter;
 import com.uom.cse.central_node.data_objects.FilterTable;
 import com.uom.cse.central_node.model.FilterData;
 import com.uom.cse.central_node.util.EventFeeder;
+import com.uom.cse.central_node.windows_agent_services.ProcessStats;
+import com.uom.cse.central_node.windows_agent_services.ProcessStatsClient;
 
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -115,7 +117,10 @@ public class FilterDetailsController {
 	
 	@FXML
 	private void actionApplyFilter(){
-		EventFeeder.applyFilter(new Filter(selectedFilter));
+		//EventFeeder.applyFilter(new Filter(selectedFilter));
 		//DeviceOverviewController.hydraCN.showAlertMessageBox("This is a warm alert!!");
+		DeviceOverviewController.hydraCN.getDeviceData().forEach(action -> {
+			ProcessStatsClient.getAllAvgProcessInfo(action.getIPAddress(), 2, 3, 0, 0, 5);
+		});
 	}
 }

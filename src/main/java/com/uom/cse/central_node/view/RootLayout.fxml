@@ -9,9 +9,25 @@
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
-          <Menu mnemonicParsing="false" text="File">
+          <Menu mnemonicParsing="false" text="Configure">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#showFilterList" text="Filter List" />
+                  <Menu mnemonicParsing="false" text="Agents">
+                    <items>
+                        <Menu mnemonicParsing="false" text="Windows Agents">
+                           <items>
+                          <MenuItem mnemonicParsing="false" onAction="#showFilterList" text="Performance Rules" />
+                              <MenuItem mnemonicParsing="false" onAction="#showWindowsLogViewer" text="Log Rules" />
+                           </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Android Agents">
+                           <items>
+                              <MenuItem mnemonicParsing="false" text="Performance Rules" />
+                           </items>
+                        </Menu>
+                    </items>
+                  </Menu>
+                  <MenuItem mnemonicParsing="false" text="Manage CEP Rules" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" text="Close" />
             </items>
           </Menu>
