@@ -20,11 +20,12 @@ public class EventFeeder {
 	static{
 		defaultFilter = new Filter();
 		defaultFilter.setFilterName("Default Filter");
-		defaultFilter.setCpuUsage(30);
-		defaultFilter.setRamUsage(41);
-		defaultFilter.setSentData(410);
-		defaultFilter.setReceivedData(420);
+		defaultFilter.setCpuUsage(10);
+		defaultFilter.setRamUsage(30);
+		defaultFilter.setSentData(10);
+		defaultFilter.setReceivedData(10);
 		defaultFilter.setTimeBound(1);
+		defaultFilter.setProcesses("name,nameone,nametwo");
 	}
 	
 	
@@ -41,19 +42,37 @@ public class EventFeeder {
 	    
 	}
 	
+	public static String statementInterpreter(Filter filter){
+		
+		String statement = "select name,mac,cpuUsage,ramUsage,sentData,receiveData from ApplicationEvent";
+		
+		if(filter.getTimeBound() != 0){
+			statement += ".win:time_batch(" + filter.getTimeBound() * 60 +"sec)";
+			//statement += ".win:time_batch(10sec)";
+		}
+		if(!filter.getProcesses().isEmpty()){
+			statement += " where name in (" + filter.getProcessesToQuery() +") and";
+			//statement += " where name in ('nameone','name')";
+		}
+		
+		statement += " having avg(cpuUsage) > " + filter.getCpuUsage() + " and avg(ramUsage) > " + filter.getRamUsage() + " and avg(sentData) > " + filter.getSentData() + " and avg(receiveData) >" + filter.getReceivedData();
+		//statement += " cpuUsage > " + filter.getCpuUsage() + " and ramUsage > " + filter.getRamUsage() + " and sentData > " + filter.getSentData() + " and receiveData >" + filter.getReceivedData();
+		return statement;
+	}
+	
 	public static void pushToCEP(List<ThriftAgentProcessInfo> processes){
 		
 		CriticalEventSubscriber customSubscriber = new CriticalEventSubscriber();
 		
 		ProcessInfoEventHandler processInfoEventHandler = new ProcessInfoEventHandler(customSubscriber,defaultFilter);
 		
-		String customExpression = "select mac,cpuUsage,ramUsage,sentData,receiveData from ApplicationEvent where cpuUsage > 40.00 and ramUsage > 40.00 and sentData > 150.00 and receiveData > 150.00";
+		//String customExpression = "select mac,cpuUsage,ramUsage,sentData,receiveData from ApplicationEvent where cpuUsage > 40.00 and ramUsage > 40.00 and sentData > 150.00 and receiveData > 150.00";
 		
-		processInfoEventHandler.createCriticalEventCheckExpression(customExpression, customSubscriber);
+		processInfoEventHandler.createCriticalEventCheckExpression(statementInterpreter(defaultFilter), customSubscriber);
 		
-		customExpression = "select cpuUsage from ApplicationEvent where cpuUsage > 30";
+		//customExpression = "select cpuUsage from ApplicationEvent where cpuUsage > 30";
 		
-		processInfoEventHandler.createCriticalEventCheckExpression(customExpression, new StatementSubscriber() {
+		/*processInfoEventHandler.createCriticalEventCheckExpression(customExpression, new StatementSubscriber() {
 			
 			@Override
 			public String getStatement() {
@@ -72,7 +91,7 @@ public class EventFeeder {
 			        System.out.println(sb.toString());
 			        
 			    }
-		});
+		}); */
 		
 		ExecutorService eventFeeder = Executors.newSingleThreadExecutor();
 		eventFeeder.submit(new Runnable() {
@@ -80,8 +99,15 @@ public class EventFeeder {
 	            	
 	            	processes.forEach((process)->{
 	        			processInfoEventHandler.handle(new ApplicationEvent(process));
+	        			try {
+							Thread.sleep(5000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}	   
 	        		});
 	            	
+	            	         	
 //	            	int count = 0;
 //	            	
 //	            	while(count < 100){
