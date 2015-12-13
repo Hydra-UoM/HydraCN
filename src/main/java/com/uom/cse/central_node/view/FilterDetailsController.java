@@ -7,8 +7,6 @@ import java.util.concurrent.Executors;
 import com.uom.cse.central_node.data_objects.Filter;
 import com.uom.cse.central_node.data_objects.FilterTable;
 import com.uom.cse.central_node.model.FilterData;
-import com.uom.cse.central_node.util.EventFeeder;
-import com.uom.cse.central_node.windows_agent_services.ProcessStats;
 import com.uom.cse.central_node.windows_agent_services.ProcessStatsClient;
 
 import javafx.concurrent.Task;

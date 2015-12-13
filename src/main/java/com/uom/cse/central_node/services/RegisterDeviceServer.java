@@ -5,9 +5,6 @@ import org.apache.thrift.server.TSimpleServer;
 import org.apache.thrift.transport.TServerSocket;
 import org.apache.thrift.transport.TServerTransport;
 
-import com.uom.cse.central_node.HydraCN;
-import com.uom.cse.central_node.model.Device;
-
 import org.apache.thrift.server.TServer.Args;
 
 public class RegisterDeviceServer extends Thread {

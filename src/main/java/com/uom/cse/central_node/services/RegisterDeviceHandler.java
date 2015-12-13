@@ -2,28 +2,18 @@ package com.uom.cse.central_node.services;
 
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import org.apache.thrift.TException;
 
 import com.uom.cse.central_node.HydraCN;
-import com.uom.cse.central_node.android_agent_services.AndroidAgentServiceClient;
-import com.uom.cse.central_node.data_objects.Filter;
-import com.uom.cse.central_node.event.ApplicationEvent;
-import com.uom.cse.central_node.handler.ProcessInfoEventHandler;
-import com.uom.cse.central_node.model.Device;
-import com.uom.cse.central_node.subscriber.CriticalEventSubscriber;
 import com.uom.cse.central_node.util.EventFeeder;
 import com.uom.cse.central_node.view.DeviceOverviewController;
 
-import javafx.application.Application;
 import javafx.application.Platform;
 
 public class RegisterDeviceHandler implements RegisterDeviceService.Iface {
 
 	public static HydraCN hydraCN;
-	private ProcessInfoEventHandler processInfoEventHandler;
 
 	int count = 0;
 	@Override

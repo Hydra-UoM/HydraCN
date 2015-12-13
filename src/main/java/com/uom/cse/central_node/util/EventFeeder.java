@@ -1,8 +1,6 @@
 package com.uom.cse.central_node.util;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -11,7 +9,6 @@ import com.uom.cse.central_node.event.ApplicationEvent;
 import com.uom.cse.central_node.handler.ProcessInfoEventHandler;
 import com.uom.cse.central_node.services.ThriftAgentProcessInfo;
 import com.uom.cse.central_node.subscriber.CriticalEventSubscriber;
-import com.uom.cse.central_node.subscriber.StatementSubscriber;
 
 public class EventFeeder {
 	

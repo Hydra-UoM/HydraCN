@@ -1,7 +1,5 @@
 package com.uom.cse.central_node.util;
 
-import java.util.Date;
-import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -11,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.uom.cse.central_node.handler.ProcessInfoEventHandler;
-import com.uom.cse.central_node.event.ApplicationEvent;
 
 
 @Component

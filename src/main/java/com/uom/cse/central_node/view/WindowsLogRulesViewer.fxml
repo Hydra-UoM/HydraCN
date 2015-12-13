@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uom.cse.central_node.view.WindowsLogRulesViewerController">
+   <children>
+      <TableView fx:id="logRuleTable" layoutX="24.0" layoutY="21.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="45.0">
+        <columns>
+          <TableColumn fx:id="ruleName" prefWidth="75.0" text="RULE NAME" />
+          <TableColumn fx:id="summarizationLevel" prefWidth="75.0" text="SUMMARIZATION LEVEL" />
+            <TableColumn fx:id="logType" prefWidth="75.0" text="LOG TYPE" />
+            <TableColumn fx:id="timeInterval" prefWidth="75.0" text="TIME INTERVAL" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <Label layoutX="14.0" layoutY="14.0" text="Log Rule Viewer">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Button layoutX="934.0" layoutY="561.0" mnemonicParsing="false" onAction="#actionClose" text="Close" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+      <Button layoutX="840.0" layoutY="561.0" mnemonicParsing="false" onAction="#actionShowNewForm" text="Add New Rule" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="68.0" />
+      <Button fx:id="btnApply" disable="true" layoutX="773.0" layoutY="561.0" mnemonicParsing="false" onAction="#actionClose" text="Apply" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="170.0" />
+   </children>
+</AnchorPane>
