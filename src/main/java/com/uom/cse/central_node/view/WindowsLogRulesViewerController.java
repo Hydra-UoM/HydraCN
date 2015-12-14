@@ -28,8 +28,14 @@ public class WindowsLogRulesViewerController {
 	private TableColumn<WindowsLogData, String> timeInterval;
 	@FXML
 	private Button btnApply;
+	@FXML
+	private Button btnShowAppliedRule;
+	@FXML
+	private Button btnRemoveAppliedRule;
 
 	private Stage dialogStage;
+	
+	private WindowsLogData selectedRule;
 
 	// executer for creating a thread pool
 	private Executor exec;
@@ -59,6 +65,23 @@ public class WindowsLogRulesViewerController {
 		}
 		
 		logRuleTable.setItems(DeviceOverviewController.hydraCN.getWindowsLogData());
+		
+		Task<LogRule> filterTask = new Task<LogRule>() {
+            @Override
+            public LogRule call() throws Exception {
+                return LogRuleTable.getAppliedRule();
+            }
+        };
+        
+        filterTask.setOnSucceeded((e) ->{
+        	LogRule rule = filterTask.getValue();
+        	if(rule != null){
+    			btnShowAppliedRule.setDisable(false);
+    		}
+        });
+        
+        // run the task using a thread from the thread pool:
+        exec.execute(filterTask);
 
 	}
 
@@ -82,7 +105,8 @@ public class WindowsLogRulesViewerController {
 	}
 
 	private void ruleChanged(WindowsLogData newValue) {
-
+		btnApply.setDisable(false);
+		selectedRule = newValue;
 	}
 
 	@FXML
@@ -93,6 +117,23 @@ public class WindowsLogRulesViewerController {
 	@FXML
 	private void actionShowNewForm() {
 		DeviceOverviewController.hydraCN.showWindowsLogRuleCreateForm();
+	}
+	
+	@FXML
+	private void actionApplyRule(){
+		LogRuleTable.applyRule(selectedRule.getId());
+		btnShowAppliedRule.setDisable(false);
+	}
+	
+	@FXML
+	private void actionRemoveAppliedRule(){
+		LogRuleTable.disableAllRule();
+		btnShowAppliedRule.setDisable(true);
+	}
+	
+	@FXML
+	private void actionShowAppiledRule(){
+		DeviceOverviewController.hydraCN.showAppliedRuleView(selectedRule);
 	}
 
 	public void setDialogStage(Stage stage) {

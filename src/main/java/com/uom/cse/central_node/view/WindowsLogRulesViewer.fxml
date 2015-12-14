@@ -26,6 +26,8 @@
       </Label>
       <Button layoutX="934.0" layoutY="561.0" mnemonicParsing="false" onAction="#actionClose" text="Close" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
       <Button layoutX="840.0" layoutY="561.0" mnemonicParsing="false" onAction="#actionShowNewForm" text="Add New Rule" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="68.0" />
-      <Button fx:id="btnApply" disable="true" layoutX="773.0" layoutY="561.0" mnemonicParsing="false" onAction="#actionClose" text="Apply" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="170.0" />
+      <Button fx:id="btnApply" disable="true" layoutX="773.0" layoutY="561.0" mnemonicParsing="false" onAction="#actionApplyRule" text="Apply" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="170.0" />
+      <Button fx:id="btnShowAppliedRule" disable="true" layoutX="14.0" layoutY="561.0" mnemonicParsing="false" onAction="#actionShowAppiledRule" text="Show Applied Rule" />
+      <Button fx:id="btnRemoveAppliedRule" layoutX="138.0" layoutY="561.0" mnemonicParsing="false" onAction="#actionRemoveAppliedRule" text="Disable Applied Rule" />
    </children>
 </AnchorPane>

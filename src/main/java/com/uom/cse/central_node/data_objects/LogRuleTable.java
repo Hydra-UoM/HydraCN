@@ -14,13 +14,13 @@ public class LogRuleTable {
 	private static String TABLE_NAME = "windowsLogRules";
 	// jdbc Connection
 	private static Connection conn = null;
-	private static Statement stmt = null;
 
 	// queries
 	private static String CREATE_LOG_RULE_TABLE_QUERY = "CREATE TABLE " + TABLE_NAME
 			+ " (ID INTEGER not null primary key " + "GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
 			+ "FILTERNAME VARCHAR(30),TIMEBOUND VARCHAR(5),LOGTYPE VARCHAR(30),SUMMARIZATIONLEVEL INTEGER,"
-			+ "ISPROCESSENABLE BOOLEAN, PROCESSNAME VARCHAR(30), TYPE VARCHAR(30), SECURITYLEVEL VARCHAR(30))";
+			+ "ISPROCESSENABLE BOOLEAN, PROCESSNAME VARCHAR(30), TYPE VARCHAR(30), SECURITYLEVEL VARCHAR(30),"
+			+ "APPLY VARCHAR(1))";
 	
 	
 	private static void createConnection() {
@@ -38,12 +38,13 @@ public class LogRuleTable {
 		int returnValue = -1;
 		createConnection();
 		try {
-			stmt = conn.createStatement();
+			Statement stmt = conn.createStatement();
 			
-			String insertStatement = "insert into " + TABLE_NAME + "(FILTERNAME, TIMEBOUND, LOGTYPE, SUMMARIZATIONLEVEL, ISPROCESSENABLE, "
-					+ "PROCESSNAME, TYPE, SECURITYLEVEL) values ('"+ rule.getFilterName() + "','" + rule.getTimeBound()
-					+ "','" + rule.getLogType() + "'," + rule.getSummarizationLevel() + "," + rule.isProcessLogEnable() 
-					+ ",'" + rule.getProcessName() + "','" + rule.getType() + "','" + rule.getSecurityLevel() + "')";
+			String insertStatement = "insert into " + TABLE_NAME + "(FILTERNAME, TIMEBOUND, LOGTYPE, SUMMARIZATIONLEVEL, "
+					+ "ISPROCESSENABLE, PROCESSNAME, TYPE, SECURITYLEVEL, APPLY) values ('"+ rule.getFilterName() + "','" 
+					+ rule.getTimeBound() + "','" + rule.getLogType() + "'," + rule.getSummarizationLevel() + "," 
+					+ rule.isProcessLogEnable() + ",'" + rule.getProcessName() + "','" + rule.getType() + "','" 
+					+ rule.getSecurityLevel() + "',"+ "'N')";
 			
 			stmt.execute(insertStatement, Statement.RETURN_GENERATED_KEYS);
 
@@ -58,16 +59,89 @@ public class LogRuleTable {
 		} catch (SQLException sqlExcept) {
 			sqlExcept.printStackTrace();
 		}
-		shutdown();
+		
 		return returnValue;
 	}
+	
+	public static void applyRule(int id){
+		createConnection();
+		try {
+			Statement stmt = conn.createStatement();
+			
+			String updateStatement = "UPDATE " + TABLE_NAME + " SET APPLY = 'Y' WHERE ID = " + id ;
+			
+			stmt.execute(updateStatement);
+
+			String disableApply = "UPDATE " + TABLE_NAME + " SET APPLY = 'N' WHERE ID != " + id ;
+			
+			stmt.execute(disableApply);
+			
+			// close statement
+			stmt.close();
+		} catch (SQLException sqlExcept) {
+			sqlExcept.printStackTrace();
+		}
+		//shutdown();
+	}
+
+	public static void disableAllRule(){
+		createConnection();
+		try {
+			Statement stmt = conn.createStatement();
+			
+			String updateStatement = "UPDATE " + TABLE_NAME + " SET APPLY = 'N'";
+			
+			stmt.execute(updateStatement);
+			// close statement
+			stmt.close();
+		} catch (SQLException sqlExcept) {
+			sqlExcept.printStackTrace();
+		}
+		//shutdown();
+	}
+	
+	public static LogRule getAppliedRule(){
+		
+		createConnection();
+		LogRule rule = null;
+		try {
+			Statement stmt = conn.createStatement();
+			ResultSet results = stmt.executeQuery("select * from " + TABLE_NAME + " where APPLY = 'Y'");
+			
+			while (results.next()) {
+
+				rule = new LogRule();
+
+				rule.setId(results.getInt(1));
+				rule.setFilterName(results.getString(2));
+				rule.setTimeBound(results.getString(3));
+				rule.setLogType(results.getString(4));
+				rule.setSummarizationLevel(results.getInt(5));
+				rule.setProcessLogEnable(results.getBoolean(6));
+				rule.setProcessName(results.getString(7));
+				rule.setType(results.getString(8));
+				rule.setSecurityLevel(results.getString(9));
+
+
+			}
+			results.close();
+
+			stmt.close();
+		} catch (SQLException sqlExcept) {
+			sqlExcept.printStackTrace();
+		}
+		//shutdown(); 
+		
+		return rule;
+	}
+
 	public static List<LogRule> getAllLogRules() {
 		List<LogRule> returnRules = new ArrayList<LogRule>();
 		
 		createConnection();
 		
 		try {
-			stmt = conn.createStatement();
+			Statement stmt = conn.createStatement();
 			ResultSet results = stmt.executeQuery("select * from " + TABLE_NAME);
 
 			while (results.next()) {
@@ -94,7 +168,6 @@ public class LogRuleTable {
 			sqlExcept.printStackTrace();
 		}
 		
-		shutdown();
 
 		return returnRules;
 	}
@@ -108,7 +181,7 @@ public class LogRuleTable {
 
 			// check table exists
 			if (!tables.next()) {
-				stmt = conn.createStatement();
+				Statement stmt = conn.createStatement();
 				stmt.execute(CREATE_LOG_RULE_TABLE_QUERY);
 				stmt.close();
 			}
@@ -117,18 +190,18 @@ public class LogRuleTable {
 		}
 	}
 
-	private static void shutdown() {
-		try {
-			if (stmt != null) {
-				stmt.close();
-			}
-			if (conn != null) {
-				DriverManager.getConnection(dbURL + ";shutdown=true");
-				conn.close();
-			}
-		} catch (SQLException sqlExcept) {
-
-		}
-	}
+//	private static void shutdown() {
+//		try {
+//			if (stmt != null) {
+//				stmt.close();
+//			}
+//			if (conn != null) {
+//				DriverManager.getConnection(dbURL + ";shutdown=true");
+//				conn.close();
+//			}
+//		} catch (SQLException sqlExcept) {
+//
+//		}
+//	}
 
 }

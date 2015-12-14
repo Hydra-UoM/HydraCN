@@ -7,7 +7,6 @@ import java.util.concurrent.Executors;
 import com.uom.cse.central_node.data_objects.Filter;
 import com.uom.cse.central_node.data_objects.FilterTable;
 import com.uom.cse.central_node.model.FilterData;
-import com.uom.cse.central_node.windows_agent_services.ProcessStatsClient;
 
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -37,6 +36,10 @@ public class FilterDetailsController {
 	private TableColumn<FilterData, String> message;
 	@FXML
 	private Button btnApply;
+	@FXML
+	private Button btnShowAppliedFilter;
+	@FXML
+	private Button btnDisableAppliedFilter;
 	
 	private Stage dialogStage;
 	
@@ -74,6 +77,23 @@ public class FilterDetailsController {
 		}
 		
 		filterTable.setItems(DeviceOverviewController.hydraCN.getFilterData());
+		
+		Task<Filter> filterTask = new Task<Filter>() {
+            @Override
+            public Filter call() throws Exception {
+                return FilterTable.getAppliedFilter();
+            }
+        };
+        
+        filterTask.setOnSucceeded((e) ->{
+        	Filter filter = filterTask.getValue();
+        	if(filter != null){
+    			btnShowAppliedFilter.setDisable(false);
+    		}
+        });
+        
+        // run the task using a thread from the thread pool:
+        exec.execute(filterTask);
 	}
 	
 	private void filterChanged(FilterData filterData) {
@@ -117,8 +137,23 @@ public class FilterDetailsController {
 	private void actionApplyFilter(){
 		//EventFeeder.applyFilter(new Filter(selectedFilter));
 		//DeviceOverviewController.hydraCN.showAlertMessageBox("This is a warm alert!!");
-		DeviceOverviewController.hydraCN.getDeviceData().forEach(action -> {
-			ProcessStatsClient.getAllAvgProcessInfo(action.getIPAddress(), 2, 3, 0, 0, 5);
-		});
+//		DeviceOverviewController.hydraCN.getDeviceData().forEach(action -> {
+//			ProcessStatsClient.getAllAvgProcessInfo(action.getIPAddress(), 2, 3, 0, 0, 5);
+//		});
+		
+		FilterTable.applyFilter(selectedFilter.getId());
+		btnShowAppliedFilter.setDisable(false);
+	}
+	
+	@FXML
+	private void actionShowAppliedFilter(){
+		Filter filter = FilterTable.getAppliedFilter();
+		DeviceOverviewController.hydraCN.showAppliedRuleView(filter);
+	}
+	
+	@FXML
+	private void actionDisableAppliedFilter(){
+		FilterTable.disableAllFilter();
+		btnShowAppliedFilter.setDisable(true);
 	}
 }

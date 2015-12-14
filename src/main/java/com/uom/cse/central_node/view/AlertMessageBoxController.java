@@ -7,6 +7,8 @@ import javafx.stage.Stage;
 public class AlertMessageBoxController {
 	@FXML
 	private Label lblMessage;
+	@FXML
+	private Label lblTitle;
 	
 	private Stage dialogStage;
 	
@@ -16,6 +18,10 @@ public class AlertMessageBoxController {
 	
 	public void setMessage(String msg){
 		lblMessage.setText(msg);
+	}
+	
+	public void setTitle(String title){
+		lblTitle.setText(title);
 	}
 	
 	@FXML
