@@ -1,5 +1,6 @@
 package com.uom.cse.central_node.view;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -7,6 +8,8 @@ import java.util.concurrent.Executors;
 import com.uom.cse.central_node.data_objects.Filter;
 import com.uom.cse.central_node.data_objects.FilterTable;
 import com.uom.cse.central_node.model.FilterData;
+import com.uom.cse.central_node.services.ThriftAgentProcessInfo;
+import com.uom.cse.central_node.util.LogFileWritter;
 
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -55,7 +58,7 @@ public class FilterDetailsController {
 		exec = Executors.newCachedThreadPool(runnable -> {
             Thread t = new Thread(runnable);
             t.setDaemon(true);
-            return t ;
+            return t;
         });
 		
 		// Initialize the person table with the two columns.
@@ -141,8 +144,28 @@ public class FilterDetailsController {
 //			ProcessStatsClient.getAllAvgProcessInfo(action.getIPAddress(), 2, 3, 0, 0, 5);
 //		});
 		
+		//change database entry
 		FilterTable.applyFilter(selectedFilter.getId());
+		
+		//enable apply button
 		btnShowAppliedFilter.setDisable(false);
+		
+		ThriftAgentProcessInfo info = new ThriftAgentProcessInfo();
+		info.name = "ddddssssrrrrrrrrrrrrrrr";
+		info.cpuUsage = 4.0d;
+		info.ramUsage = 3.0d;
+		info.packageName = "sssdasd";
+		info.name = "asdasd";
+		info.sentData = 3.0d;
+		info.receiveData = 3.0d;
+		info.mac = "dsdasda";
+		
+		List<ThriftAgentProcessInfo> infolist = new ArrayList<>();
+		infolist.add(info);
+		infolist.add(info);
+		
+		LogFileWritter.writeFile(infolist);
+		
 	}
 	
 	@FXML

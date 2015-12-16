@@ -1,12 +1,10 @@
 package com.uom.cse.central_node.services;
 
 import java.util.List;
-import java.util.Random;
 
 import org.apache.thrift.TException;
 
 import com.uom.cse.central_node.HydraCN;
-import com.uom.cse.central_node.util.EventFeeder;
 import com.uom.cse.central_node.view.DeviceOverviewController;
 
 import javafx.application.Platform;
@@ -17,8 +15,7 @@ public class RegisterDeviceHandler implements RegisterDeviceService.Iface {
 
 	int count = 0;
 	@Override
-	public void registerDevice(com.uom.cse.central_node.services.Device deviceDetails) throws TException {
-		
+	public boolean registerDevice(com.uom.cse.central_node.services.Device deviceDetails) throws TException {
 		com.uom.cse.central_node.model.Device device = new com.uom.cse.central_node.model.Device(
 				deviceDetails.deviceId, deviceDetails.IPAddress, deviceDetails.type);
 		
@@ -40,23 +37,31 @@ public class RegisterDeviceHandler implements RegisterDeviceService.Iface {
 		//add device to observableList of device table
 		hydraCN.getDeviceData().add(device);
 //		float bandwidth = AndroidAgentServiceClient.getNetworkBandwidth(device.getIPAddress());
-		return;
-		
+		return true;
 	}
-	
-	@Override
-	public void pushProcessesInfo(List<ThriftAgentProcessInfo> processes) throws TException {
-		// TODO Auto-generated method stub
-		int count = 0;
-    	
-    	while(count < 1000){
-    		processes.add(new ThriftAgentProcessInfo("name", "packageName", new Random().nextInt(50), new Random().nextInt(50), new Random().nextInt(2000), new Random().nextInt(2000), "15", "Android", "123:33:45:333"));
-    		count++;
-		}
 
+	@Override
+	public boolean pushProcessesInfo(List<ThriftAgentProcessInfo> processes) throws TException {
 		
-		EventFeeder.pushToCEP(processes);
-	    
-	 }
+		return true;
+	}
+
+	@Override
+	public boolean pushLogInfo(List<myLogStructure> logInfo) throws TException {
+		
+		return true;
+	}
+
+	@Override
+	public boolean pushUsersInfo(List<myUserAccountDetailsStruct> usersInfo) throws TException {
+		
+		return true;
+	}
+
+	@Override
+	public boolean pushCurrentUserInfo(myUserAccountDetailsStruct userInfo) throws TException {
+		
+		return true;
+	}
 	
 }
