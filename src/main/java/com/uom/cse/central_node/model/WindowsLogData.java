@@ -12,12 +12,38 @@ public class WindowsLogData {
 	private StringProperty logType;
 	private StringProperty summarizationLevel;
 	
+	private String logTypeNum;
+	private String processName;
+	private String securityLevel;
+	private String type;
+	
 	public WindowsLogData(LogRule rule) {
 		id = new SimpleStringProperty(rule.getId() + "");
 		filterName = new SimpleStringProperty(rule.getFilterName());
 		timeBound = new SimpleStringProperty(rule.getTimeBound() + "");
 		logType = new SimpleStringProperty(rule.getLogTypeNames());
 		summarizationLevel = new SimpleStringProperty(rule.getSummarizationLevel() + "");
+		
+		logTypeNum = rule.getLogType();
+		processName = rule.getProcessName();
+		securityLevel = rule.getSecurityLevel();
+		type = rule.getType();
+	}
+	
+	public String getLogTypeStr(){
+		return logTypeNum;
+	}
+	
+	public String getProcessName(){
+		return processName;
+	}
+	
+	public String getSecurityLevel(){
+		return securityLevel;
+	}
+	
+	public String getType(){
+		return type;
 	}
 	
 	public int getId() {
@@ -71,13 +97,39 @@ public class WindowsLogData {
 	public int getSummarizationLevel() {
         return Integer.parseInt(summarizationLevel.get());
     }
+	
+	public String getSummarizationLevelAsString() {
+		String returnValue = "";
+		int level = Integer.parseInt(summarizationLevel.get());
+		if(0 == level){
+			returnValue = "Low";
+		}
+		if(1 == level){
+			returnValue = "Medium";
+		}
+		if(2 == level){
+			returnValue = "High";
+		}
+		return returnValue;
+    }
 
     public void setSummarizationLevel(int level) {
         this.summarizationLevel.set(level + "");
     }
     
     public StringProperty summarizationLevelProperty() {
-        return summarizationLevel;
+    	StringProperty returnValue = new SimpleStringProperty("Low");
+		int level = Integer.parseInt(summarizationLevel.get());
+		if(0 == level){
+			returnValue = new SimpleStringProperty("Low");
+		}
+		if(1 == level){
+			returnValue = new SimpleStringProperty("Medium");
+		}
+		if(2 == level){
+			returnValue = new SimpleStringProperty("High");
+		}
+        return returnValue;
     }
 
 }

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.uom.cse.central_node.model.WindowsLogData;
+
 public class LogRule {
 	private int id;
 	private String filterName;
@@ -16,6 +18,18 @@ public class LogRule {
 	private String securityLevel;
 	
 	private String returnValue = "";
+	public LogRule(){
+		
+	}
+	
+	public LogRule(WindowsLogData logData){
+		timeBound = logData.getTimeBound() + "";
+		logType = logData.getLogTypeStr();
+		summarizationLevel = logData.getSummarizationLevel();
+		securityLevel = logData.getSecurityLevel();
+		processName = logData.getProcessName();
+		type = logData.getType();
+	}
 	
 	public String getSecurityLevel() {
 		return securityLevel;
@@ -109,6 +123,10 @@ public class LogRule {
 				if(type.equals("23")){
 					returnValue += "All User Information,";
 				}
+				
+				if(type.equals("18")){
+					returnValue += "Process Logs,";
+				}
 			});
 		}
 		
@@ -119,10 +137,29 @@ public class LogRule {
 		return logType;
 	}
 	public List<String> getLogTypeAsList(){
+		List<String> list = new ArrayList<String>();
 		List<String> returnValue = new ArrayList<String>();
 		
-		if(logType != null){
-			returnValue = Arrays.asList(logType.split(","));
+		if(logType != null && !"".equals(logType)){
+			list = Arrays.asList(logType.split(","));
+			list.forEach((type) -> {
+				if(!"".equals(type.trim())){
+					returnValue.add(type.trim());
+				}
+			});
+		}
+		
+		return returnValue;
+	}
+	
+	public List<Long> getLogTypeAsIntList(){
+		final List<Long> returnValue = new ArrayList<Long>();
+		
+		if(logType != null && !"".equals(logType)){
+			Arrays.asList(logType.split(",")).forEach((type) -> {
+				returnValue.add(Long.parseLong(type.trim()));
+			});
+			
 		}
 		
 		return returnValue;

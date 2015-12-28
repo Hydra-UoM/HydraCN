@@ -66,10 +66,10 @@ public class JavaClient {
   private static void perform(ProcessStats.Client client) throws TException
   {
     List<String> result;    //create vector "result" for storing the values
-   result= client.filterAllAvgProcesses(10,0.1, 1000, 0, 0);
+   //result= client.filterAllAvgProcesses(10,0.1, 1000, 0, 0);
     //result= client.getMaxMemory();
 //for (int i = 0; i < result.size(); i++) {
-		System.out.println(result+"\n");
+		//System.out.println(result+"\n");
 	//}
    
    // System.out.println("Total Net Download: "+ Math.round(100*netdown)/100.0 + "KB");

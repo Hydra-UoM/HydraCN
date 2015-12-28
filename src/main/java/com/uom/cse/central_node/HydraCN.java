@@ -3,6 +3,7 @@ package com.uom.cse.central_node;
 import java.io.IOException;
 
 import com.uom.cse.central_node.data_objects.Filter;
+import com.uom.cse.central_node.model.CEPRuleData;
 import com.uom.cse.central_node.model.Device;
 import com.uom.cse.central_node.model.FilterData;
 import com.uom.cse.central_node.model.ProcessInfo;
@@ -40,6 +41,7 @@ public class HydraCN extends Application {
 	private ObservableList<ProcessInfo> infoData = FXCollections.observableArrayList();
 	private ObservableList<FilterData> filterData = FXCollections.observableArrayList();
 	private ObservableList<WindowsLogData> windowsLogData = FXCollections.observableArrayList();
+	private ObservableList<CEPRuleData> cepRuleData = FXCollections.observableArrayList();
 	
 	private Stage windowsLogRuleViewer;
 	
@@ -53,6 +55,10 @@ public class HydraCN extends Application {
 
 	public ObservableList<WindowsLogData> getWindowsLogData() {
         return windowsLogData;
+    }
+
+	public ObservableList<CEPRuleData> getCEPRuleData() {
+        return cepRuleData;
     }
 	
 	public void setInfoData(ObservableList<ProcessInfo> infoData) {

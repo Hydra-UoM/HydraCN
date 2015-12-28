@@ -7,6 +7,7 @@ import java.util.concurrent.Executors;
 import com.uom.cse.central_node.data_objects.LogRule;
 import com.uom.cse.central_node.data_objects.LogRuleTable;
 import com.uom.cse.central_node.model.WindowsLogData;
+import com.uom.cse.central_node.windows_agent_services.ProcessStatsClient;
 
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -123,6 +124,10 @@ public class WindowsLogRulesViewerController {
 	private void actionApplyRule(){
 		LogRuleTable.applyRule(selectedRule.getId());
 		btnShowAppliedRule.setDisable(false);
+		DeviceOverviewController.hydraCN.getDeviceData().forEach((device) -> {
+			ProcessStatsClient.sendWindowsLogInfo(device.getIPAddress(), new LogRule(selectedRule));
+		});
+		
 	}
 	
 	@FXML

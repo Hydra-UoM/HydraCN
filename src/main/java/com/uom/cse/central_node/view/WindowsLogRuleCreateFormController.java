@@ -170,14 +170,15 @@ public class WindowsLogRuleCreateFormController {
 		if(chkWindowsDefender.isSelected()){
 			logType += "30,";
 		}
-		rule.setLogType(logType);
 		
 		if(chkProcessLogs.isSelected()){
 			rule.setProcessLogEnable(true);
 			rule.setProcessName(txtProcessName.getText());
 			rule.setType(comboType.getValue());
 			rule.setSecurityLevel(comboSecurityLevel.getValue());
+			logType += "18,";
 		}
+		rule.setLogType(logType);
 		
 		int timeBound = (int)(sldTimeInterval.valueProperty().get());
 		rule.setTimeBound(timeBound + "");

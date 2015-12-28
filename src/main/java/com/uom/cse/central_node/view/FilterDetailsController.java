@@ -1,15 +1,15 @@
 package com.uom.cse.central_node.view;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import com.uom.cse.central_node.android_agent_services.AndroidAgentServiceClient;
 import com.uom.cse.central_node.data_objects.Filter;
 import com.uom.cse.central_node.data_objects.FilterTable;
+import com.uom.cse.central_node.model.Device;
 import com.uom.cse.central_node.model.FilterData;
-import com.uom.cse.central_node.services.ThriftAgentProcessInfo;
-import com.uom.cse.central_node.util.LogFileWritter;
+import com.uom.cse.central_node.windows_agent_services.ProcessStatsClient;
 
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -146,26 +146,15 @@ public class FilterDetailsController {
 		
 		//change database entry
 		FilterTable.applyFilter(selectedFilter.getId());
-		
-		//enable apply button
 		btnShowAppliedFilter.setDisable(false);
 		
-		ThriftAgentProcessInfo info = new ThriftAgentProcessInfo();
-		info.name = "ddddssssrrrrrrrrrrrrrrr";
-		info.cpuUsage = 4.0d;
-		info.ramUsage = 3.0d;
-		info.packageName = "sssdasd";
-		info.name = "asdasd";
-		info.sentData = 3.0d;
-		info.receiveData = 3.0d;
-		info.mac = "dsdasda";
-		
-		List<ThriftAgentProcessInfo> infolist = new ArrayList<>();
-		infolist.add(info);
-		infolist.add(info);
-		
-		LogFileWritter.writeFile(infolist);
-		
+		DeviceOverviewController.hydraCN.getDeviceData().forEach((device) -> {
+			if(device.getType().equals(Device.TYPE_ANDROID)){
+    			AndroidAgentServiceClient.deployCommand(device.getIPAddress(), new Filter(selectedFilter));
+    		}else{
+    			ProcessStatsClient.getAllAvgProcessInfo(device.getIPAddress(), new Filter(selectedFilter));
+    		}
+		});
 	}
 	
 	@FXML

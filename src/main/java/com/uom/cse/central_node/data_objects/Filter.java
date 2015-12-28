@@ -38,16 +38,6 @@ public class Filter {
 		filterName = data.getFilterName();
 	}
 	
-	public String getProcessesToQuery(){
-		String []processes = getProcessesAsArray();
-		String processString = "";
-		for (String string : processes) {
-			string = "'" + string + "'";
-			processString += string + ",";
-		}
-		return processString.substring(0,processString.length()-1);
-	}
-
 	public String getFilterName() {
 		return filterName;
 	}
@@ -143,8 +133,10 @@ public class Filter {
 	}
 
 	public String[] getProcessesAsArray() {
-		String[] parts = processes.split(PROCESS_DELIMETER);
-		return parts;
+		if(processes != null && "".equals(processes)){
+			return processes.split(PROCESS_DELIMETER);
+		}
+		return null;
 	}
 
 	public void setProcesses(String processes) {
@@ -154,4 +146,19 @@ public class Filter {
 	public String getProcessesStr(){
 		return processes;
 	}
+	
+
+	public String getProcessesToQuery(){
+		if(processes != null && !"".equals(processes)){
+			String []tempProcesses = processes.split(PROCESS_DELIMETER);
+			String processString = "";
+			for (String string : tempProcesses) {
+				string = "'" + string + "'";
+				processString += string + ",";
+			}
+			return processString.substring(0,processString.length()-1);
+		}
+		return "";
+	}
+
 }

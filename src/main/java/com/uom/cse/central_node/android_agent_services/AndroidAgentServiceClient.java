@@ -10,6 +10,7 @@ import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransport;
 
 import com.uom.cse.central_node.android_agent_services.AndroidAgentService.Processor.testNetwork;
+import com.uom.cse.central_node.data_objects.Filter;
 
 public class AndroidAgentServiceClient {
 	public static List<TProcessInfo> getRunningProcess(String IPAddress) {
@@ -182,6 +183,30 @@ public class AndroidAgentServiceClient {
 		return processes;
 	}
 	
+	public static float deployCommand(String IPAddress, Filter filter) {
+		float processes = -1.0f;
+		
+		try {
+			TTransport transport;
+
+			transport = new TSocket(IPAddress, 9090);
+			transport.open();
+
+			TProtocol protocol = new TBinaryProtocol(transport);
+			AndroidAgentService.Client client = new AndroidAgentService.Client(protocol);
+
+			deployCommandFromService(client, (short)filter.getCpuUsage(), (short)filter.getRamUsage(), 
+					(short)filter.getReceivedData(),(short)filter.getSentData(), (short)filter.getTimeBound(), 
+					filter.getProcessesToQuery());
+
+			transport.close();
+		} catch (TException x) {
+			x.printStackTrace();
+		}
+
+		return processes;
+	}
+	
 	private static List<TProcessInfo> getAllRunningProcessFromService(AndroidAgentService.Client client)
 			throws TException {
 
@@ -254,6 +279,12 @@ public class AndroidAgentServiceClient {
 		
 		float bandwidth = sizeOfBytes * 1.0f / totalDiff; // kB/milliSec
 		return bandwidth * 1000;
+	}
+	
+	private static boolean deployCommandFromService(AndroidAgentService.Client client, short cpu, short mem,
+			short download, short upload, short time, String processes) throws TException{
+		client.deployCommand(cpu, mem, download, upload, time, processes);
+		return true;
 	}
 
 }

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uom.cse.central_node.view.CEPRuleViewerController">
+   <children>
+      <TableView fx:id="ruleTable" layoutX="230.0" layoutY="118.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="50.0">
+        <columns>
+          <TableColumn fx:id="name" prefWidth="75.0" text="Name" />
+          <TableColumn fx:id="rule" prefWidth="75.0" text="Rule" />
+            <TableColumn fx:id="alertMessage" prefWidth="75.0" text="Alert Message" />
+            <TableColumn fx:id="status" prefWidth="75.0" text="Status" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <Label layoutX="14.0" layoutY="14.0" text="CEP Rules">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Button layoutX="831.0" layoutY="561.0" mnemonicParsing="false" text="Add New Rule" />
+      <Button layoutX="934.0" layoutY="561.0" mnemonicParsing="false" text="Cancel" />
+      <Button fx:id="btnApplyRule" disable="true" layoutX="706.0" layoutY="561.0" mnemonicParsing="false" text="Apply" />
+      <Button fx:id="btnDisableAllRules" disable="true" layoutX="14.0" layoutY="561.0" mnemonicParsing="false" text="Disable All Rules" />
+      <Button fx:id="btnDisableRule" disable="true" layoutX="764.0" layoutY="561.0" mnemonicParsing="false" text="Disable" />
+   </children>
+</AnchorPane>

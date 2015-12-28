@@ -4,7 +4,9 @@
 	<groupId>HydraCN</groupId>
 	<artifactId>HydraCN</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-
+	<organization>
+		<name>HYDRA</name>
+	</organization>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<esper-version>5.2.0</esper-version>
@@ -160,7 +162,7 @@
 				<artifactId>javafx-maven-plugin</artifactId>
 				<version>8.1.2</version>
 				<configuration>
-					<mainClass>com.uom.Main</mainClass>
+					<mainClass>com.uom.cse.central_node.HydraCN</mainClass>
 					<nativeInstallers />
 				</configuration>
 			</plugin>

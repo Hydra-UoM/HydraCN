@@ -1,6 +1,5 @@
 package com.uom.cse.central_node.windows_agent_services;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -10,6 +9,8 @@ import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransport;
 
+import com.uom.cse.central_node.data_objects.Filter;
+import com.uom.cse.central_node.data_objects.LogRule;
 import com.uom.cse.central_node.model.ProcessInfo;
 
 public class ProcessStatsClient {
@@ -118,7 +119,7 @@ public class ProcessStatsClient {
 			TProtocol protocol = new TBinaryProtocol(transport);
 			ProcessStats.Client client = new ProcessStats.Client(protocol);
 
-			overallInfo = getCurrentLoggedInUserFromService(client);
+			//overallInfo = getCurrentLoggedInUserFromService(client);
 
 			transport.close();
 		} catch (TException x) {
@@ -128,10 +129,8 @@ public class ProcessStatsClient {
 		return overallInfo;
 	}
 
-
-	public static List<String> getAllAvgProcessInfo(String IPAddress, double cpu, double mem,
-			double download, double upload, long time) {
-		List<String> overallInfo = new LinkedList<String>();
+	public static boolean getAllAvgProcessInfo(String IPAddress, Filter filter) {
+		
 		try {
 			TTransport transport;
 
@@ -141,14 +140,37 @@ public class ProcessStatsClient {
 			TProtocol protocol = new TBinaryProtocol(transport);
 			ProcessStats.Client client = new ProcessStats.Client(protocol);
 
-			overallInfo = getProcessAvgInfoFromService(client, cpu, mem, download, upload, time);
+			getProcessAvgInfoFromService(client, filter.getCpuUsage(), filter.getRamUsage(), filter.getReceivedData()
+					, filter.getSentData(), filter.getTimeBound(), filter.getProcesses());
 
 			transport.close();
 		} catch (TException x) {
 			x.printStackTrace();
 		}
 
-		return overallInfo;
+		return true;
+	}
+	
+	public static boolean sendWindowsLogInfo(String IPAddress, LogRule rule) {
+		
+		try {
+			TTransport transport;
+
+			transport = new TSocket(IPAddress, 9090);
+			transport.open();
+
+			TProtocol protocol = new TBinaryProtocol(transport);
+			ProcessStats.Client client = new ProcessStats.Client(protocol);
+
+			getWindowsLogInfoFromService(client, Integer.parseInt(rule.getTimeBound()), rule.getSummarizationLevel(), 
+					rule.getLogTypeAsList(), rule.getType(), rule.getProcessName(), rule.getSecurityLevel());
+
+			transport.close();
+		} catch (TException x) {
+			x.printStackTrace();
+		}
+
+		return true;
 	}
 
 	private static WindowsDeviceOverallInfo getDeviceOverallInfoFromService(ProcessStats.Client client)
@@ -183,19 +205,27 @@ public class ProcessStatsClient {
 		return processes;
 	}
 
-	private static List<String> getCurrentLoggedInUserFromService(ProcessStats.Client client) throws TException {
+//	private static List<String> getCurrentLoggedInUserFromService(ProcessStats.Client client) throws TException {
+//
+//		List<String> processes = client.getCurrentLoggedInUser();
+//
+//		return processes;
+//	}
+	
+	private static boolean getProcessAvgInfoFromService(ProcessStats.Client client, double cpu, double mem,
+			double download, double upload, long time, List<String> processList) throws TException {
 
-		List<String> processes = client.getCurrentLoggedInUser();
+		client.send_filterAllAvgProcesses(time, cpu, mem, download, upload, processList);
 
-		return processes;
+		return true;
 	}
 	
-	private static List<String> getProcessAvgInfoFromService(ProcessStats.Client client, double cpu, double mem,
-			double download, double upload, long time) throws TException {
+	private static boolean getWindowsLogInfoFromService(ProcessStats.Client client, int time, int summarizationLevel,
+			List<String> eventIndices, String logType, String processName, String securityLevel) throws TException {
 
-		List<String> processes = client.filterAllAvgProcesses(time, cpu, mem, download, upload);
+		client.getLogRelatedInformation(time, summarizationLevel, eventIndices, logType, processName, securityLevel);
 
-		return processes;
+		return true;
 	}
 	
 }

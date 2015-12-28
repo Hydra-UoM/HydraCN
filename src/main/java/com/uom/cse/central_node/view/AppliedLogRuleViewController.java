@@ -24,7 +24,7 @@ public class AppliedLogRuleViewController {
 	
 	public void setLogData(WindowsLogData logData){
 		lblRuleName.setText(logData.getFilterName());
-		lblSummarizationLevel.setText(logData.getSummarizationLevel() + "");
+		lblSummarizationLevel.setText(logData.getSummarizationLevelAsString());
 		lblEvents.setText(logData.getLogType());
 		lblTimeInteval.setText(logData.getTimeBound() + "min");
 	}
