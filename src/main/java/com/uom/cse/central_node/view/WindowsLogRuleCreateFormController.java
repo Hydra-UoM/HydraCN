@@ -174,8 +174,19 @@ public class WindowsLogRuleCreateFormController {
 		if(chkProcessLogs.isSelected()){
 			rule.setProcessLogEnable(true);
 			rule.setProcessName(txtProcessName.getText());
-			rule.setType(comboType.getValue());
-			rule.setSecurityLevel(comboSecurityLevel.getValue());
+			
+			if(comboType.getValue() != null){
+				rule.setType(comboType.getValue());
+			}else{
+				rule.setType("");
+			}
+			
+			if(comboSecurityLevel.getValue() != null){
+				rule.setSecurityLevel(comboSecurityLevel.getValue());
+			}else{
+				rule.setSecurityLevel("");
+			}
+			
 			logType += "18,";
 		}
 		rule.setLogType(logType);

@@ -210,21 +210,22 @@ public class LogFileWritter {
 		long timestamp = 0;
 		try{
 			timestamp = Long.parseLong(timestampStr);
-		}catch (Exception e) {
+			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 			
-		}
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		
-		Timestamp stamp = new Timestamp(timestamp * 1000);
-		
-		long millis = stamp.getTime();
-		
-		Date date = new Date(millis);
-		
-		// convert date into String
-		String currentDateAndTime = dateFormat.format(date);
+			Timestamp stamp = new Timestamp(timestamp * 1000);
+			
+			long millis = stamp.getTime();
+			
+			Date date = new Date(millis);
+			
+			// convert date into String
+			String currentDateAndTime = dateFormat.format(date);
 
-		return currentDateAndTime;
+			return currentDateAndTime;
+		}catch (NumberFormatException e) {
+			return "";
+		}
+		
 	}
 
 	private static void writeFile(String filename, StringBuilder content) {

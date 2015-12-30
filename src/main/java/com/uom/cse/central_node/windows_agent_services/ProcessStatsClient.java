@@ -151,6 +151,52 @@ public class ProcessStatsClient {
 		return true;
 	}
 	
+	public static double getTotalCpu(String IPAddress) {
+		
+		double cpu = 0.0;
+		
+		try {
+			TTransport transport;
+
+			transport = new TSocket(IPAddress, 9090);
+			transport.open();
+
+			TProtocol protocol = new TBinaryProtocol(transport);
+			ProcessStats.Client client = new ProcessStats.Client(protocol);
+
+			cpu = getTotalCpuFromService(client);
+
+			transport.close();
+		} catch (TException x) {
+			x.printStackTrace();
+		}
+
+		return cpu;
+	}
+	
+	public static double getTotalRam(String IPAddress){
+		
+		double ram = 0.0;
+		
+		try {
+			TTransport transport;
+
+			transport = new TSocket(IPAddress, 9090);
+			transport.open();
+
+			TProtocol protocol = new TBinaryProtocol(transport);
+			ProcessStats.Client client = new ProcessStats.Client(protocol);
+
+			ram = getTotalRamFromService(client);
+
+			transport.close();
+		} catch (TException x) {
+			x.printStackTrace();
+		}
+		
+		return ram;
+	}
+	
 	public static boolean sendWindowsLogInfo(String IPAddress, LogRule rule) {
 		
 		try {
@@ -190,6 +236,34 @@ public class ProcessStatsClient {
 		return overallInfo;
 	}
 
+	private static double getTotalCpuFromService(ProcessStats.Client client){
+		
+		double cpuUsage = 0.0;
+		
+		try {
+			cpuUsage = client.getTotalCPU();
+		} catch (TException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return cpuUsage;
+	}
+	
+	private static double getTotalRamFromService(ProcessStats.Client client){
+		
+		double ramUsage = 0.0;
+		
+		try {
+			ramUsage = client.getTotalMemory();
+		} catch (TException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return ramUsage;
+	}
+	
 	private static List<String> getProcessInfoFromService(ProcessStats.Client client) throws TException {
 
 		List<String> processes = client.filterAllProcesses(0, 0, 0, 0, "");

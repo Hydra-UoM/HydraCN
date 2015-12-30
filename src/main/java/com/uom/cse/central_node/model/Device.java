@@ -8,6 +8,8 @@ public class Device {
 	private final StringProperty deviceId;
 	private final StringProperty IPAddress;
 	private final StringProperty type;
+	private int commandType;
+	private long lastCommandTimeStamp;
 	
 	public final static String TYPE_ANDROID = "Android";
 	public final static String TYPE_WINDOWS = "Windows";
@@ -17,7 +19,31 @@ public class Device {
 		this.IPAddress = new SimpleStringProperty(IPaddress);
 		this.type = new SimpleStringProperty(type);
 	}
+
+	public long getLastCommandTimeStamp() {
+		return lastCommandTimeStamp;
+	}
+
+	public void setLastCommandTimeStamp(long lastCommandTimeStamp) {
+		this.lastCommandTimeStamp = lastCommandTimeStamp;
+	}
+
+	public boolean isTimeStampExpired(long timestamp){
+		if((timestamp - this.lastCommandTimeStamp) > 120000){
+			return true;
+		}else{
+			return false;
+		}
+	}
 	
+	public int getCommandType() {
+		return commandType;
+	}
+
+	public void setCommandType(int commandType) {
+		this.commandType = commandType;
+	}
+
 	public String getDeviceId() {
         return deviceId.get();
     }

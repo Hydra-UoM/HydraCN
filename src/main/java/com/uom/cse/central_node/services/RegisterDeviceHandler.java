@@ -8,6 +8,7 @@ import org.apache.thrift.TException;
 
 import com.uom.cse.central_node.HydraCN;
 import com.uom.cse.central_node.android_agent_services.AndroidAgentServiceClient;
+import com.uom.cse.central_node.commands.CommandManager;
 import com.uom.cse.central_node.data_objects.Filter;
 import com.uom.cse.central_node.data_objects.FilterTable;
 import com.uom.cse.central_node.data_objects.LogRule;
@@ -36,6 +37,7 @@ public class RegisterDeviceHandler implements RegisterDeviceService.Iface {
 	int count = 0;
 	@Override
 	public boolean registerDevice(com.uom.cse.central_node.services.Device deviceDetails) throws TException {
+		
 		com.uom.cse.central_node.model.Device device = new com.uom.cse.central_node.model.Device(
 				deviceDetails.deviceId, deviceDetails.IPAddress, deviceDetails.type);
 		
@@ -78,6 +80,9 @@ public class RegisterDeviceHandler implements RegisterDeviceService.Iface {
     		}
         });
 		
+		// run the task using a thread from the thread pool:
+		executor.execute(commandTask);
+				
 		Task<LogRule> logCommandTask = new Task<LogRule>() {
 			@Override
 			public LogRule call() throws Exception {
@@ -100,8 +105,23 @@ public class RegisterDeviceHandler implements RegisterDeviceService.Iface {
 
 	@Override
 	public boolean pushProcessesInfo(List<ThriftAgentProcessInfo> processes) throws TException {
+		
 		LogFileWritter.writeFile(processes);
+		
+		processes.forEach((process) -> {
+			
+			//check agent
+			if(process.getPackageName().equals("Windows Agent")){
+				//deploy command for windows
+				CommandManager.checkAndDeployCommandForWindows(process);
+			}else if(process.getPackageName().equals("Android Agent")){
+				//deploy command for android
+				CommandManager.checkAndDeployCommandForAndorid(process);
+			}
+		});
+		
 		return true;
+		
 	}
 
 	@Override

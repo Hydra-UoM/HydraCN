@@ -138,7 +138,8 @@ public class WindowsLogRulesViewerController {
 	
 	@FXML
 	private void actionShowAppiledRule(){
-		DeviceOverviewController.hydraCN.showAppliedRuleView(selectedRule);
+		
+		DeviceOverviewController.hydraCN.showAppliedRuleView(new WindowsLogData(LogRuleTable.getAppliedRule()));
 	}
 
 	public void setDialogStage(Stage stage) {

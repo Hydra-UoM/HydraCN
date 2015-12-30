@@ -9,7 +9,6 @@ import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransport;
 
-import com.uom.cse.central_node.android_agent_services.AndroidAgentService.Processor.testNetwork;
 import com.uom.cse.central_node.data_objects.Filter;
 
 public class AndroidAgentServiceClient {
