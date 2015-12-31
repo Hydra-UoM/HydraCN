@@ -38,7 +38,7 @@ public class Device implements org.apache.thrift.TBase<Device, Device._Fields>, 
   private static final org.apache.thrift.protocol.TField PORT_FIELD_DESC = new org.apache.thrift.protocol.TField("port", org.apache.thrift.protocol.TType.STRING, (short)3);
   private static final org.apache.thrift.protocol.TField TYPE_FIELD_DESC = new org.apache.thrift.protocol.TField("type", org.apache.thrift.protocol.TType.STRING, (short)4);
   private static final org.apache.thrift.protocol.TField GROUP_FIELD_DESC = new org.apache.thrift.protocol.TField("group", org.apache.thrift.protocol.TType.STRING, (short)5);
-  private static final org.apache.thrift.protocol.TField COMMAND_TYPE_FIELD_DESC = new org.apache.thrift.protocol.TField("commandType", org.apache.thrift.protocol.TType.I32, (short)6);
+  private static final org.apache.thrift.protocol.TField NAME_FIELD_DESC = new org.apache.thrift.protocol.TField("name", org.apache.thrift.protocol.TType.STRING, (short)6);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -51,11 +51,7 @@ public class Device implements org.apache.thrift.TBase<Device, Device._Fields>, 
   public String port; // required
   public String type; // required
   public String group; // required
-  /**
-   * 
-   * @see CommandType
-   */
-  public CommandType commandType; // required
+  public String name; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -64,11 +60,7 @@ public class Device implements org.apache.thrift.TBase<Device, Device._Fields>, 
     PORT((short)3, "port"),
     TYPE((short)4, "type"),
     GROUP((short)5, "group"),
-    /**
-     * 
-     * @see CommandType
-     */
-    COMMAND_TYPE((short)6, "commandType");
+    NAME((short)6, "name");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -93,8 +85,8 @@ public class Device implements org.apache.thrift.TBase<Device, Device._Fields>, 
           return TYPE;
         case 5: // GROUP
           return GROUP;
-        case 6: // COMMAND_TYPE
-          return COMMAND_TYPE;
+        case 6: // NAME
+          return NAME;
         default:
           return null;
       }
@@ -148,8 +140,8 @@ public class Device implements org.apache.thrift.TBase<Device, Device._Fields>, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.GROUP, new org.apache.thrift.meta_data.FieldMetaData("group", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
-    tmpMap.put(_Fields.COMMAND_TYPE, new org.apache.thrift.meta_data.FieldMetaData("commandType", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-        new org.apache.thrift.meta_data.EnumMetaData(org.apache.thrift.protocol.TType.ENUM, CommandType.class)));
+    tmpMap.put(_Fields.NAME, new org.apache.thrift.meta_data.FieldMetaData("name", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(Device.class, metaDataMap);
   }
@@ -163,7 +155,7 @@ public class Device implements org.apache.thrift.TBase<Device, Device._Fields>, 
     String port,
     String type,
     String group,
-    CommandType commandType)
+    String name)
   {
     this();
     this.deviceId = deviceId;
@@ -171,7 +163,7 @@ public class Device implements org.apache.thrift.TBase<Device, Device._Fields>, 
     this.port = port;
     this.type = type;
     this.group = group;
-    this.commandType = commandType;
+    this.name = name;
   }
 
   /**
@@ -193,8 +185,8 @@ public class Device implements org.apache.thrift.TBase<Device, Device._Fields>, 
     if (other.isSetGroup()) {
       this.group = other.group;
     }
-    if (other.isSetCommandType()) {
-      this.commandType = other.commandType;
+    if (other.isSetName()) {
+      this.name = other.name;
     }
   }
 
@@ -209,7 +201,7 @@ public class Device implements org.apache.thrift.TBase<Device, Device._Fields>, 
     this.port = null;
     this.type = null;
     this.group = null;
-    this.commandType = null;
+    this.name = null;
   }
 
   public String getDeviceId() {
@@ -332,35 +324,27 @@ public class Device implements org.apache.thrift.TBase<Device, Device._Fields>, 
     }
   }
 
-  /**
-   * 
-   * @see CommandType
-   */
-  public CommandType getCommandType() {
-    return this.commandType;
+  public String getName() {
+    return this.name;
   }
 
-  /**
-   * 
-   * @see CommandType
-   */
-  public Device setCommandType(CommandType commandType) {
-    this.commandType = commandType;
+  public Device setName(String name) {
+    this.name = name;
     return this;
   }
 
-  public void unsetCommandType() {
-    this.commandType = null;
+  public void unsetName() {
+    this.name = null;
   }
 
-  /** Returns true if field commandType is set (has been assigned a value) and false otherwise */
-  public boolean isSetCommandType() {
-    return this.commandType != null;
+  /** Returns true if field name is set (has been assigned a value) and false otherwise */
+  public boolean isSetName() {
+    return this.name != null;
   }
 
-  public void setCommandTypeIsSet(boolean value) {
+  public void setNameIsSet(boolean value) {
     if (!value) {
-      this.commandType = null;
+      this.name = null;
     }
   }
 
@@ -406,11 +390,11 @@ public class Device implements org.apache.thrift.TBase<Device, Device._Fields>, 
       }
       break;
 
-    case COMMAND_TYPE:
+    case NAME:
       if (value == null) {
-        unsetCommandType();
+        unsetName();
       } else {
-        setCommandType((CommandType)value);
+        setName((String)value);
       }
       break;
 
@@ -434,8 +418,8 @@ public class Device implements org.apache.thrift.TBase<Device, Device._Fields>, 
     case GROUP:
       return getGroup();
 
-    case COMMAND_TYPE:
-      return getCommandType();
+    case NAME:
+      return getName();
 
     }
     throw new IllegalStateException();
@@ -458,8 +442,8 @@ public class Device implements org.apache.thrift.TBase<Device, Device._Fields>, 
       return isSetType();
     case GROUP:
       return isSetGroup();
-    case COMMAND_TYPE:
-      return isSetCommandType();
+    case NAME:
+      return isSetName();
     }
     throw new IllegalStateException();
   }
@@ -522,12 +506,12 @@ public class Device implements org.apache.thrift.TBase<Device, Device._Fields>, 
         return false;
     }
 
-    boolean this_present_commandType = true && this.isSetCommandType();
-    boolean that_present_commandType = true && that.isSetCommandType();
-    if (this_present_commandType || that_present_commandType) {
-      if (!(this_present_commandType && that_present_commandType))
+    boolean this_present_name = true && this.isSetName();
+    boolean that_present_name = true && that.isSetName();
+    if (this_present_name || that_present_name) {
+      if (!(this_present_name && that_present_name))
         return false;
-      if (!this.commandType.equals(that.commandType))
+      if (!this.name.equals(that.name))
         return false;
     }
 
@@ -563,10 +547,10 @@ public class Device implements org.apache.thrift.TBase<Device, Device._Fields>, 
     if (present_group)
       list.add(group);
 
-    boolean present_commandType = true && (isSetCommandType());
-    list.add(present_commandType);
-    if (present_commandType)
-      list.add(commandType.getValue());
+    boolean present_name = true && (isSetName());
+    list.add(present_name);
+    if (present_name)
+      list.add(name);
 
     return list.hashCode();
   }
@@ -629,12 +613,12 @@ public class Device implements org.apache.thrift.TBase<Device, Device._Fields>, 
         return lastComparison;
       }
     }
-    lastComparison = Boolean.valueOf(isSetCommandType()).compareTo(other.isSetCommandType());
+    lastComparison = Boolean.valueOf(isSetName()).compareTo(other.isSetName());
     if (lastComparison != 0) {
       return lastComparison;
     }
-    if (isSetCommandType()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.commandType, other.commandType);
+    if (isSetName()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.name, other.name);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -699,11 +683,11 @@ public class Device implements org.apache.thrift.TBase<Device, Device._Fields>, 
     }
     first = false;
     if (!first) sb.append(", ");
-    sb.append("commandType:");
-    if (this.commandType == null) {
+    sb.append("name:");
+    if (this.name == null) {
       sb.append("null");
     } else {
-      sb.append(this.commandType);
+      sb.append(this.name);
     }
     first = false;
     sb.append(")");
@@ -789,10 +773,10 @@ public class Device implements org.apache.thrift.TBase<Device, Device._Fields>, 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 6: // COMMAND_TYPE
-            if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
-              struct.commandType = CommandType.findByValue(iprot.readI32());
-              struct.setCommandTypeIsSet(true);
+          case 6: // NAME
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+              struct.name = iprot.readString();
+              struct.setNameIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
@@ -837,9 +821,9 @@ public class Device implements org.apache.thrift.TBase<Device, Device._Fields>, 
         oprot.writeString(struct.group);
         oprot.writeFieldEnd();
       }
-      if (struct.commandType != null) {
-        oprot.writeFieldBegin(COMMAND_TYPE_FIELD_DESC);
-        oprot.writeI32(struct.commandType.getValue());
+      if (struct.name != null) {
+        oprot.writeFieldBegin(NAME_FIELD_DESC);
+        oprot.writeString(struct.name);
         oprot.writeFieldEnd();
       }
       oprot.writeFieldStop();
@@ -875,7 +859,7 @@ public class Device implements org.apache.thrift.TBase<Device, Device._Fields>, 
       if (struct.isSetGroup()) {
         optionals.set(4);
       }
-      if (struct.isSetCommandType()) {
+      if (struct.isSetName()) {
         optionals.set(5);
       }
       oprot.writeBitSet(optionals, 6);
@@ -894,8 +878,8 @@ public class Device implements org.apache.thrift.TBase<Device, Device._Fields>, 
       if (struct.isSetGroup()) {
         oprot.writeString(struct.group);
       }
-      if (struct.isSetCommandType()) {
-        oprot.writeI32(struct.commandType.getValue());
+      if (struct.isSetName()) {
+        oprot.writeString(struct.name);
       }
     }
 
@@ -924,8 +908,8 @@ public class Device implements org.apache.thrift.TBase<Device, Device._Fields>, 
         struct.setGroupIsSet(true);
       }
       if (incoming.get(5)) {
-        struct.commandType = CommandType.findByValue(iprot.readI32());
-        struct.setCommandTypeIsSet(true);
+        struct.name = iprot.readString();
+        struct.setNameIsSet(true);
       }
     }
   }

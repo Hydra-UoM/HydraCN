@@ -108,17 +108,18 @@ public class RegisterDeviceHandler implements RegisterDeviceService.Iface {
 		
 		LogFileWritter.writeFile(processes);
 		
-		processes.forEach((process) -> {
-			
-			//check agent
-			if(process.getPackageName().equals("Windows Agent")){
+		try{
+			ThriftAgentProcessInfo process = processes.get(0);
+			if(process.type.equals(Device.TYPE_WINDOWS)){
 				//deploy command for windows
 				CommandManager.checkAndDeployCommandForWindows(process);
-			}else if(process.getPackageName().equals("Android Agent")){
+			}else if(process.type.equals(Device.TYPE_ANDROID)){
 				//deploy command for android
 				CommandManager.checkAndDeployCommandForAndorid(process);
 			}
-		});
+		}catch(ArrayIndexOutOfBoundsException e){
+			
+		}
 		
 		return true;
 		

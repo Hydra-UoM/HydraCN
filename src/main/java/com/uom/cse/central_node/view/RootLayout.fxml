@@ -13,17 +13,8 @@
             <items>
                   <Menu mnemonicParsing="false" text="Agents">
                     <items>
-                        <Menu mnemonicParsing="false" text="Windows Agents">
-                           <items>
-                          <MenuItem mnemonicParsing="false" onAction="#showFilterList" text="Performance Rules" />
-                              <MenuItem mnemonicParsing="false" onAction="#showWindowsLogViewer" text="Log Rules" />
-                           </items>
-                        </Menu>
-                        <Menu mnemonicParsing="false" text="Android Agents">
-                           <items>
-                              <MenuItem mnemonicParsing="false" text="Performance Rules" />
-                           </items>
-                        </Menu>
+                    <MenuItem mnemonicParsing="false" onAction="#showFilterList" text="Performance Rules" />
+                        <MenuItem mnemonicParsing="false" onAction="#showWindowsLogViewer" text="Log Rules" />
                     </items>
                   </Menu>
                   <MenuItem mnemonicParsing="false" text="Manage CEP Rules" />
@@ -31,11 +22,7 @@
                   <MenuItem mnemonicParsing="false" text="Close" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
+          <Menu mnemonicParsing="false" text="Edit" />
           <Menu mnemonicParsing="false" text="Help">
             <items>
               <MenuItem mnemonicParsing="false" text="About" />

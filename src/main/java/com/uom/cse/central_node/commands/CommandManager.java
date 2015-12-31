@@ -4,8 +4,6 @@ import java.util.Date;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-import com.uom.cse.central_node.android_agent_services.AndroidAgentServiceClient;
-import com.uom.cse.central_node.android_agent_services.DeviceOverallInfo;
 import com.uom.cse.central_node.bandwidthDetector.BandwidthDetector;
 import com.uom.cse.central_node.services.ThriftAgentProcessInfo;
 import com.uom.cse.central_node.view.DeviceOverviewController;
