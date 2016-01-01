@@ -556,14 +556,16 @@ public class DeviceOverviewController {
 		command.add(CommandStrings.GET_PROCESSES_WITH_INFORMATION);
 		command.add(CommandStrings.FILTER_PROCESS_ALL_DEVICES);
 
-		if (selectedDevice.getType().equals(Device.TYPE_ANDROID)) {
-			command.add(CommandStrings.GET_SENSOR_DETAILS);
-		}
+		if(selectedDevice != null){
+			if (Device.TYPE_ANDROID.equals(selectedDevice.getType())) {
+				command.add(CommandStrings.GET_SENSOR_DETAILS);
+			}
 
-		if (selectedDevice.getType().equals(Device.TYPE_WINDOWS)) {
-			command.add(CommandStrings.GET_CURRENT_LOGGEDIN_USER_INFORMATION);
+			if (Device.TYPE_WINDOWS.equals(selectedDevice.getType())) {
+				command.add(CommandStrings.GET_CURRENT_LOGGEDIN_USER_INFORMATION);
+			}
 		}
-
+		
 		commandChoiceBox.setItems(command);
 	}
 

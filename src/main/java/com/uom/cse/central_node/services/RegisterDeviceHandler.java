@@ -24,8 +24,9 @@ import javafx.concurrent.Task;
 public class RegisterDeviceHandler implements RegisterDeviceService.Iface {
 
 	public static HydraCN hydraCN;
-	
+
 	private static Executor executor;
+
 	static {
 		executor = Executors.newSingleThreadExecutor(runnable -> {
 			Thread t = new Thread(runnable);
@@ -33,34 +34,36 @@ public class RegisterDeviceHandler implements RegisterDeviceService.Iface {
 			return t;
 		});
 	}
-	
+
 	int count = 0;
+
 	@Override
 	public boolean registerDevice(com.uom.cse.central_node.services.Device deviceDetails) throws TException {
-		
-		com.uom.cse.central_node.model.Device device = new com.uom.cse.central_node.model.Device(
-				deviceDetails.deviceId, deviceDetails.IPAddress, deviceDetails.type);
-		
-		List<com.uom.cse.central_node.model.Device> existingDeviceList = 
-				DeviceOverviewController.deviceOverviewController.deviceTable.getItems();
-		
+
+		com.uom.cse.central_node.model.Device device = new com.uom.cse.central_node.model.Device(deviceDetails.deviceId,
+				deviceDetails.IPAddress, deviceDetails.type);
+		device.setName(deviceDetails.name);
+
+		List<com.uom.cse.central_node.model.Device> existingDeviceList = DeviceOverviewController.deviceOverviewController.deviceTable
+				.getItems();
+
 		count = 0;
-		for(com.uom.cse.central_node.model.Device tempDevice : existingDeviceList){
-			
-			if(tempDevice.getDeviceId().equals(device.getDeviceId())){
-				
-				Platform.runLater 
-				( () -> DeviceOverviewController.deviceOverviewController.deviceTable.getItems().remove(count));
-				
+		for (com.uom.cse.central_node.model.Device tempDevice : existingDeviceList) {
+
+			if (tempDevice.getDeviceId().equals(device.getDeviceId())) {
+
+				Platform.runLater(
+						() -> DeviceOverviewController.deviceOverviewController.deviceTable.getItems().remove(count));
+
 			}
 			count++;
 		}
-		
-		//add device to observableList of device table
+
+		// add device to observableList of device table
 		hydraCN.getDeviceData().add(device);
-//		float bandwidth = AndroidAgentServiceClient.getNetworkBandwidth(device.getIPAddress());
-		
-		
+		// float bandwidth =
+		// AndroidAgentServiceClient.getNetworkBandwidth(device.getIPAddress());
+
 		Task<Filter> commandTask = new Task<Filter>() {
 			@Override
 			public Filter call() throws Exception {
@@ -69,20 +72,20 @@ public class RegisterDeviceHandler implements RegisterDeviceService.Iface {
 			}
 		};
 
-		commandTask.setOnSucceeded((e) ->{
-        	Filter retFilter = commandTask.getValue();
-        	if(retFilter != null){
-        		if(device.getType().equals(Device.TYPE_ANDROID)){
-        			AndroidAgentServiceClient.deployCommand(deviceDetails.IPAddress, retFilter);
-        		}else{
-        			ProcessStatsClient.getAllAvgProcessInfo(deviceDetails.IPAddress, retFilter);
-        		}
-    		}
-        });
-		
+		commandTask.setOnSucceeded((e) -> {
+			Filter retFilter = commandTask.getValue();
+			if (retFilter != null) {
+				if (device.getType().equals(Device.TYPE_ANDROID)) {
+					AndroidAgentServiceClient.deployCommand(deviceDetails.IPAddress, retFilter);
+				} else {
+					ProcessStatsClient.getAllAvgProcessInfo(deviceDetails.IPAddress, retFilter);
+				}
+			}
+		});
+
 		// run the task using a thread from the thread pool:
 		executor.execute(commandTask);
-				
+
 		Task<LogRule> logCommandTask = new Task<LogRule>() {
 			@Override
 			public LogRule call() throws Exception {
@@ -91,13 +94,13 @@ public class RegisterDeviceHandler implements RegisterDeviceService.Iface {
 			}
 		};
 
-		logCommandTask.setOnSucceeded((e) ->{
+		logCommandTask.setOnSucceeded((e) -> {
 			LogRule logRule = logCommandTask.getValue();
-        	if(logRule != null && !device.getType().equals(Device.TYPE_ANDROID)){
-        		ProcessStatsClient.sendWindowsLogInfo(deviceDetails.IPAddress, logRule);
-    		}
-        });
-		
+			if (logRule != null && !device.getType().equals(Device.TYPE_ANDROID)) {
+				ProcessStatsClient.sendWindowsLogInfo(deviceDetails.IPAddress, logRule);
+			}
+		});
+
 		// run the task using a thread from the thread pool:
 		executor.execute(logCommandTask);
 		return true;
@@ -106,28 +109,49 @@ public class RegisterDeviceHandler implements RegisterDeviceService.Iface {
 	@Override
 	public boolean pushProcessesInfo(List<ThriftAgentProcessInfo> processes) throws TException {
 		
-		LogFileWritter.writeFile(processes);
-		
-		try{
-			ThriftAgentProcessInfo process = processes.get(0);
-			if(process.type.equals(Device.TYPE_WINDOWS)){
-				//deploy command for windows
+		processes.forEach((process) -> {
+			
+			List<com.uom.cse.central_node.model.Device> existingDeviceList = DeviceOverviewController.deviceOverviewController.deviceTable
+					.getItems();
+
+			for (com.uom.cse.central_node.model.Device tempDevice : existingDeviceList) {
+				if (tempDevice.getDeviceId().equals(process.mac)) {
+					LogFileWritter.writeFile(process, tempDevice.getName());
+					break;
+				}
+			}
+			
+			if (process.type.equals(Device.TYPE_WINDOWS)) {
+				// deploy command for windows
 				CommandManager.checkAndDeployCommandForWindows(process);
-			}else if(process.type.equals(Device.TYPE_ANDROID)){
-				//deploy command for android
+			} else if (process.type.equals(Device.TYPE_ANDROID)) {
+				// deploy command for android
 				CommandManager.checkAndDeployCommandForAndorid(process);
 			}
-		}catch(ArrayIndexOutOfBoundsException e){
-			
-		}
-		
+		});
+
 		return true;
-		
+
 	}
 
 	@Override
 	public boolean pushLogInfo(List<myLogStructure> logInfo) throws TException {
-		LogFileWritter.writeFileWindowsLog(logInfo);
+		try {
+			myLogStructure log = logInfo.get(0);
+			List<com.uom.cse.central_node.model.Device> existingDeviceList = DeviceOverviewController.deviceOverviewController.deviceTable
+					.getItems();
+
+			for (com.uom.cse.central_node.model.Device tempDevice : existingDeviceList) {
+				if (tempDevice.getDeviceId().equals(log.mac)) {
+					LogFileWritter.writeFileWindowsLog(logInfo, tempDevice.getName());
+					break;
+				}
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
 		return true;
 	}
 
@@ -142,5 +166,25 @@ public class RegisterDeviceHandler implements RegisterDeviceService.Iface {
 		LogFileWritter.writeFile(userInfo);
 		return true;
 	}
-	
+
+	@Override
+	public boolean pushLogInfoTest1(List<myLogStructure> logInfo) throws TException {
+		
+		logInfo.forEach((log) -> {
+			List<com.uom.cse.central_node.model.Device> existingDeviceList = DeviceOverviewController.deviceOverviewController.deviceTable
+					.getItems();
+			
+			for (com.uom.cse.central_node.model.Device tempDevice : existingDeviceList) {
+				if (tempDevice.getDeviceId().equals(log.mac)) {
+					LogFileWritter.writeFileWindowsLog(log, tempDevice.getName());
+					break;
+				}
+			}
+			
+		});
+		
+		return true;
+	}
+
+
 }

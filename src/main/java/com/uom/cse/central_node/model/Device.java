@@ -10,6 +10,7 @@ public class Device {
 	private final StringProperty type;
 	private int commandType;
 	private long lastCommandTimeStamp;
+	private String name;
 	
 	public final static String TYPE_ANDROID = "Android";
 	public final static String TYPE_WINDOWS = "Windows";
@@ -18,6 +19,14 @@ public class Device {
 		this.deviceId = new SimpleStringProperty(deviceId);
 		this.IPAddress = new SimpleStringProperty(IPaddress);
 		this.type = new SimpleStringProperty(type);
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public long getLastCommandTimeStamp() {

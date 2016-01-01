@@ -126,8 +126,11 @@ public class Filter {
 	
 	public List<String> getProcesses() {
 		if(processes != null){
-			String[] parts = processes.split(PROCESS_DELIMETER);
-			return Arrays.asList(parts);
+			String trimProcesses = processes.trim();
+			if(!"".equals(trimProcesses)){
+				String[] parts = processes.split(PROCESS_DELIMETER);
+				return Arrays.asList(parts);
+			}
 		}
 		return new ArrayList<>();
 	}

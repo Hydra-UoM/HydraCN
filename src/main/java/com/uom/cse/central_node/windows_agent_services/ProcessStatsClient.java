@@ -290,6 +290,7 @@ public class ProcessStatsClient {
 			double download, double upload, long time, List<String> processList) throws TException {
 
 		client.send_filterAllAvgProcesses(time, cpu, mem, download, upload, processList);
+		//client.send_filterAllAvgProcesses(time, cpu, mem, download, upload, null);
 
 		return true;
 	}
@@ -297,7 +298,9 @@ public class ProcessStatsClient {
 	private static boolean getWindowsLogInfoFromService(ProcessStats.Client client, int time, int summarizationLevel,
 			List<String> eventIndices, String logType, String processName, String securityLevel) throws TException {
 
-		client.getLogRelatedInformation(time, summarizationLevel, eventIndices, logType, processName, securityLevel);
+		short timeInShort = (short)time;
+		short summarizationLevelInShort = (short)summarizationLevel;
+		client.getLogRelatedInformation(timeInShort, summarizationLevelInShort, eventIndices, logType, processName, securityLevel);
 
 		return true;
 	}

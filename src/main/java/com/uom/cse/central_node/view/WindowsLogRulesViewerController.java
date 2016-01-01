@@ -122,11 +122,24 @@ public class WindowsLogRulesViewerController {
 	
 	@FXML
 	private void actionApplyRule(){
-		LogRuleTable.applyRule(selectedRule.getId());
-		btnShowAppliedRule.setDisable(false);
-		DeviceOverviewController.hydraCN.getDeviceData().forEach((device) -> {
-			ProcessStatsClient.sendWindowsLogInfo(device.getIPAddress(), new LogRule(selectedRule));
+		Task<List<LogRule>> logDataTask = new Task<List<LogRule>>() {
+			@Override
+			public List<LogRule> call() throws Exception {
+				LogRuleTable.applyRule(selectedRule.getId());
+				return null;
+			}
+		};
+
+		logDataTask.setOnSucceeded((e) -> {
+			DeviceOverviewController.hydraCN.getDeviceData().forEach((device) -> {
+				ProcessStatsClient.sendWindowsLogInfo(device.getIPAddress(), new LogRule(selectedRule));
+			});
 		});
+
+		// run the task using a thread from the thread pool:
+		exec.execute(logDataTask);
+		
+		btnShowAppliedRule.setDisable(false);
 		
 	}
 	

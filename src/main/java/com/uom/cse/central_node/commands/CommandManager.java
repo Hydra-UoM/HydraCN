@@ -5,7 +5,9 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 import com.uom.cse.central_node.bandwidthDetector.BandwidthDetector;
+import com.uom.cse.central_node.model.Device;
 import com.uom.cse.central_node.services.ThriftAgentProcessInfo;
+import com.uom.cse.central_node.util.LogFileWritter;
 import com.uom.cse.central_node.view.DeviceOverviewController;
 import com.uom.cse.central_node.windows_agent_services.ProcessStatsClient;
 
@@ -69,7 +71,18 @@ public class CommandManager {
 	}
 
 	private static void deployCommandForWindows(int command, String ipAddress) {
-
+		String commandStr = "";
+		if (command == 0) {
+			commandStr = "USER_DEFINE_COMMAND";
+		} else if (command == 1) {
+			commandStr = "FULL_DATA_COMMAND";
+		} else if (command == 2) {
+			commandStr = "CRITICAL_DATA_WITHOUT_PREPROCESSING_COMMAND";
+		} else if (command == 3) {
+			commandStr = "CRITICAL_DATA_WITHOUT_PREPROCESSING_COMMAND";
+		}
+		
+		LogFileWritter.writeCommandFile(ipAddress, commandStr, Device.TYPE_WINDOWS);
 	}
 
 	private static int determineCommandForWindows(double bandwidth, double cpu, double ram) {
@@ -138,7 +151,18 @@ public class CommandManager {
 	}
 
 	private static void deployCommandForAndroid(int command, String ipAddress) {
-
+		String commandStr = "";
+		if (command == 0) {
+			commandStr = "USER_DEFINE_COMMAND";
+		} else if (command == 1) {
+			commandStr = "FULL_DATA_COMMAND";
+		} else if (command == 2) {
+			commandStr = "CRITICAL_DATA_WITHOUT_PREPROCESSING_COMMAND";
+		} else if (command == 3) {
+			commandStr = "CRITICAL_DATA_WITHOUT_PREPROCESSING_COMMAND";
+		}
+		
+		LogFileWritter.writeCommandFile(ipAddress, commandStr, Device.TYPE_ANDROID);
 	}
 
 	private static int determineCommandForAndroid(double bandwidth, double cpu, double ram) {
