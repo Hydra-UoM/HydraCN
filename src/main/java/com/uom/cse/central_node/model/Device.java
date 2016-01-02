@@ -8,9 +8,11 @@ public class Device {
 	private final StringProperty deviceId;
 	private final StringProperty IPAddress;
 	private final StringProperty type;
+	private StringProperty deviceName;
 	private int commandType;
 	private long lastCommandTimeStamp;
 	private String name;
+	private boolean isAlreadyRegistered = false;
 	
 	public final static String TYPE_ANDROID = "Android";
 	public final static String TYPE_WINDOWS = "Windows";
@@ -21,12 +23,21 @@ public class Device {
 		this.type = new SimpleStringProperty(type);
 	}
 
+	public boolean isAlreadyRegistered() {
+		return isAlreadyRegistered;
+	}
+
+	public void setAlreadyRegistered(boolean isAlreadyRegistered) {
+		this.isAlreadyRegistered = isAlreadyRegistered;
+	}
+
 	public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
+		this.deviceName = new SimpleStringProperty(name);
 	}
 
 	public long getLastCommandTimeStamp() {
@@ -87,5 +98,9 @@ public class Device {
     
     public StringProperty typeProperty() {
         return type;
+    }
+    
+    public StringProperty deviceNameProperty() {
+        return deviceName;
     }
 }

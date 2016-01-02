@@ -218,6 +218,37 @@ public class ProcessStatsClient {
 
 		return true;
 	}
+	
+	public static boolean stopWindowsLogInfo(String ipAddress){
+		
+		try {
+			TTransport transport;
+
+			transport = new TSocket(ipAddress, 9090);
+			transport.open();
+
+			TProtocol protocol = new TBinaryProtocol(transport);
+			ProcessStats.Client client = new ProcessStats.Client(protocol);
+
+			stopWindowsLogInfoFromService(client);
+
+			transport.close();
+		} catch (TException x) {
+			x.printStackTrace();
+		}
+		return true;
+	}
+
+	private static void stopWindowsLogInfoFromService(ProcessStats.Client client) {
+		
+		try {
+			client.stopLogInfo();
+			//client.getFullLogInformation((short)1);
+		} catch (TException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	private static WindowsDeviceOverallInfo getDeviceOverallInfoFromService(ProcessStats.Client client)
 			throws TException {

@@ -96,7 +96,7 @@ public class FilterCreateFormController {
 		Task<List<Filter>> insertFilterTask = new Task<List<Filter>>() {
 			@Override
 			public List<Filter> call() throws Exception {
-				FilterTable.insertFilter(newFilter);
+				newFilter.setId(FilterTable.insertFilter(newFilter));
 				return null;
 			}
 		};

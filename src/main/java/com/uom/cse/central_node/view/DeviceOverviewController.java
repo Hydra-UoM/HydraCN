@@ -38,6 +38,8 @@ public class DeviceOverviewController {
 	private TableColumn<Device, String> IPAddressColumn;
 	@FXML
 	private TableColumn<Device, String> typeColumn;
+	@FXML
+	private TableColumn<Device, String> nameColumn;
 
 	@FXML
 	private TitledPane basicInfoPane;
@@ -138,6 +140,7 @@ public class DeviceOverviewController {
 		deviceIdColumn.setCellValueFactory(cellData -> cellData.getValue().deviceIdProperty());
 		IPAddressColumn.setCellValueFactory(cellData -> cellData.getValue().IPAddressProperty());
 		typeColumn.setCellValueFactory(cellData -> cellData.getValue().typeProperty());
+		nameColumn.setCellValueFactory(cellData -> cellData.getValue().deviceNameProperty());
 
 		clearBasicInfoGrid();
 		hideCommandBox();

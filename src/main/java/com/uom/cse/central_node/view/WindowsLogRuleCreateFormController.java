@@ -197,7 +197,7 @@ public class WindowsLogRuleCreateFormController {
 		Task<List<LogRule>> insertLogRuleTask = new Task<List<LogRule>>() {
 			@Override
 			public List<LogRule> call() throws Exception {
-				LogRuleTable.insertRule(rule);
+				rule.setId(LogRuleTable.insertRule(rule));
 				return null;
 			}
 		};

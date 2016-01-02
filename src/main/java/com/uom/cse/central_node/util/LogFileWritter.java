@@ -1,12 +1,17 @@
 package com.uom.cse.central_node.util;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -24,6 +29,7 @@ public class LogFileWritter {
 	private static final String USER_INFO_LOG_FILE_NAME_PREFIX = "USER_INFO";
 	private static final String WINDOWS_LOG_FILE_NAME_PREFIX = "WINDOWS_LOG";
 	private static final String COMMANDS_LOG_FILE_NAME = "COMMANDS";
+	private static final String LOG_FILES_NAMES_FILE = "logfilenames.txt";
 
 	private static StringBuilder builder;
 
@@ -74,6 +80,9 @@ public class LogFileWritter {
 
 				String filename = getFileName(PERFORMANCE_LOG_FILE_NAME_PREFIX, processInfo.mac,
 						deviceName + "_" + processInfo.type);
+
+				insertLogFilename(filename);
+
 				writeFile(filename, builder);
 
 				return null;
@@ -103,6 +112,9 @@ public class LogFileWritter {
 
 					String filename = getFileName(PERFORMANCE_LOG_FILE_NAME_PREFIX, processInfo.mac,
 							deviceName + "_" + processInfo.type);
+
+					insertLogFilename(filename);
+
 					writeFile(filename, builder);
 				});
 
@@ -122,39 +134,40 @@ public class LogFileWritter {
 				logs.forEach((log) -> {
 					builder = new StringBuilder();
 
-					builder.append("" + log.myTimeStamp1.day + "/" + log.myTimeStamp1.month + "/"
-							+ log.myTimeStamp1.year + " " + log.myTimeStamp1.hour + ":" + log.myTimeStamp1.minute + ":"
-							+ log.myTimeStamp1.second);
-					builder.append(", Message : " + log.message);
-					builder.append(", Level : " + log.levelMessageString);
-					builder.append(", Process Id : " + log.executionProcessID);
-					builder.append(", Thread Id : " + log.executionThreadID);
-					builder.append(", Computer : " + log.computer);
-					builder.append(", Event Id : " + log.EventID);
-					builder.append(", S_Account Name : " + log.mySubject1.Account_Name);
-					builder.append(", Object Name : " + log.myObject1.Object_Name);
-					builder.append(", Object Type : " + log.myObject1.Object_Type);
-					builder.append(", Source Address : " + log.myNetworkInformation1.Source_Address);
-					builder.append(", Source Port : " + log.myNetworkInformation1.Source_Port);
-					builder.append(", Destination Address : " + log.myNetworkInformation1.Destination_Address);
-					builder.append(", Destination Port : " + log.myNetworkInformation1.Destination_Port);
-					builder.append(", Protocol : " + log.myNetworkInformation1.Protocol);
-					builder.append(", Change Type : " + log.myChangeInformation1.Change_Type);
-					builder.append(", Accesses : " + log.myAccessRequestInformation1.Accesses);
+					builder.append(formatTime(log));
+					builder.append(", Message : " + log.message.trim());
+					builder.append(", Level : " + log.levelMessageString.trim());
+					builder.append(", MAC : " + log.mac.trim());
+					builder.append(", Device : " + deviceName.trim());
+					builder.append(", Process Id : " + log.executionProcessID.trim());
+					builder.append(", Thread Id : " + log.executionThreadID.trim());
+					builder.append(", Computer : " + log.computer.trim());
+					builder.append(", Event Id : " + log.EventID.trim());
+					builder.append(", S_Account Name : " + log.mySubject1.Account_Name.trim());
+					builder.append(", Object Name : " + log.myObject1.Object_Name.trim());
+					builder.append(", Object Type : " + log.myObject1.Object_Type.trim());
+					builder.append(", Source Address : " + log.myNetworkInformation1.Source_Address.trim());
+					builder.append(", Source Port : " + log.myNetworkInformation1.Source_Port.trim());
+					builder.append(", Destination Address : " + log.myNetworkInformation1.Destination_Address.trim());
+					builder.append(", Destination Port : " + log.myNetworkInformation1.Destination_Port.trim());
+					builder.append(", Protocol : " + log.myNetworkInformation1.Protocol.trim());
+					builder.append(", Change Type : " + log.myChangeInformation1.Change_Type.trim());
+					builder.append(", Accesses : " + log.myAccessRequestInformation1.Accesses.trim());
 					builder.append(", Access Reason : " + log.myAccessRequestInformation1.Access_Reasons);
 					builder.append(", Privilege for Access Check : "
-							+ log.myAccessRequestInformation1.Privileges_Used_For_Access_Check);
-					builder.append(", Error Information Reason : " + log.myErrorInformation1.Reason);
-					builder.append(", Process Name : " + log.myProcessInformation1.Process_Name);
-					builder.append(", Logon Type : " + log.myLogonType1.Logon_Type);
-					builder.append(", Impersonation Level : " + log.myImpersonationLevel1.Impersonation_Level);
-					builder.append(", Account Name : " + log.myAccountForWhichLogonFailed1.Account_Name);
-					builder.append(", Failure Reason : " + log.myFailureInformation1.Failure_Reason);
-					builder.append(", Failure Status : " + log.myFailureInformation1.Status);
-					builder.append(", Logon Account Name : " + log.myNewLogon1.Account_Name);
-					builder.append(", Event : " + log.eventCategory);
-					
+							+ log.myAccessRequestInformation1.Privileges_Used_For_Access_Check.trim());
+					builder.append(", Error Information Reason : " + log.myErrorInformation1.Reason.trim());
+					builder.append(", Process Name : " + log.myProcessInformation1.Process_Name.trim());
+					builder.append(", Logon Type : " + log.myLogonType1.Logon_Type.trim());
+					builder.append(", Impersonation Level : " + log.myImpersonationLevel1.Impersonation_Level.trim());
+					builder.append(", Account Name : " + log.myAccountForWhichLogonFailed1.Account_Name.trim());
+					builder.append(", Failure Reason : " + log.myFailureInformation1.Failure_Reason.trim());
+					builder.append(", Failure Status : " + log.myFailureInformation1.Status.trim());
+					builder.append(", Logon Account Name : " + log.myNewLogon1.Account_Name.trim());
+					builder.append(", Event : " + log.eventCategory.trim());
+
 					String filename = getFileName(WINDOWS_LOG_FILE_NAME_PREFIX, log.mac, deviceName);
+					insertLogFilename(filename);
 					writeFile(filename, builder);
 				});
 
@@ -173,38 +186,40 @@ public class LogFileWritter {
 
 				builder = new StringBuilder();
 
-				builder.append("" + log.myTimeStamp1.day + "/" + log.myTimeStamp1.month + "/" + log.myTimeStamp1.year
-						+ " " + log.myTimeStamp1.hour + ":" + log.myTimeStamp1.minute + ":" + log.myTimeStamp1.second);
-				builder.append(", Message : " + log.message);
-				builder.append(", Level : " + log.levelMessageString);
-				builder.append(", Process Id : " + log.executionProcessID);
-				builder.append(", Thread Id : " + log.executionThreadID);
-				builder.append(", Computer : " + log.computer);
-				builder.append(", Event Id : " + log.EventID);
-				builder.append(", S_Account Name : " + log.mySubject1.Account_Name);
-				builder.append(", Object Name : " + log.myObject1.Object_Name);
-				builder.append(", Object Type : " + log.myObject1.Object_Type);
-				builder.append(", Source Address : " + log.myNetworkInformation1.Source_Address);
-				builder.append(", Source Port : " + log.myNetworkInformation1.Source_Port);
-				builder.append(", Destination Address : " + log.myNetworkInformation1.Destination_Address);
-				builder.append(", Destination Port : " + log.myNetworkInformation1.Destination_Port);
-				builder.append(", Protocol : " + log.myNetworkInformation1.Protocol);
-				builder.append(", Change Type : " + log.myChangeInformation1.Change_Type);
-				builder.append(", Accesses : " + log.myAccessRequestInformation1.Accesses);
+				builder.append(formatTime(log));
+				builder.append(", Message : " + log.message.trim());
+				builder.append(", Level : " + log.levelMessageString.trim());
+				builder.append(", MAC : " + log.mac.trim());
+				builder.append(", Device : " + deviceName.trim());
+				builder.append(", Process Id : " + log.executionProcessID.trim());
+				builder.append(", Thread Id : " + log.executionThreadID.trim());
+				builder.append(", Computer : " + log.computer.trim());
+				builder.append(", Event Id : " + log.EventID.trim());
+				builder.append(", S_Account Name : " + log.mySubject1.Account_Name.trim());
+				builder.append(", Object Name : " + log.myObject1.Object_Name.trim());
+				builder.append(", Object Type : " + log.myObject1.Object_Type.trim());
+				builder.append(", Source Address : " + log.myNetworkInformation1.Source_Address.trim());
+				builder.append(", Source Port : " + log.myNetworkInformation1.Source_Port.trim());
+				builder.append(", Destination Address : " + log.myNetworkInformation1.Destination_Address.trim());
+				builder.append(", Destination Port : " + log.myNetworkInformation1.Destination_Port.trim());
+				builder.append(", Protocol : " + log.myNetworkInformation1.Protocol.trim());
+				builder.append(", Change Type : " + log.myChangeInformation1.Change_Type.trim());
+				builder.append(", Accesses : " + log.myAccessRequestInformation1.Accesses.trim());
 				builder.append(", Access Reason : " + log.myAccessRequestInformation1.Access_Reasons);
 				builder.append(", Privilege for Access Check : "
-						+ log.myAccessRequestInformation1.Privileges_Used_For_Access_Check);
-				builder.append(", Error Information Reason : " + log.myErrorInformation1.Reason);
-				builder.append(", Process Name : " + log.myProcessInformation1.Process_Name);
-				builder.append(", Logon Type : " + log.myLogonType1.Logon_Type);
-				builder.append(", Impersonation Level : " + log.myImpersonationLevel1.Impersonation_Level);
-				builder.append(", Account Name : " + log.myAccountForWhichLogonFailed1.Account_Name);
-				builder.append(", Failure Reason : " + log.myFailureInformation1.Failure_Reason);
-				builder.append(", Failure Status : " + log.myFailureInformation1.Status);
-				builder.append(", Logon Account Name : " + log.myNewLogon1.Account_Name);
-				builder.append(", Event : " + log.eventCategory);
+						+ log.myAccessRequestInformation1.Privileges_Used_For_Access_Check.trim());
+				builder.append(", Error Information Reason : " + log.myErrorInformation1.Reason.trim());
+				builder.append(", Process Name : " + log.myProcessInformation1.Process_Name.trim());
+				builder.append(", Logon Type : " + log.myLogonType1.Logon_Type.trim());
+				builder.append(", Impersonation Level : " + log.myImpersonationLevel1.Impersonation_Level.trim());
+				builder.append(", Account Name : " + log.myAccountForWhichLogonFailed1.Account_Name.trim());
+				builder.append(", Failure Reason : " + log.myFailureInformation1.Failure_Reason.trim());
+				builder.append(", Failure Status : " + log.myFailureInformation1.Status.trim());
+				builder.append(", Logon Account Name : " + log.myNewLogon1.Account_Name.trim());
+				builder.append(", Event : " + log.eventCategory.trim());
 
 				String filename = getFileName(WINDOWS_LOG_FILE_NAME_PREFIX, log.mac, deviceName);
+				insertLogFilename(filename);
 				writeFile(filename, builder);
 
 				return null;
@@ -247,6 +262,7 @@ public class LogFileWritter {
 				builder.append(", Current User : Yes");
 
 				String filename = getFileName(USER_INFO_LOG_FILE_NAME_PREFIX, userInfo.mac, userInfo.computerName);
+				insertLogFilename(filename);
 				writeFile(filename, builder);
 
 				return null;
@@ -290,6 +306,7 @@ public class LogFileWritter {
 					builder.append(", Current User : No");
 
 					String filename = getFileName(USER_INFO_LOG_FILE_NAME_PREFIX, userInfo.mac, userInfo.computerName);
+					insertLogFilename(filename);
 					writeFile(filename, builder);
 				});
 				return null;
@@ -315,11 +332,11 @@ public class LogFileWritter {
 
 	public static String getDateAndTime(String timestampStr) {
 		long timestamp = 0;
-		
-		if("".equals(timestampStr) || "0".equals(timestampStr)){
+
+		if ("".equals(timestampStr) || "0".equals(timestampStr)) {
 			return "0";
 		}
-		
+
 		try {
 			timestamp = Long.parseLong(timestampStr);
 			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -339,6 +356,88 @@ public class LogFileWritter {
 		}
 
 	}
+	
+	public static String formatTime(myLogStructure log){
+		int day = log.myTimeStamp1.day;
+		int month = log.myTimeStamp1.month;
+		int hour = log.myTimeStamp1.hour;
+		int minute = log.myTimeStamp1.minute;
+		int second = log.myTimeStamp1.second;
+		
+		StringBuilder sb = new StringBuilder();
+		
+		if(day < 9){
+			sb.append("0" + day + "/");
+		}else{
+			sb.append(day + "/");
+		}
+		
+		if(month < 9){
+			sb.append("0" + month + "/");
+		}else{
+			sb.append(month + "/");
+		}
+		
+		sb.append(log.myTimeStamp1.year + " ");
+		
+		if(hour < 9){
+			sb.append("0" + hour + ":");
+		}else{
+			sb.append(hour + ":");
+		}
+
+		if(minute < 9){
+			sb.append("0" + minute + ":");
+		}else{
+			sb.append(minute + ":");
+		}
+
+		if(second < 9){
+			sb.append("0" + second + " ");
+		}else{
+			sb.append(second + " ");
+		}
+		
+		return sb.toString();
+	}
+
+	public static void getPerformanceStatistics() {
+		List<String> filenames = getWindowsLogFilenames();
+
+		filenames.forEach((filename) -> {
+			try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+
+				String line = br.readLine();
+
+				while (line != null) {
+					List<String> elements = Arrays.asList(line.split(","));
+					
+					elements.forEach((element) -> {
+						String[] values = element.split(":");
+						
+						if(values.length >= 2){
+							String title = values[0].trim();
+							if(""){
+								
+							}
+							if("Event".equals(title)){
+								
+							}
+						}
+						
+					});
+					
+					line = br.readLine();
+				}
+
+			} catch (FileNotFoundException e) {
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+		
+	}
 
 	private static String getFileName(String prefix, String mac, String name) {
 
@@ -357,5 +456,114 @@ public class LogFileWritter {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private static void insertLogFilename(String filename) {
+		boolean flag = true;
+
+		try (BufferedReader br = new BufferedReader(new FileReader(LOG_FILES_NAMES_FILE))) {
+
+			String line = br.readLine();
+
+			while (line != null) {
+				if (filename.equals(line)) {
+					flag = false;
+				}
+				line = br.readLine();
+			}
+
+			if (flag) {
+				StringBuilder sb = new StringBuilder();
+				sb.append(filename);
+				writeFile(LOG_FILES_NAMES_FILE, sb);
+			}
+
+		} catch (FileNotFoundException e) {
+
+			StringBuilder sb = new StringBuilder();
+			sb.append(filename);
+			writeFile(LOG_FILES_NAMES_FILE, sb);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static List<String> getPerformanceDataFilenames() {
+
+		List<String> returnList = new ArrayList<String>();
+
+		try (BufferedReader br = new BufferedReader(new FileReader(LOG_FILES_NAMES_FILE))) {
+
+			String line = br.readLine();
+
+			while (line != null) {
+
+				if (line.toLowerCase().contains(PERFORMANCE_LOG_FILE_NAME_PREFIX.toLowerCase())) {
+					returnList.add(line);
+				}
+
+				line = br.readLine();
+			}
+
+		} catch (FileNotFoundException e) {
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return returnList;
+	}
+
+	private static List<String> getUserInfoFilenames() {
+
+		List<String> returnList = new ArrayList<String>();
+
+		try (BufferedReader br = new BufferedReader(new FileReader(LOG_FILES_NAMES_FILE))) {
+
+			String line = br.readLine();
+
+			while (line != null) {
+
+				if (line.toLowerCase().contains(USER_INFO_LOG_FILE_NAME_PREFIX.toLowerCase())) {
+					returnList.add(line);
+				}
+
+				line = br.readLine();
+			}
+
+		} catch (FileNotFoundException e) {
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return returnList;
+	}
+
+	private static List<String> getWindowsLogFilenames() {
+
+		List<String> returnList = new ArrayList<String>();
+
+		try (BufferedReader br = new BufferedReader(new FileReader(LOG_FILES_NAMES_FILE))) {
+
+			String line = br.readLine();
+
+			while (line != null) {
+
+				if (line.toLowerCase().contains(WINDOWS_LOG_FILE_NAME_PREFIX.toLowerCase())) {
+					returnList.add(line);
+				}
+
+				line = br.readLine();
+			}
+
+		} catch (FileNotFoundException e) {
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return returnList;
 	}
 }
