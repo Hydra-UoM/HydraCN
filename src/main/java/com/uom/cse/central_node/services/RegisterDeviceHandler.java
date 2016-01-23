@@ -47,21 +47,34 @@ public class RegisterDeviceHandler implements RegisterDeviceService.Iface {
 		List<com.uom.cse.central_node.model.Device> existingDeviceList = DeviceOverviewController.deviceOverviewController.deviceTable
 				.getItems();
 
-		count = 0;
-		for (com.uom.cse.central_node.model.Device tempDevice : existingDeviceList) {
+		synchronized(RegisterDeviceHandler.class){
+			count = 0;
+			for (com.uom.cse.central_node.model.Device tempDevice : existingDeviceList) {
 
-			if (tempDevice.getDeviceId().equals(device.getDeviceId())) {
+				if (tempDevice.getDeviceId().equals(device.getDeviceId())) {
 
-				Platform.runLater(
-						() -> DeviceOverviewController.deviceOverviewController.deviceTable.getItems().remove(count));
-				
-				device.setAlreadyRegistered(true);
+					Platform.runLater(
+							() -> DeviceOverviewController.deviceOverviewController.deviceTable.getItems().remove(count));
+					
+					device.setAlreadyRegistered(true);
+				}
+				count++;
 			}
-			count++;
-		}
 
-		// add device to observableList of device table
-		hydraCN.getDeviceData().add(device);
+			// add device to observableList of device table
+			hydraCN.getDeviceData().add(device);
+		}
+		
+
+		return true;
+	}
+	
+	boolean returnFlag = false;
+	@Override
+	public boolean getCommands(com.uom.cse.central_node.services.Device deviceDetails) throws TException {
+		
+		com.uom.cse.central_node.model.Device device = new com.uom.cse.central_node.model.Device(deviceDetails.deviceId,
+				deviceDetails.IPAddress, deviceDetails.type);
 
 		Task<Filter> commandTask = new Task<Filter>() {
 			@Override
@@ -73,11 +86,13 @@ public class RegisterDeviceHandler implements RegisterDeviceService.Iface {
 
 		commandTask.setOnSucceeded((e) -> {
 			Filter retFilter = commandTask.getValue();
-			if (retFilter != null && !device.isAlreadyRegistered()) {
+			if (retFilter != null) {
 				if (device.getType().equals(Device.TYPE_ANDROID)) {
 					AndroidAgentServiceClient.deployCommand(deviceDetails.IPAddress, retFilter);
+					returnFlag = true;
 				} else {
 					ProcessStatsClient.getAllAvgProcessInfo(deviceDetails.IPAddress, retFilter);
+					returnFlag = true;
 				}
 			}
 		});
@@ -95,8 +110,9 @@ public class RegisterDeviceHandler implements RegisterDeviceService.Iface {
 
 		logCommandTask.setOnSucceeded((e) -> {
 			LogRule logRule = logCommandTask.getValue();
-			if (logRule != null && !device.getType().equals(Device.TYPE_ANDROID) && !device.isAlreadyRegistered()) {
+			if (logRule != null && !device.getType().equals(Device.TYPE_ANDROID)) {
 				ProcessStatsClient.sendWindowsLogInfo(deviceDetails.IPAddress, logRule);
+				returnFlag = true;
 			}
 		});
 
@@ -184,6 +200,5 @@ public class RegisterDeviceHandler implements RegisterDeviceService.Iface {
 		
 		return true;
 	}
-
 
 }

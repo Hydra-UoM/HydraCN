@@ -14,6 +14,7 @@ import com.uom.cse.central_node.view.AlertMessageBoxController;
 import com.uom.cse.central_node.view.AllDeviceFilterController;
 import com.uom.cse.central_node.view.AppliedFilterViewController;
 import com.uom.cse.central_node.view.AppliedLogRuleViewController;
+import com.uom.cse.central_node.view.CEPRuleEditorController;
 import com.uom.cse.central_node.view.DataViewerController;
 import com.uom.cse.central_node.view.DeviceOverviewController;
 import com.uom.cse.central_node.view.FilterCreateFormController;
@@ -256,6 +257,33 @@ public class HydraCN extends Application {
 
             // Set the person into the controller.
             WindowsLogRulesViewerController controller = loader.getController();
+            controller.setDialogStage(windowsLogRuleViewer);
+
+            // Show the dialog and wait until the user closes it
+            windowsLogRuleViewer.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
+	
+	public void showCEPRuleEditor(){
+		try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(HydraCN.class.getResource("view/CEPRuleEditor.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Create the filter Stage.
+            windowsLogRuleViewer = new Stage();
+            windowsLogRuleViewer.setTitle("CEP Rule Editor");
+            windowsLogRuleViewer.initModality(Modality.WINDOW_MODAL);
+            windowsLogRuleViewer.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            windowsLogRuleViewer.setScene(scene);
+
+            // Set the person into the controller.
+            CEPRuleEditorController controller = loader.getController();
             controller.setDialogStage(windowsLogRuleViewer);
 
             // Show the dialog and wait until the user closes it

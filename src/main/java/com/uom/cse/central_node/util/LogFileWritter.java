@@ -28,7 +28,7 @@ public class LogFileWritter {
 	private static final String PERFORMANCE_LOG_FILE_NAME_PREFIX = "PERFORMANCE_DATA";
 	private static final String USER_INFO_LOG_FILE_NAME_PREFIX = "USER_INFO";
 	private static final String WINDOWS_LOG_FILE_NAME_PREFIX = "WINDOWS_LOG";
-	private static final String COMMANDS_LOG_FILE_NAME = "COMMANDS";
+	private static final String COMMANDS_LOG_FILE_NAME = "COMMANDS.txt";
 	private static final String LOG_FILES_NAMES_FILE = "logfilenames.txt";
 
 	private static StringBuilder builder;
@@ -52,7 +52,7 @@ public class LogFileWritter {
 				builder.append(", Command : " + ipAddress);
 				builder.append(", Type : " + type);
 
-				writeFile(COMMANDS_LOG_FILE_NAME, builder);
+				writeFile(COMMANDS_LOG_FILE_NAME, builder, "centralNodeCommands");
 
 				return null;
 			}
@@ -81,9 +81,11 @@ public class LogFileWritter {
 				String filename = getFileName(PERFORMANCE_LOG_FILE_NAME_PREFIX, processInfo.mac,
 						deviceName + "_" + processInfo.type);
 
-				insertLogFilename(filename);
+				String foldername = getFolderName(processInfo.mac, deviceName);
+				
+				insertLogFilename(foldername + "/" + filename);
 
-				writeFile(filename, builder);
+				writeFile(filename, builder, foldername);
 
 				return null;
 			}
@@ -113,9 +115,11 @@ public class LogFileWritter {
 					String filename = getFileName(PERFORMANCE_LOG_FILE_NAME_PREFIX, processInfo.mac,
 							deviceName + "_" + processInfo.type);
 
-					insertLogFilename(filename);
-
-					writeFile(filename, builder);
+					String foldername = getFolderName(processInfo.mac, deviceName);
+					
+					insertLogFilename(foldername + "/" + filename);
+					
+					writeFile(filename, builder, foldername);
 				});
 
 				return null;
@@ -167,8 +171,12 @@ public class LogFileWritter {
 					builder.append(", Event : " + log.eventCategory.trim());
 
 					String filename = getFileName(WINDOWS_LOG_FILE_NAME_PREFIX, log.mac, deviceName);
-					insertLogFilename(filename);
-					writeFile(filename, builder);
+					
+					String foldername = getFolderName(log.mac, deviceName);
+					
+					insertLogFilename(foldername + "/" + filename);
+					
+					writeFile(filename, builder, foldername);
 				});
 
 				return null;
@@ -219,8 +227,12 @@ public class LogFileWritter {
 				builder.append(", Event : " + log.eventCategory.trim());
 
 				String filename = getFileName(WINDOWS_LOG_FILE_NAME_PREFIX, log.mac, deviceName);
-				insertLogFilename(filename);
-				writeFile(filename, builder);
+				
+				String foldername = getFolderName(log.mac, deviceName);
+				
+				insertLogFilename(foldername + "/" + filename);
+				
+				writeFile(filename, builder, foldername);
 
 				return null;
 			}
@@ -262,8 +274,12 @@ public class LogFileWritter {
 				builder.append(", Current User : Yes");
 
 				String filename = getFileName(USER_INFO_LOG_FILE_NAME_PREFIX, userInfo.mac, userInfo.computerName);
-				insertLogFilename(filename);
-				writeFile(filename, builder);
+				
+				String foldername = getFolderName(userInfo.mac, userInfo.computerName);
+				
+				insertLogFilename(foldername + "/" + filename);
+				
+				writeFile(filename, builder, foldername);
 
 				return null;
 			}
@@ -306,8 +322,12 @@ public class LogFileWritter {
 					builder.append(", Current User : No");
 
 					String filename = getFileName(USER_INFO_LOG_FILE_NAME_PREFIX, userInfo.mac, userInfo.computerName);
-					insertLogFilename(filename);
-					writeFile(filename, builder);
+					
+					String foldername = getFolderName(userInfo.mac, userInfo.computerName);
+					
+					insertLogFilename(foldername + "/" + filename);
+					
+					writeFile(filename, builder, foldername);
 				});
 				return null;
 			}
@@ -417,9 +437,6 @@ public class LogFileWritter {
 						
 						if(values.length >= 2){
 							String title = values[0].trim();
-							if(""){
-								
-							}
 							if("Event".equals(title)){
 								
 							}
@@ -448,9 +465,21 @@ public class LogFileWritter {
 
 		return filename;
 	}
+	
+	private static String getFolderName(String mac, String name) {
 
-	private static void writeFile(String filename, StringBuilder content) {
-		File file = new File(filename);
+		String macWithoutColon = mac.replace(":", "");
+
+		String filename = macWithoutColon.toLowerCase() + "_" + name.toLowerCase();
+
+		return filename;
+	}
+
+	private static void writeFile(String filename, StringBuilder content, String foldername) {
+		File dir = new File(foldername);
+		dir.mkdir();
+		
+		File file = new File(foldername + "/" + filename);
 		try (PrintWriter printWriter = new PrintWriter(new FileOutputStream(file, true))) {
 			printWriter.println(content);
 		} catch (FileNotFoundException e) {
@@ -461,7 +490,7 @@ public class LogFileWritter {
 	private static void insertLogFilename(String filename) {
 		boolean flag = true;
 
-		try (BufferedReader br = new BufferedReader(new FileReader(LOG_FILES_NAMES_FILE))) {
+		try (BufferedReader br = new BufferedReader(new FileReader("LogFileConfig/" + LOG_FILES_NAMES_FILE))) {
 
 			String line = br.readLine();
 
@@ -475,14 +504,14 @@ public class LogFileWritter {
 			if (flag) {
 				StringBuilder sb = new StringBuilder();
 				sb.append(filename);
-				writeFile(LOG_FILES_NAMES_FILE, sb);
+				writeFile(LOG_FILES_NAMES_FILE, sb, "LogFileConfig");
 			}
 
 		} catch (FileNotFoundException e) {
 
 			StringBuilder sb = new StringBuilder();
 			sb.append(filename);
-			writeFile(LOG_FILES_NAMES_FILE, sb);
+			writeFile(LOG_FILES_NAMES_FILE, sb, "logFileConfig");
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -493,7 +522,7 @@ public class LogFileWritter {
 
 		List<String> returnList = new ArrayList<String>();
 
-		try (BufferedReader br = new BufferedReader(new FileReader(LOG_FILES_NAMES_FILE))) {
+		try (BufferedReader br = new BufferedReader(new FileReader("LogFileConfig/" + LOG_FILES_NAMES_FILE))) {
 
 			String line = br.readLine();
 
@@ -519,7 +548,7 @@ public class LogFileWritter {
 
 		List<String> returnList = new ArrayList<String>();
 
-		try (BufferedReader br = new BufferedReader(new FileReader(LOG_FILES_NAMES_FILE))) {
+		try (BufferedReader br = new BufferedReader(new FileReader("LogFileConfig/" + LOG_FILES_NAMES_FILE))) {
 
 			String line = br.readLine();
 
@@ -545,7 +574,7 @@ public class LogFileWritter {
 
 		List<String> returnList = new ArrayList<String>();
 
-		try (BufferedReader br = new BufferedReader(new FileReader(LOG_FILES_NAMES_FILE))) {
+		try (BufferedReader br = new BufferedReader(new FileReader("LogFileConfig/" + LOG_FILES_NAMES_FILE))) {
 
 			String line = br.readLine();
 

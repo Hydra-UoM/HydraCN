@@ -12,4 +12,9 @@ public class RootLayoutController {
 	private void showWindowsLogViewer(){
 		DeviceOverviewController.hydraCN.showWindowsLogRuleViewer();
 	}
+	
+	@FXML
+	private void showCepRuleEditor(){
+		DeviceOverviewController.hydraCN.showCEPRuleEditor();
+	}
 }

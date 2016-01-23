@@ -17,7 +17,7 @@
                         <MenuItem mnemonicParsing="false" onAction="#showWindowsLogViewer" text="Log Rules" />
                     </items>
                   </Menu>
-                  <MenuItem mnemonicParsing="false" text="Manage CEP Rules" />
+                  <MenuItem mnemonicParsing="false" onAction="#showCepRuleEditor" text="Manage CEP Rules" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" text="Close" />
             </items>
