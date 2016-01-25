@@ -12,7 +12,11 @@ import com.uom.cse.central_node.event.ApplicationEvent;
 @Component
 public class CriticalEventSubscriber implements StatementSubscriber {
 	
+	public CriticalEventSubscriber(String alert) {
+		this.alertMessage = alert;
+	}
 	
+    public String alertMessage;
     
     private static Logger LOG = LoggerFactory.getLogger(CriticalEventSubscriber.class);
       
@@ -31,7 +35,9 @@ public class CriticalEventSubscriber implements StatementSubscriber {
         StringBuilder sb = new StringBuilder();
         sb.append("************************************************");
         sb.append("\n* [ALERT] : CRITICAL EVENT DETECTED BY ESPER! ");
-        sb.append("\n* The CPU Usage of device 1 is above 20%; Device id - " +eventMap.get("mac") + " CPU Usage - " + eventMap.get("cpuUsage") + "RAM Usage - " + eventMap.get("ramUsage") + " Sent Data -" + eventMap.get("sentData") + " Receive Data -" + eventMap.get("receiveData"));
+        sb.append("\n" + alertMessage);
+        sb.append("\n" + "Detected in PC MAC - " + eventMap.get("mac"));
+        //sb.append("\n* The CPU Usage of device 1 is above 20%; Device id - " +eventMap.get("mac") + " CPU Usage - " + eventMap.get("cpuUsage") + "RAM Usage - " + eventMap.get("ramUsage") + " Sent Data -" + eventMap.get("sentData") + " Receive Data -" + eventMap.get("receiveData"));
         sb.append("\n**********************************************");
         System.out.println(sb.toString());
         LOG.debug(sb.toString());

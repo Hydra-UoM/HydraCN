@@ -57,15 +57,15 @@ public class EventFeeder {
 		return statement;
 	}
 	
-	public static void pushToCEP(List<ThriftAgentProcessInfo> processes){
+	public static ProcessInfoEventHandler deployCEPRule(String cepRule, String alertMessage){
 		
-		CriticalEventSubscriber customSubscriber = new CriticalEventSubscriber();
+		CriticalEventSubscriber customSubscriber = new CriticalEventSubscriber(alertMessage);
 		
-		ProcessInfoEventHandler processInfoEventHandler = new ProcessInfoEventHandler(customSubscriber,defaultFilter);
+		ProcessInfoEventHandler processInfoEventHandler = new ProcessInfoEventHandler(customSubscriber);
 		
 		//String customExpression = "select mac,cpuUsage,ramUsage,sentData,receiveData from ApplicationEvent where cpuUsage > 40.00 and ramUsage > 40.00 and sentData > 150.00 and receiveData > 150.00";
 		
-		processInfoEventHandler.createCriticalEventCheckExpression(statementInterpreter(defaultFilter), customSubscriber);
+		processInfoEventHandler.createCriticalEventCheckExpression(cepRule, customSubscriber);
 		
 		//customExpression = "select cpuUsage from ApplicationEvent where cpuUsage > 30";
 		
@@ -89,7 +89,12 @@ public class EventFeeder {
 			        
 			    }
 		}); */
+		return processInfoEventHandler;
 		
+	}
+	
+	public static void pushToCEP (List<ThriftAgentProcessInfo> processes,ProcessInfoEventHandler processInfoEventHandler){
+
 		ExecutorService eventFeeder = Executors.newSingleThreadExecutor();
 		eventFeeder.submit(new Runnable() {
 	            public void run() {
@@ -118,6 +123,5 @@ public class EventFeeder {
 
 	            }
 	    });
-		
 	}
 }

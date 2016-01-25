@@ -31,9 +31,8 @@ public class ProcessInfoEventHandler implements InitializingBean{
     
     private StatementSubscriber criticalEventSubscriber;
     
-    public ProcessInfoEventHandler(StatementSubscriber statementSubscriber,Filter filter) {
+    public ProcessInfoEventHandler(StatementSubscriber statementSubscriber) {
 		this.criticalEventSubscriber = statementSubscriber;
-		this.filter = filter;
 		initService();
 	}
 
