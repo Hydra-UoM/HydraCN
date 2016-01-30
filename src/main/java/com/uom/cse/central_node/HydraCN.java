@@ -83,6 +83,7 @@ public class HydraCN extends Application {
 		loadProgress.setPrefWidth(SPLASH_WIDTH - 20);
 		progressText = new Label("Will find friends for peanuts . . .");
 		splashLayout = new VBox();
+		
 		splashLayout.getChildren().addAll(splash, loadProgress, progressText);
 		progressText.setAlignment(Pos.CENTER);
 		splashLayout.setStyle(
@@ -131,6 +132,7 @@ public class HydraCN extends Application {
 
 		Scene splashScene = new Scene(splashLayout);
 		initStage.initStyle(StageStyle.UNDECORATED);
+		initStage.getIcons().add(new Image("icon.png"));
 		final Rectangle2D bounds = Screen.getPrimary().getBounds();
 		initStage.setScene(splashScene);
 		initStage.setX(bounds.getMinX() + bounds.getWidth() / 2 - SPLASH_WIDTH / 2);
@@ -246,6 +248,7 @@ public class HydraCN extends Application {
 			dialogStage.setTitle("Data Viewer");
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			dialogStage.initOwner(primaryStage);
+			dialogStage.getIcons().add(new Image("icon.png"));
 			Scene scene = new Scene(page);
 			dialogStage.setScene(scene);
 
@@ -273,6 +276,7 @@ public class HydraCN extends Application {
 			dialogStage.setTitle("Filter Viewer");
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			dialogStage.initOwner(primaryStage);
+			dialogStage.getIcons().add(new Image("icon.png"));
 			Scene scene = new Scene(page);
 			dialogStage.setScene(scene);
 
@@ -300,6 +304,7 @@ public class HydraCN extends Application {
 			filterStage.setTitle("Rule Viewer");
 			filterStage.initModality(Modality.WINDOW_MODAL);
 			filterStage.initOwner(primaryStage);
+			filterStage.getIcons().add(new Image("icon.png"));
 			Scene scene = new Scene(page);
 			filterStage.setScene(scene);
 
@@ -327,6 +332,7 @@ public class HydraCN extends Application {
 			newFilterStage.setTitle("Performance Data");
 			newFilterStage.initModality(Modality.WINDOW_MODAL);
 			newFilterStage.initOwner(filterStage);
+			newFilterStage.getIcons().add(new Image("icon.png"));
 			Scene scene = new Scene(page);
 			newFilterStage.setScene(scene);
 
@@ -354,6 +360,7 @@ public class HydraCN extends Application {
 			windowsLogRuleViewer.setTitle("Windows Log Rules");
 			windowsLogRuleViewer.initModality(Modality.WINDOW_MODAL);
 			windowsLogRuleViewer.initOwner(primaryStage);
+			windowsLogRuleViewer.getIcons().add(new Image("icon.png"));
 			Scene scene = new Scene(page);
 			windowsLogRuleViewer.setScene(scene);
 
@@ -381,6 +388,7 @@ public class HydraCN extends Application {
 			windowsLogRuleViewer.setTitle("CEP Rule Editor");
 			windowsLogRuleViewer.initModality(Modality.WINDOW_MODAL);
 			windowsLogRuleViewer.initOwner(primaryStage);
+			windowsLogRuleViewer.getIcons().add(new Image("icon.png"));
 			Scene scene = new Scene(page);
 			windowsLogRuleViewer.setScene(scene);
 
@@ -408,6 +416,7 @@ public class HydraCN extends Application {
 			newFilterStage.setTitle("Performance Data");
 			newFilterStage.initModality(Modality.WINDOW_MODAL);
 			newFilterStage.initOwner(windowsLogRuleViewer);
+			newFilterStage.getIcons().add(new Image("icon.png"));
 			Scene scene = new Scene(page);
 			newFilterStage.setScene(scene);
 
@@ -492,6 +501,7 @@ public class HydraCN extends Application {
 			msgStage.setTitle("Selected Rule");
 			msgStage.initModality(Modality.WINDOW_MODAL);
 			msgStage.initOwner(filterStage);
+			msgStage.getIcons().add(new Image("icon.png"));
 			Scene scene = new Scene(page);
 			msgStage.setScene(scene);
 
@@ -520,6 +530,7 @@ public class HydraCN extends Application {
 			msgStage.setTitle("Selected Rule");
 			msgStage.initModality(Modality.WINDOW_MODAL);
 			msgStage.initOwner(windowsLogRuleViewer);
+			msgStage.getIcons().add(new Image("icon.png"));
 			Scene scene = new Scene(page);
 			msgStage.setScene(scene);
 
@@ -547,6 +558,7 @@ public class HydraCN extends Application {
 			Stage newFilterStage = new Stage();
 			newFilterStage.setTitle("About");
 			newFilterStage.initModality(Modality.WINDOW_MODAL);
+			newFilterStage.getIcons().add(new Image("icon.png"));
 			newFilterStage.initOwner(primaryStage);
 			Scene scene = new Scene(page);
 			newFilterStage.setScene(scene);
