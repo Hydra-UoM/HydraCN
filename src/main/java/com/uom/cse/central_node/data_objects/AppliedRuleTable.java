@@ -29,7 +29,7 @@ public class AppliedRuleTable {
 			+ "TARGET_TYPE VARCHAR(40), RULE_TYPE VARCHAR(40), RULE_ID INTEGER, GROUP_ID INTEGER, MAC VARCHAR(40)"
 			+ " ACTIVE VARCHAR(1))";
 	
-	private static void createConnection() {
+	static {
 		try {
 			Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
 			// Get a connection
@@ -60,7 +60,7 @@ public class AppliedRuleTable {
 
 	public static int insertAppliedRule(AppliedRule rule) {
 		int returnValue = -1;
-		createConnection();
+		
 		try {
 			Statement stmt = conn.createStatement();
 			
@@ -91,7 +91,7 @@ public class AppliedRuleTable {
 
 	public static List<AppliedRule> getAppliedRulesForGroup(int groupId) {
 		List<AppliedRule> returnValue = new ArrayList<AppliedRule>();
-		createConnection();
+		
 		try {
 			Statement stmt = conn.createStatement();
 			
@@ -124,7 +124,7 @@ public class AppliedRuleTable {
 	
 	public static List<AppliedRule> getAppliedRulesForIndividual(String mac) {
 		List<AppliedRule> returnValue = new ArrayList<AppliedRule>();
-		createConnection();
+		
 		try {
 			Statement stmt = conn.createStatement();
 			
@@ -156,7 +156,7 @@ public class AppliedRuleTable {
 	}
 	
 	public static void applyFilter(int id){
-		createConnection();
+		
 		try {
 			Statement stmt = conn.createStatement();
 			
@@ -177,7 +177,7 @@ public class AppliedRuleTable {
 	}
 	
 	public static void disableFilter(int id){
-		createConnection();
+		
 		try {
 			Statement stmt = conn.createStatement();
 			
@@ -194,7 +194,7 @@ public class AppliedRuleTable {
 
 	public static Filter getFilter(int id) {
 		List<Filter> returnFilters = new ArrayList<Filter>();
-		createConnection();
+		
 		try {
 			Statement stmt = conn.createStatement();
 			ResultSet results = stmt.executeQuery("select * from " + TABLE_NAME + " where ID = " + id);
@@ -230,7 +230,6 @@ public class AppliedRuleTable {
 	public static List<Filter> getAllFilters() {
 		List<Filter> returnFilters = new ArrayList<Filter>();
 		
-		createConnection();
 		
 		try {
 			Statement stmt = conn.createStatement();

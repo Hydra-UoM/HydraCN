@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import com.uom.cse.central_node.model.Device;
 import com.uom.cse.central_node.services.ThriftAgentProcessInfo;
 import com.uom.cse.central_node.services.myLogStructure;
 import com.uom.cse.central_node.services.myUserAccountDetailsStruct;
@@ -76,7 +77,11 @@ public class LogFileWritter {
 				builder.append(", Sent Data : " + processInfo.sentData);
 				builder.append(", Received Data : " + processInfo.receiveData);
 				builder.append(", Process ID : " + processInfo.pid);
-				builder.append("URLs : " + processInfo.URLs.toString());
+				
+				if(!Device.TYPE_ANDROID.equals(processInfo.type)){
+					builder.append(", URLs : " + processInfo.URLs.toString());
+				}
+				
 				builder.append(", Type : " + processInfo.type);
 
 				String filename = getFileName(PERFORMANCE_LOG_FILE_NAME_PREFIX, processInfo.mac,
@@ -387,13 +392,13 @@ public class LogFileWritter {
 		
 		StringBuilder sb = new StringBuilder();
 		
-		if(day < 9){
+		if(day <= 9){
 			sb.append("0" + day + "/");
 		}else{
 			sb.append(day + "/");
 		}
 		
-		if(month < 9){
+		if(month <= 9){
 			sb.append("0" + month + "/");
 		}else{
 			sb.append(month + "/");
@@ -401,19 +406,19 @@ public class LogFileWritter {
 		
 		sb.append(log.myTimeStamp1.year + " ");
 		
-		if(hour < 9){
+		if(hour <= 9){
 			sb.append("0" + hour + ":");
 		}else{
 			sb.append(hour + ":");
 		}
 
-		if(minute < 9){
+		if(minute <= 9){
 			sb.append("0" + minute + ":");
 		}else{
 			sb.append(minute + ":");
 		}
 
-		if(second < 9){
+		if(second <= 9){
 			sb.append("0" + second + " ");
 		}else{
 			sb.append(second + " ");
@@ -595,5 +600,33 @@ public class LogFileWritter {
 		}
 
 		return returnList;
+	}
+	
+	public static String getPerformanceFilename(Device device) {
+
+
+		try (BufferedReader br = new BufferedReader(new FileReader("LogFileConfig/" + LOG_FILES_NAMES_FILE))) {
+
+			String line = br.readLine();
+
+			while (line != null) {
+
+				if (line.toLowerCase().contains(PERFORMANCE_LOG_FILE_NAME_PREFIX.toLowerCase())) {
+					String macWithoutColon = device.getDeviceId().replace(":", "");
+					if(line.toLowerCase().contains(macWithoutColon.toLowerCase())){
+						return line;
+					}
+				}
+
+				line = br.readLine();
+			}
+
+		} catch (FileNotFoundException e) {
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return null;
 	}
 }

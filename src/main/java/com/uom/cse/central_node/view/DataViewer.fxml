@@ -11,8 +11,7 @@
         <columns>
           <TableColumn fx:id="nameColumn" minWidth="-Infinity" prefWidth="75.0" text="Name" />
           <TableColumn fx:id="cpuColumn" minWidth="-Infinity" prefWidth="44.0" text="CPU" />
-            <TableColumn fx:id="sharedMemoryColumn" minWidth="-Infinity" prefWidth="101.0" text="Shared Memory" />
-            <TableColumn fx:id="privateMemoryColumn" minWidth="-Infinity" prefWidth="85.0" text="Private Memory" />
+            <TableColumn fx:id="sharedMemoryColumn" minWidth="-Infinity" prefWidth="101.0" text="RAM" />
             <TableColumn fx:id="sentDataColumn" minWidth="-Infinity" prefWidth="103.0" text="Sent Data" />
             <TableColumn fx:id="receivedDataColumn" minWidth="-Infinity" prefWidth="83.0" text="Recieved Data" />
         </columns>

@@ -22,7 +22,7 @@ public class FilterTable {
 			+ "CPU DOUBLE, RAM DOUBLE, SENTDATA DOUBLE, RECEIVEDDATA DOUBLE, PROCESSES VARCHAR(1000), EVENTID VARCHAR(1000), "
 			+ "TIMEBOUND INTEGER, FILTERNAME VARCHAR(30), MESSAGE VARCHAR(1000), APPLY VARCHAR(1))";
 	
-	private static void createConnection() {
+	static {
 		try {
 			Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
 			// Get a connection
@@ -53,7 +53,7 @@ public class FilterTable {
 
 	public static int insertFilter(Filter filter) {
 		int returnValue = -1;
-		createConnection();
+		
 		try {
 			Statement stmt = conn.createStatement();
 			
@@ -81,7 +81,7 @@ public class FilterTable {
 	}
 	
 	public static void applyFilter(int id){
-		createConnection();
+		
 		try {
 			Statement stmt = conn.createStatement();
 			
@@ -102,7 +102,7 @@ public class FilterTable {
 	}
 	
 	public static void disableAllFilter(){
-		createConnection();
+		
 		try {
 			Statement stmt = conn.createStatement();
 			
@@ -119,7 +119,6 @@ public class FilterTable {
 	
 	public static Filter getAppliedFilter(){
 		
-		createConnection();
 		Filter filter = null;
 		try {
 			Statement stmt = conn.createStatement();
@@ -154,7 +153,7 @@ public class FilterTable {
 
 	public static Filter getFilter(int id) {
 		List<Filter> returnFilters = new ArrayList<Filter>();
-		createConnection();
+		
 		try {
 			Statement stmt = conn.createStatement();
 			ResultSet results = stmt.executeQuery("select * from " + TABLE_NAME + " where ID = " + id);
@@ -189,9 +188,7 @@ public class FilterTable {
 
 	public static List<Filter> getAllFilters() {
 		List<Filter> returnFilters = new ArrayList<Filter>();
-		
-		createConnection();
-		
+				
 		try {
 			Statement stmt = conn.createStatement();
 			ResultSet results = stmt.executeQuery("select * from " + TABLE_NAME);

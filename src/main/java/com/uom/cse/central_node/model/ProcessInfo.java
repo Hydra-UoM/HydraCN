@@ -23,6 +23,17 @@ public class ProcessInfo {
 		this.recievedData = new SimpleStringProperty(recievedData);
 	}
 	
+	public ProcessInfo(String processName, String cpu, String sharedMemory,
+			String sentData, String recievedData) {
+		
+		this.processName = new SimpleStringProperty(processName);
+		this.cpu = new SimpleStringProperty(cpu);
+		this.sharedMemory = new SimpleStringProperty(sharedMemory);
+		this.privateMemory = new SimpleStringProperty("0.0");
+		this.sentData = new SimpleStringProperty(sentData);
+		this.recievedData = new SimpleStringProperty(recievedData);
+	}
+	
 	public String getProcessName() {
         return processName.get();
     }

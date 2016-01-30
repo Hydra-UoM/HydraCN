@@ -1,8 +1,0 @@
-2016/01/20 14:29:17 Computer Name : DREAM-75, Account Name : SYSTEM, Last logOn : 1970/08/25 13:03:32, Last logOff : 1970/08/25 13:03:32, Last logOn hours : 0, Privilege : , No Of logOns : , Current User : Yes
-2016/01/20 14:29:17 Computer Name : DREAM-75, Account Name : Administrator, Last logOn : 2015/12/10 12:04:03, Last logOff : 0, Last logOn hours : 0, Privilege : ADMIN, No Of logOns : , Current User : No
-2016/01/20 14:29:17 Computer Name : DREAM-75, Account Name : cse, Last logOn : 2016/01/19 11:21:44, Last logOff : 0, Last logOn hours : 0, Privilege : ADMIN, No Of logOns : , Current User : No
-2016/01/20 14:29:17 Computer Name : DREAM-75, Account Name : cyg_server, Last logOn : 2016/01/20 14:14:20, Last logOff : 0, Last logOn hours : 0, Privilege : ADMIN, No Of logOns : , Current User : No
-2016/01/20 14:29:17 Computer Name : DREAM-75, Account Name : Guest, Last logOn : 0, Last logOff : 0, Last logOn hours : 0, Privilege : GUEST, No Of logOns : , Current User : No
-2016/01/20 14:29:17 Computer Name : DREAM-75, Account Name : l2user, Last logOn : 2014/12/04 09:53:49, Last logOff : 0, Last logOn hours : 0, Privilege : USER, No Of logOns : , Current User : No
-2016/01/20 14:29:17 Computer Name : DREAM-75, Account Name : sshd, Last logOn : 0, Last logOff : 0, Last logOn hours : 0, Privilege : USER, No Of logOns : , Current User : No
-2016/01/20 14:29:17 Computer Name : DREAM-75, Account Name : Student, Last logOn : 2016/01/20 14:13:46, Last logOff : 0, Last logOn hours : 0, Privilege : USER, No Of logOns : , Current User : No

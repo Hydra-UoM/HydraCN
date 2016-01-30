@@ -1,6 +1,0 @@
-2016/01/18 12:46:23 Computer Name : , Account Name : , Last logOn : 0, Last logOff : 0, Last logOn hours : 0, Privilege : , No Of logOns : , Current User : Yes
-2016/01/18 12:47:08 Computer Name : , Account Name : , Last logOn : 0, Last logOff : 0, Last logOn hours : 0, Privilege : , No Of logOns : , Current User : Yes
-2016/01/18 12:47:21 Computer Name : , Account Name : , Last logOn : 0, Last logOff : 0, Last logOn hours : 0, Privilege : , No Of logOns : , Current User : Yes
-2016/01/18 12:47:33 Computer Name : , Account Name : , Last logOn : 0, Last logOff : 0, Last logOn hours : 0, Privilege : , No Of logOns : , Current User : Yes
-2016/01/18 12:47:44 Computer Name : , Account Name : , Last logOn : 0, Last logOff : 0, Last logOn hours : 0, Privilege : , No Of logOns : , Current User : Yes
-2016/01/18 12:47:52 Computer Name : , Account Name : , Last logOn : 0, Last logOff : 0, Last logOn hours : 0, Privilege : , No Of logOns : , Current User : Yes

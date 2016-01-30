@@ -23,7 +23,7 @@ public class LogRuleTable {
 			+ "APPLY VARCHAR(1))";
 	
 	
-	private static void createConnection() {
+	static {
 		try {
 			Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
 			// Get a connection
@@ -36,7 +36,7 @@ public class LogRuleTable {
 
 	public static int insertRule(LogRule rule) {
 		int returnValue = -1;
-		createConnection();
+		
 		try {
 			Statement stmt = conn.createStatement();
 			
@@ -64,7 +64,7 @@ public class LogRuleTable {
 	}
 	
 	public static void applyRule(int id){
-		createConnection();
+		
 		try {
 			Statement stmt = conn.createStatement();
 			
@@ -85,7 +85,7 @@ public class LogRuleTable {
 	}
 
 	public static void disableAllRule(){
-		createConnection();
+		
 		try {
 			Statement stmt = conn.createStatement();
 			
@@ -102,7 +102,6 @@ public class LogRuleTable {
 	
 	public static LogRule getAppliedRule(){
 		
-		createConnection();
 		LogRule rule = null;
 		try {
 			Statement stmt = conn.createStatement();
@@ -137,8 +136,6 @@ public class LogRuleTable {
 
 	public static List<LogRule> getAllLogRules() {
 		List<LogRule> returnRules = new ArrayList<LogRule>();
-		
-		createConnection();
 		
 		try {
 			Statement stmt = conn.createStatement();
