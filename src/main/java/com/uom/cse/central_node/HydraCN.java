@@ -10,6 +10,7 @@ import com.uom.cse.central_node.model.ProcessInfo;
 import com.uom.cse.central_node.model.WindowsLogData;
 import com.uom.cse.central_node.services.RegisterDeviceHandler;
 import com.uom.cse.central_node.services.RegisterDeviceServer;
+import com.uom.cse.central_node.view.AboutUsController;
 import com.uom.cse.central_node.view.AlertMessageBoxController;
 import com.uom.cse.central_node.view.AllDeviceFilterController;
 import com.uom.cse.central_node.view.AppliedFilterViewController;
@@ -529,6 +530,33 @@ public class HydraCN extends Application {
 
 			// Show the dialog and wait until the user closes it
 			msgStage.showAndWait();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void showAbout() {
+		try {
+			// Load the fxml file and create a new stage for the popup dialog.
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(HydraCN.class.getResource("view/AboutUs.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
+
+			// Create the filter Stage.
+			Stage newFilterStage = new Stage();
+			newFilterStage.setTitle("About");
+			newFilterStage.initModality(Modality.WINDOW_MODAL);
+			newFilterStage.initOwner(primaryStage);
+			Scene scene = new Scene(page);
+			newFilterStage.setScene(scene);
+
+			// Set the person into the controller.
+			AboutUsController controller = loader.getController();
+			controller.setDialogStage(newFilterStage);
+
+			// Show the dialog and wait until the user closes it
+			newFilterStage.showAndWait();
 
 		} catch (IOException e) {
 			e.printStackTrace();

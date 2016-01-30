@@ -17,4 +17,9 @@ public class RootLayoutController {
 	private void showCepRuleEditor(){
 		DeviceOverviewController.hydraCN.showCEPRuleEditor();
 	}
+	
+	@FXML
+	private void showAbout(){
+		DeviceOverviewController.hydraCN.showAbout();
+	}
 }
