@@ -18,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class FilterDetailsController {
@@ -163,6 +164,10 @@ public class FilterDetailsController {
 		alert.setHeaderText(null);
 		alert.setContentText("Your Performance rule applied successfully!!");
 
+		// Add a custom icon.
+		Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+		stage.getIcons().add(new Image("icon.png"));
+		
 		alert.showAndWait();
 	}
 	

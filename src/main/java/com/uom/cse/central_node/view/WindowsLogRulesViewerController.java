@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class WindowsLogRulesViewerController {
@@ -146,6 +147,10 @@ public class WindowsLogRulesViewerController {
 		alert.setHeaderText(null);
 		alert.setContentText("Your Windows log rule applied successfully!!");
 
+		// Add a custom icon.
+		Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+		stage.getIcons().add(new Image("icon.png"));
+		
 		alert.showAndWait();
 		
 		btnShowAppliedRule.setDisable(false);

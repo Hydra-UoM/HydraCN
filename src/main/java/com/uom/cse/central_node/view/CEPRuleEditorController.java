@@ -22,6 +22,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class CEPRuleEditorController {
@@ -60,7 +61,11 @@ public class CEPRuleEditorController {
 			alert.setTitle("HYDRA SUCCESS MESSAGE");
 			alert.setHeaderText(null);
 			alert.setContentText("Your CEP rule deployed successfully!!");
-
+			
+			// Add a custom icon.
+			Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+			stage.getIcons().add(new Image("icon.png"));
+			
 			alert.showAndWait();
 			
 			dialogStage.close();
@@ -70,6 +75,10 @@ public class CEPRuleEditorController {
 			alert.setHeaderText("CEP Rule Error!!");
 			alert.setContentText(e.getMessage());
 
+			// Add a custom icon.
+			Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+			stage.getIcons().add(new Image("icon.png"));
+			
 			alert.showAndWait();
 		}
 		

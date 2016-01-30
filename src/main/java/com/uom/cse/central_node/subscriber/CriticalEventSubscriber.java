@@ -12,6 +12,8 @@ import com.uom.cse.central_node.event.ApplicationEvent;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
 @Component
 public class CriticalEventSubscriber implements StatementSubscriber {
@@ -59,6 +61,10 @@ public class CriticalEventSubscriber implements StatementSubscriber {
 			alert.setContentText(alertMessage + "\n" + "Unintended Processes in Use - " + eventMap.get("name") + "\n"
 					+ "Unintended URLs accessed - " + eventMap.get("urls"));
 
+			// Add a custom icon.
+			Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+			stage.getIcons().add(new Image("icon.png"));
+			
 			alert.show();
 		});
 
