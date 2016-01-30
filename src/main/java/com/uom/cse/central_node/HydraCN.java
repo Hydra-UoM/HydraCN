@@ -107,7 +107,10 @@ public class HydraCN extends Application {
 
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
-            primaryStage.getIcons().add(new Image("https://example.com/javaicon.png"));
+
+            //HydraCN.class.getResourceAsStream("icon.png");
+            primaryStage.getIcons().add(new Image("icon.png"));
+            
             primaryStage.setScene(scene);
             
             primaryStage.show();
