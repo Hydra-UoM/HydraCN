@@ -14,6 +14,7 @@ import com.uom.cse.central_node.data_objects.FilterTable;
 import com.uom.cse.central_node.data_objects.LogRule;
 import com.uom.cse.central_node.data_objects.LogRuleTable;
 import com.uom.cse.central_node.model.Device;
+import com.uom.cse.central_node.util.EventFeeder;
 import com.uom.cse.central_node.util.LogFileWritter;
 import com.uom.cse.central_node.view.DeviceOverviewController;
 import com.uom.cse.central_node.windows_agent_services.ProcessStatsClient;
@@ -123,6 +124,10 @@ public class RegisterDeviceHandler implements RegisterDeviceService.Iface {
 
 	@Override
 	public boolean pushProcessesInfo(List<ThriftAgentProcessInfo> processes) throws TException {
+		
+		if(EventFeeder.isHandlerset){
+			EventFeeder.pushToCEP(processes);
+		}
 		
 		processes.forEach((process) -> {
 			

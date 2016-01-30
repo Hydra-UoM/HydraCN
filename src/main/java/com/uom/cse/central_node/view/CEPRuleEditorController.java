@@ -4,9 +4,11 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import com.espertech.esper.client.EPStatementException;
 import com.uom.cse.central_node.data_objects.LogRule;
 import com.uom.cse.central_node.data_objects.LogRuleTable;
 import com.uom.cse.central_node.model.WindowsLogData;
+import com.uom.cse.central_node.util.EventFeeder;
 import com.uom.cse.central_node.windows_agent_services.ProcessStatsClient;
 
 import javafx.concurrent.Task;
@@ -46,6 +48,13 @@ public class CEPRuleEditorController {
 
 	@FXML
 	private void actionApplyRule(){
+		try{
+			EventFeeder.deployCEPRule(txtRule.getText(), txtAlertMsg.getText());
+			dialogStage.close();
+		}catch(EPStatementException e){
+			System.out.println(e.getMessage());
+			//need to put an alert
+		}
 		
 	}
 

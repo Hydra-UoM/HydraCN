@@ -13,6 +13,8 @@ import com.uom.cse.central_node.subscriber.CriticalEventSubscriber;
 public class EventFeeder {
 	
 	public static Filter defaultFilter;
+	public static ProcessInfoEventHandler eventHandler;
+	public static boolean isHandlerset;
 	
 	static{
 		defaultFilter = new Filter();
@@ -57,7 +59,7 @@ public class EventFeeder {
 		return statement;
 	}
 	
-	public static ProcessInfoEventHandler deployCEPRule(String cepRule, String alertMessage){
+	public static void deployCEPRule(String cepRule, String alertMessage){
 		
 		CriticalEventSubscriber customSubscriber = new CriticalEventSubscriber(alertMessage);
 		
@@ -89,24 +91,25 @@ public class EventFeeder {
 			        
 			    }
 		}); */
-		return processInfoEventHandler;
+		eventHandler = processInfoEventHandler;
+		isHandlerset = true;
 		
 	}
 	
-	public static void pushToCEP (List<ThriftAgentProcessInfo> processes,ProcessInfoEventHandler processInfoEventHandler){
+	public static void pushToCEP (List<ThriftAgentProcessInfo> processes){
 
 		ExecutorService eventFeeder = Executors.newSingleThreadExecutor();
 		eventFeeder.submit(new Runnable() {
 	            public void run() {
 	            	
 	            	processes.forEach((process)->{
-	        			processInfoEventHandler.handle(new ApplicationEvent(process));
-	        			try {
-							Thread.sleep(5000);
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}	   
+	            		eventHandler.handle(new ApplicationEvent(process));
+//	        			try {
+//							Thread.sleep(5000);
+//						} catch (InterruptedException e) {
+//							// TODO Auto-generated catch block
+//							e.printStackTrace();
+//						}	   
 	        		});
 	            	
 	            	         	
