@@ -629,4 +629,44 @@ public class LogFileWritter {
 
 		return null;
 	}
+	
+	public static List<LogFile> getPerformanceFilename(List<Device> devices) {
+
+		List<LogFile> returnList = new ArrayList<LogFile>();
+		
+		try (BufferedReader br = new BufferedReader(new FileReader("LogFileConfig/" + LOG_FILES_NAMES_FILE))) {
+
+			String line = br.readLine();
+
+			while (line != null) {
+
+				if (line.toLowerCase().contains(PERFORMANCE_LOG_FILE_NAME_PREFIX.toLowerCase())) {
+					
+					for (Device device : devices){
+						String macWithoutColon = device.getDeviceId().replace(":", "");
+						if(line.toLowerCase().contains(macWithoutColon.toLowerCase())){
+							LogFile file = new LogFile();
+							file.setName(device.getName());
+							file.setIpAddress(device.getIPAddress());
+							file.setDeviceId(device.getDeviceId());
+							file.setFilename(line);
+							
+							returnList.add(file);
+							break;
+						}
+					}
+					
+				}
+
+				line = br.readLine();
+			}
+
+		} catch (FileNotFoundException e) {
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return returnList;
+	}
 }

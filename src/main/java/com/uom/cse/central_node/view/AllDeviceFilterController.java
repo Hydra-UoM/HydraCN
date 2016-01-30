@@ -1,17 +1,19 @@
 package com.uom.cse.central_node.view;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Random;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
-import com.uom.cse.central_node.android_agent_services.AndroidAgentServiceClient;
-import com.uom.cse.central_node.android_agent_services.TProcessInfo;
 import com.uom.cse.central_node.model.AllDeviceDetails;
 import com.uom.cse.central_node.model.Device;
-import com.uom.cse.central_node.model.ProcessInfo;
-import com.uom.cse.central_node.windows_agent_services.ProcessStatsClient;
+import com.uom.cse.central_node.util.LogFileReader;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -33,16 +35,27 @@ public class AllDeviceFilterController {
 	@FXML
 	private TableColumn<AllDeviceDetails, String> userNameColumn;
 
-	public boolean updateInfoTableRunningFlag;
-	public boolean updateInfoTableStopFlag = true;
-	public int countDevice = 0;
+	private Executor executor;
 
 	private Stage dialogStage;
+	
+	private List<Device> currentlyConnectedDevices;
 
 	private ObservableList<AllDeviceDetails> infoData = FXCollections.observableArrayList();
+	private DeviceOverviewController deviceOverviewController;
 
 	@FXML
 	private void initialize() {
+		
+		currentlyConnectedDevices = DeviceOverviewController.deviceOverviewController.deviceTable
+				.getItems();
+		
+		executor = Executors.newSingleThreadExecutor(runnable -> {
+			Thread t = new Thread(runnable);
+			t.setDaemon(true);
+			return t;
+		});
+		
 		// set property to info table column
 		nameColumn.setCellValueFactory(cellData -> cellData.getValue().processNameProperty());
 		cpuColumn.setCellValueFactory(cellData -> cellData.getValue().cpuProperty());
@@ -52,190 +65,138 @@ public class AllDeviceFilterController {
 		userNameColumn.setCellValueFactory(cellData -> cellData.getValue().usernameProperty());
 
 		infoTable.setItems(infoData);
-
-		// stopUpdatingTable();
-
-		// clear info table
-		// clearInfoTable();
-
-		startUpdateInfoTable();
-
-	}
-
-	private void startUpdateInfoTable() {
-
-		updateInfoTableStopFlag = false;
-		updateInfoTableRunningFlag = true;
-
-		// create a separate thread for fill info table
-		Thread thread = new Thread() {
-			@Override
-			public void run() {
-
-				while (updateInfoTableRunningFlag) {
-					countDevice = 0;
-					for (Device device : DeviceOverviewController.hydraCN.getDeviceData()) {
-						// populate info table
-						populateInfoTable(device);
-						countDevice++;
-					}
-					
-					try {
-						Thread.sleep(1000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					
-					while(countDevice > 0){};
-				}
-
-				updateInfoTableStopFlag = true;
-			}
-		};
-
-		thread.setDaemon(true);
-		// start the created thread
-		thread.start();
-	}
-
-	private void populateInfoTable(Device device) {
-
-		clearInfoTable();
 		
-		AllDeviceDetails tempInfo = new AllDeviceDetails("loading..", "loading..", "loading..", "loading..", "loading..",
-				"loading..");
-		infoData.add(tempInfo);
-		
-		Thread thread = new Thread() {
-			@Override
-			public void run() {
-				// fill info table with latest info
-				fillProcessInfo(device);
-			}
-		};
+		populateInfoTable();
 
-		thread.start();
-	}
-
-	private void fillProcessInfo(Device device) {
-
-		String type = device.getType();
-		if (type.equals(Device.TYPE_ANDROID)) {
-
-			List<TProcessInfo> processes = getAndroidRunningProcesses(device);
-
-
-			for (TProcessInfo tInfo : processes) {
-
-				if ("Android Agent".equals(tInfo.name)) {
-					Random rand = new Random();
-					tInfo.processCPUUsage = (rand.nextInt(6) + 1) + "%";
-				}
-
-				AllDeviceDetails info = new AllDeviceDetails(device.getDeviceId(), device.getIPAddress(), "Nirushan",
-						tInfo.name, tInfo.processCPUUsage, tInfo.sharedRAMUsage);
-
-				infoData.add(info);
-				countDevice--;
-			}
-		} else if (type.equals(Device.TYPE_WINDOWS)) {
-
-			List<ProcessInfo> processes = getWindowsRunningProcesses(device);
-
-			for (ProcessInfo tInfo : processes) {
-
-				float cpu = Float.parseFloat(tInfo.getCpu());
-				float ram = Float.parseFloat(tInfo.getSharedMemory()) * 1000;
-				
-				int cpuInt = (int)cpu;
-				int ramInt = (int)ram;
-				
-				infoData.add(new AllDeviceDetails(device.getDeviceId(), device.getIPAddress(), "Jeyatharsini", 
-						tInfo.getProcessName(), cpuInt + "%", ramInt + "kB"));
-				countDevice--;
-			}
-		}
-
-	}
-
-	private List<TProcessInfo> getAndroidRunningProcesses(Device device) {
-
-		String cpuFilterValStr = DeviceOverviewController.deviceOverviewController.cpuTxt.getText();
-		String ramFilterValStr = DeviceOverviewController.deviceOverviewController.ramTxt.getText();
-		String processFilterValStr = DeviceOverviewController.deviceOverviewController.processTxt.getText();
-
-		String cpuFilter = "0";
-		String ramFilter = "0";
-		String processFilter = "";
-
-		if (!cpuFilterValStr.equals("")) {
-
-			cpuFilter = cpuFilterValStr;
-		}
-
-		if (!ramFilterValStr.equals("")) {
-			ramFilter = ramFilterValStr;
-		}
-
-		if (!processFilterValStr.equals("")) {
-
-			processFilter = processFilterValStr;
-		}
-
-		List<TProcessInfo> processes = AndroidAgentServiceClient.getAllRunningProcessWithInfo(device.getIPAddress(),
-				cpuFilter, ramFilter, processFilter);
-
-		return processes;
-	}
-
-	private List<ProcessInfo> getWindowsRunningProcesses(Device device) {
-
-		String cpuFilterValStr = DeviceOverviewController.deviceOverviewController.cpuTxt.getText();
-		String ramFilterValStr = DeviceOverviewController.deviceOverviewController.ramTxt.getText();
-		String processFilterValStr = DeviceOverviewController.deviceOverviewController.processTxt.getText();
-
-		float cpuFilter = 0.0f;
-		float ramFilter = 0.0f;
-		String processFilter = "";
-
-		if (!cpuFilterValStr.equals("")) {
-
-			try {
-				cpuFilter = Float.parseFloat(cpuFilterValStr);
-			} catch (NumberFormatException nfe) {
-
-			}
-
-		}
-
-		if (!cpuFilterValStr.equals("")) {
-
-			try {
-				ramFilter = Float.parseFloat(ramFilterValStr);
-			} catch (NumberFormatException nfe) {
-
-			}
-
-		}
-
-		if (!cpuFilterValStr.equals("")) {
-
-			processFilter = processFilterValStr;
-		}
-
-		List<ProcessInfo> processes = ProcessStatsClient.getProcessesInfo(device.getIPAddress(), cpuFilter, ramFilter,
-				0.0, 0.0, processFilter);
-
-		return processes;
 	}
 	
-	private void clearInfoTable() {
-		infoData = FXCollections.observableArrayList();
+	private void populateInfoTable() {
+		
+		Task<Object> writeTask = new Task<Object>() {
+			@Override
+			public Object call() throws Exception {
 
-		infoTable.setItems(infoData);
+				while(true){
+					
+					
+					List<AllDeviceDetails> processInfoList = LogFileReader.readProcessInfoData(currentlyConnectedDevices);
+					
+					if (isDataChanged(processInfoList)){
+						infoData = FXCollections.observableArrayList();
+						
+						Platform.runLater(
+								() -> infoTable.setItems(infoData));
+						
+						fillProcessInfo(filterDeviceDetails(processInfoList));
+					}
+					Thread.sleep(1000);
+				}
+				
+			}
+		};
+
+		// run the task using a thread from the thread pool:
+		executor.execute(writeTask);
+		
+		List<AllDeviceDetails> processInfoList = LogFileReader.readProcessInfoData(currentlyConnectedDevices);
+		// fill info table with latest info
+		fillProcessInfo(filterDeviceDetails(processInfoList));
+	}
+	
+	private void fillProcessInfo(List<AllDeviceDetails> processInfoList) {
+
+		for (AllDeviceDetails info : processInfoList) {
+			infoData.add(info);
+		}
+	}
+	
+	private boolean isDataChanged (List<AllDeviceDetails> processInfoList) {
+		boolean returnFlag = false;
+		if (infoData.size() == processInfoList.size()) {
+			for (int i = 0; i < processInfoList.size(); i++) {
+				AllDeviceDetails currentData = processInfoList.get(i);
+				AllDeviceDetails latestData = infoData.get(i);
+				
+				if (!currentData.getProcessName().equals(latestData.getProcessName()) || 
+						!currentData.getCpu().equals(latestData.getCpu()) ||
+						!currentData.getSharedMemory().equals(latestData.getSharedMemory())) {
+					returnFlag = true;
+				}
+			}
+		}else{
+			returnFlag = true;
+		}
+		return returnFlag;
+	}
+	
+	private List<AllDeviceDetails> filterDeviceDetails (List<AllDeviceDetails> detailList) {
+		List<AllDeviceDetails> cpuFilterList = new ArrayList<AllDeviceDetails>();
+//		
+//		for (AllDeviceDetails detail : detailList) {
+//			returnList.add(detail);
+//		}
+//		
+		if (DeviceOverviewController.isCpuChecked && !DeviceOverviewController.condCpu.equals("")) {
+			for (AllDeviceDetails detail : detailList) {
+				String cpu = detail.getCpu();
+				try{
+					
+					double cpuInDouble = Double.parseDouble(cpu);
+					double condCpuInDouble = Double.parseDouble(DeviceOverviewController.condCpu);
+					if (cpuInDouble >= condCpuInDouble) {
+						cpuFilterList.add(detail);
+					}
+				}catch(NumberFormatException e){
+					
+				}
+			}
+		}else{
+			for (AllDeviceDetails detail : detailList) {
+				cpuFilterList.add(detail);
+			}
+		}
+		
+		List<AllDeviceDetails> ramFilterList = new ArrayList<AllDeviceDetails>();
+		if (deviceOverviewController.isRamChecked && !deviceOverviewController.condRam.equals("")) {
+			for (AllDeviceDetails detail : cpuFilterList) {
+				String ram = detail.getSharedMemory();
+				try{
+					
+					double ramInDouble = Double.parseDouble(ram);
+					double condRamInDouble = Double.parseDouble(deviceOverviewController.condRam);
+					if (ramInDouble >= condRamInDouble) {
+						ramFilterList.add(detail);
+					}
+				}catch(NumberFormatException e){
+					
+				}
+			}
+		}else{
+			for (AllDeviceDetails detail : cpuFilterList) {
+				ramFilterList.add(detail);
+			}
+		}
+		
+		List<AllDeviceDetails> processFilterList = new ArrayList<AllDeviceDetails>();
+		if (deviceOverviewController.isProcessChecked && !deviceOverviewController.condProcess.equals("")) {
+			for (AllDeviceDetails detail : ramFilterList) {
+				String processName = detail.getProcessName().trim();
+				String condProcessName = deviceOverviewController.condProcess.trim();
+				if (!detail.getProcessName().toLowerCase().equals(condProcessName.toLowerCase())) {
+					processFilterList.add(detail);
+				}
+			}
+		}else{
+			for (AllDeviceDetails detail : ramFilterList) {
+				processFilterList.add(detail);
+			}
+		}
+		
+		return processFilterList;
 	}
 
-	public void setDialogStage(Stage dialogStage) {
+	public void setDialogStage(Stage dialogStage, DeviceOverviewController deviceOverviewController) {
+		this.deviceOverviewController = deviceOverviewController;
 		this.dialogStage = dialogStage;
 	}
 	

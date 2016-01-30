@@ -165,7 +165,7 @@ public class HydraCN extends Application {
         }
 	}
 	
-	public void showAllDeviceFilter(){
+	public void showAllDeviceFilter(DeviceOverviewController deviceOverviewController){
 		try {
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
@@ -182,7 +182,7 @@ public class HydraCN extends Application {
 
             // Set the person into the controller.
             AllDeviceFilterController controller = loader.getController();
-            controller.setDialogStage(dialogStage);
+            controller.setDialogStage(dialogStage, deviceOverviewController);
 
             // Show the dialog and wait until the user closes it
             dialogStage.showAndWait();

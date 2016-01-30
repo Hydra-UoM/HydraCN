@@ -83,11 +83,11 @@ public class DeviceOverviewController {
 	@FXML
 	public TitledPane filterPane;
 	@FXML
-	public TextField cpuTxt;
+	private TextField cpuTxt;
 	@FXML
-	public TextField ramTxt;
+	private TextField ramTxt;
 	@FXML
-	public TextField processTxt;
+	private TextField processTxt;
 
 	@FXML
 	private CheckBox cpuCheck;
@@ -95,6 +95,14 @@ public class DeviceOverviewController {
 	private CheckBox ramCheck;
 	@FXML
 	private CheckBox processesCheck;
+	
+	public static boolean isCpuChecked;
+	public static boolean isRamChecked;
+	public static boolean isProcessChecked;
+	
+	public static String condCpu;
+	public static String condRam;
+	public static String condProcess;
 
 	private ObservableList<Sensor> sensorData = FXCollections.observableArrayList();
 
@@ -242,13 +250,17 @@ public class DeviceOverviewController {
 			}
 
 			if (command.equals(CommandStrings.FILTER_PROCESS_ALL_DEVICES)) {
+				condCpu = cpuTxt.getText();
+				condProcess = processTxt.getText();
+				condRam = ramTxt.getText();
 				showFilterViewer();
+				
 			}
 		}
 	}
 
 	private void showFilterViewer() {
-		hydraCN.showAllDeviceFilter();
+		hydraCN.showAllDeviceFilter(this);
 	}
 
 	public void updateSensorTable() {
@@ -583,6 +595,8 @@ public class DeviceOverviewController {
 
 			final Tooltip tooltip = new Tooltip("Enable CPU Filter");
 			cpuCheck.setTooltip(tooltip);
+			
+			isCpuChecked = false;
 
 		} else {
 
@@ -592,6 +606,8 @@ public class DeviceOverviewController {
 
 			final Tooltip tooltip = new Tooltip("Disable CPU Filter");
 			cpuCheck.setTooltip(tooltip);
+			
+			isCpuChecked = true;
 		}
 	}
 
@@ -606,6 +622,8 @@ public class DeviceOverviewController {
 
 			final Tooltip tooltip = new Tooltip("Enable RAM Filter");
 			ramCheck.setTooltip(tooltip);
+			
+			isRamChecked = false;
 
 		} else {
 
@@ -615,6 +633,8 @@ public class DeviceOverviewController {
 
 			final Tooltip tooltip = new Tooltip("Disable RAM Filter");
 			ramCheck.setTooltip(tooltip);
+			
+			isRamChecked = true;
 		}
 	}
 
@@ -629,6 +649,8 @@ public class DeviceOverviewController {
 
 			final Tooltip tooltip = new Tooltip("Enable Process Filter");
 			processesCheck.setTooltip(tooltip);
+			
+			isProcessChecked = false;
 
 		} else {
 
@@ -638,6 +660,8 @@ public class DeviceOverviewController {
 
 			final Tooltip tooltip = new Tooltip("Disable Process Filter");
 			processesCheck.setTooltip(tooltip);
+			
+			isProcessChecked = true;
 		}
 	}
 

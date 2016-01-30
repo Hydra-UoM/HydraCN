@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.uom.cse.central_node.model.AllDeviceDetails;
 import com.uom.cse.central_node.model.Device;
 import com.uom.cse.central_node.model.ProcessInfo;
 
@@ -55,6 +56,60 @@ public class LogFileReader {
 
 			} catch (IOException e) {
 				e.printStackTrace();
+			}
+		}
+		
+		return returnList;
+	}
+	
+	public static List<AllDeviceDetails> readProcessInfoData(List<Device> devices){
+		List<AllDeviceDetails> returnList = new ArrayList<AllDeviceDetails>();
+		
+		List<AllDeviceDetails> allProcessInfoList = new ArrayList<AllDeviceDetails>();
+		
+		List<LogFile> files = LogFileWritter.getPerformanceFilename(devices);
+		
+		for (LogFile file : files) {
+			String filename = file.getFilename();
+			if (filename != null) {
+				try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+
+					String line = br.readLine();
+
+					while (line != null) {
+						ProcessInfo processInfo = convertToProcessInfo(line);
+						
+						AllDeviceDetails details = new AllDeviceDetails(file.getDeviceId(), file.getIpAddress(), file.getName(), 
+								processInfo.getProcessName(), processInfo.getCpu(), processInfo.getSharedMemory());
+						
+						allProcessInfoList.add(details);
+						
+						line = br.readLine();
+					}
+					
+					//get latest info
+					for (AllDeviceDetails duplicatedInfo : allProcessInfoList) {
+						boolean isAdded = false;
+						for (int i = 0; i < returnList.size(); i++) {
+							AllDeviceDetails info = returnList.get(i);
+							
+							if (duplicatedInfo.getProcessName().equals(info.getProcessName())) {
+								returnList.set(i, duplicatedInfo);
+								isAdded = true;
+							} 
+						}
+						
+						if (!isAdded) {
+							returnList.add(duplicatedInfo);
+						}
+						
+					}
+
+				} catch (FileNotFoundException e) {
+
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		

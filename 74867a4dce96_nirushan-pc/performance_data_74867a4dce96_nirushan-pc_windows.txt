@@ -55,3 +55,85 @@
 2016/01/30 14:03:53 Process Name : utorrentie, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 1.1578377756688296, RAM usage : 41768.0, Sent Data : 0.0, Received Data : 0.0, Process ID : 3084URLs : [], Type : Windows
 2016/01/30 14:03:53 Process Name : utorrentie#1, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 33984.0, Sent Data : 0.0, Received Data : 0.0, Process ID : 3232URLs : [], Type : Windows
 2016/01/30 14:03:53 Process Name : utorrentie#2, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 11352.0, Sent Data : 0.0, Received Data : 0.0, Process ID : 6132URLs : [], Type : Windows
+2016/01/30 15:44:57 Process Name : ActivateDesktop, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 1156.0, Sent Data : 0.0, Received Data : 0.0, Process ID : �, URLs : [], Type : Windows
+2016/01/30 15:44:57 Process Name : BtvStack, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 18632.0, Sent Data : 0.0, Received Data : 0.0, Process ID : �, URLs : [], Type : Windows
+2016/01/30 15:44:57 Process Name : CCC, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 190064.0, Sent Data : 0.0, Received Data : 0.0, Process ID : �, URLs : [], Type : Windows
+2016/01/30 15:44:57 Process Name : GoogleInputHandler, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 5192.0, Sent Data : 0.0, Received Data : 0.0, Process ID : �, URLs : [], Type : Windows
+2016/01/30 15:44:57 Process Name : IDMan, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 5476.0, Sent Data : 0.0, Received Data : 0.0, Process ID : �, URLs : [], Type : Windows
+2016/01/30 15:44:57 Process Name : IEMonitor, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 1376.0, Sent Data : 0.0, Received Data : 0.0, Process ID : 4, URLs : [], Type : Windows
+2016/01/30 15:44:57 Process Name : Project, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 11.64831265338498, RAM usage : 9064.0, Sent Data : 0.0, Received Data : 0.0, Process ID : ,, URLs : [], Type : Windows
+2016/01/30 15:44:57 Process Name : SceneBuilder, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 369616.0, Sent Data : 0.0, Received Data : 0.0, Process ID : t, URLs : [], Type : Windows
+2016/01/30 15:44:57 Process Name : SearchIndexer, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 0.0, Sent Data : 0.0, Received Data : 0.0, Process ID : �, URLs : [], Type : Windows
+2016/01/30 15:44:57 Process Name : StikyNot, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 4012.0, Sent Data : 0.0, Received Data : 0.0, Process ID : t, URLs : [], Type : Windows
+2016/01/30 15:44:57 Process Name : chrome, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 97636.0, Sent Data : 0.0, Received Data : 0.0, Process ID : �, URLs : [], Type : Windows
+2016/01/30 15:44:57 Process Name : chrome#1, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 97284.0, Sent Data : 0.0, Received Data : 0.0, Process ID : �, URLs : [], Type : Windows
+2016/01/30 15:44:57 Process Name : chrome#2, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 57656.0, Sent Data : 0.0, Received Data : 0.0, Process ID : �, URLs : [], Type : Windows
+2016/01/30 15:44:57 Process Name : chrome#3, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 39936.0, Sent Data : 0.0, Received Data : 0.0, Process ID : �, URLs : [], Type : Windows
+2016/01/30 15:44:57 Process Name : chrome#4, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 145404.0, Sent Data : 0.0, Received Data : 0.0, Process ID : �, URLs : [], Type : Windows
+2016/01/30 15:44:57 Process Name : chrome#5, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 40944.0, Sent Data : 0.0, Received Data : 0.0, Process ID : �, URLs : [], Type : Windows
+2016/01/30 15:44:57 Process Name : chrome#6, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 43768.0, Sent Data : 0.0, Received Data : 0.0, Process ID : `, URLs : [], Type : Windows
+2016/01/30 15:44:57 Process Name : chrome#7, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 101292.0, Sent Data : 0.0, Received Data : 0.0, Process ID : l, URLs : [], Type : Windows
+2016/01/30 15:44:57 Process Name : conhost, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 920.0, Sent Data : 0.0, Received Data : 0.0, Process ID : �, URLs : [], Type : Windows
+2016/01/30 15:44:57 Process Name : conhost#1, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 1040.0, Sent Data : 0.0, Received Data : 0.0, Process ID : 0, URLs : [], Type : Windows
+2016/01/30 15:44:57 Process Name : eclipse, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 1285612.0, Sent Data : 0.0, Received Data : 0.0, Process ID :  , URLs : [], Type : Windows
+2016/01/30 15:44:57 Process Name : explorer, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 1.794428440375823, RAM usage : 100788.0, Sent Data : 0.0, Received Data : 0.0, Process ID : 8, URLs : [], Type : Windows
+2016/01/30 15:44:57 Process Name : notepad++, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 18996.0, Sent Data : 0.0, Received Data : 0.0, Process ID : 4, URLs : [], Type : Windows
+2016/01/30 15:44:57 Process Name : powershell, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 68164.0, Sent Data : 0.0, Received Data : 0.0, Process ID : \, URLs : [], Type : Windows
+2016/01/30 15:44:57 Process Name : taskhost, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 4264.0, Sent Data : 0.0, Received Data : 0.0, Process ID : �, URLs : [], Type : Windows
+2016/01/30 15:44:57 Process Name : taskhostex, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 6116.0, Sent Data : 0.0, Received Data : 0.0, Process ID : �, URLs : [], Type : Windows
+2016/01/30 15:44:57 Process Name : uTorrent, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 15928.0, Sent Data : 0.0, Received Data : 0.0, Process ID : @, URLs : [], Type : Windows
+2016/01/30 15:44:57 Process Name : utorrentie, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 20812.0, Sent Data : 0.0, Received Data : 0.0, Process ID : , URLs : [], Type : Windows
+2016/01/30 15:44:57 Process Name : utorrentie#1, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 16920.0, Sent Data : 0.0, Received Data : 0.0, Process ID : �, URLs : [], Type : Windows
+2016/01/30 15:44:57 Process Name : utorrentie#2, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 5676.0, Sent Data : 0.0, Received Data : 0.0, Process ID : �, URLs : [], Type : Windows
+2016/01/30 15:51:23 Process Name : ActivateDesktop, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 1156.0, Sent Data : 0.0, Received Data : 0.0, Process ID : �, URLs : [], Type : Windows
+2016/01/30 15:51:23 Process Name : BtvStack, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 18632.0, Sent Data : 0.0, Received Data : 0.0, Process ID : �, URLs : [], Type : Windows
+2016/01/30 15:51:23 Process Name : CCC, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 189180.0, Sent Data : 0.0, Received Data : 0.0, Process ID : �, URLs : [], Type : Windows
+2016/01/30 15:51:23 Process Name : GoogleInputHandler, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 5192.0, Sent Data : 0.0, Received Data : 0.0, Process ID : �, URLs : [], Type : Windows
+2016/01/30 15:51:23 Process Name : IDMan, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 5476.0, Sent Data : 0.0, Received Data : 0.0, Process ID : �, URLs : [], Type : Windows
+2016/01/30 15:51:23 Process Name : IEMonitor, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 1376.0, Sent Data : 0.0, Received Data : 0.0, Process ID : 4, URLs : [], Type : Windows
+2016/01/30 15:51:23 Process Name : Project, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 25.80416086933186, RAM usage : 8664.0, Sent Data : 0.0, Received Data : 0.0, Process ID : �, URLs : [], Type : Windows
+2016/01/30 15:51:23 Process Name : SceneBuilder, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 369656.0, Sent Data : 0.0, Received Data : 0.0, Process ID : t, URLs : [], Type : Windows
+2016/01/30 15:51:23 Process Name : SearchFilterHost, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 1672.0, Sent Data : 0.0, Received Data : 0.0, Process ID : H, URLs : [], Type : Windows
+2016/01/30 15:51:23 Process Name : StikyNot, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 4012.0, Sent Data : 0.0, Received Data : 0.0, Process ID : t, URLs : [], Type : Windows
+2016/01/30 15:51:23 Process Name : chrome, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 97420.0, Sent Data : 0.0, Received Data : 0.0, Process ID : �, URLs : [], Type : Windows
+2016/01/30 15:51:23 Process Name : chrome#1, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 83488.0, Sent Data : 0.0, Received Data : 0.0, Process ID : �, URLs : [], Type : Windows
+2016/01/30 15:51:23 Process Name : chrome#2, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 60520.0, Sent Data : 0.0, Received Data : 0.0, Process ID : �, URLs : [], Type : Windows
+2016/01/30 15:51:23 Process Name : chrome#3, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 40140.0, Sent Data : 0.0, Received Data : 0.0, Process ID : x, URLs : [], Type : Windows
+2016/01/30 15:51:23 Process Name : conhost, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 920.0, Sent Data : 0.0, Received Data : 0.0, Process ID : �, URLs : [], Type : Windows
+2016/01/30 15:51:23 Process Name : conhost#1, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 1040.0, Sent Data : 0.0, Received Data : 0.0, Process ID : |, URLs : [], Type : Windows
+2016/01/30 15:51:23 Process Name : eclipse, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 1288412.0, Sent Data : 0.0, Received Data : 0.0, Process ID :  , URLs : [], Type : Windows
+2016/01/30 15:51:23 Process Name : explorer, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 2.3168680747886494, RAM usage : 99256.0, Sent Data : 0.0, Received Data : 0.0, Process ID : 8, URLs : [], Type : Windows
+2016/01/30 15:51:23 Process Name : powershell, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 68164.0, Sent Data : 0.0, Received Data : 0.0, Process ID : \, URLs : [], Type : Windows
+2016/01/30 15:51:23 Process Name : taskhost, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 4264.0, Sent Data : 0.0, Received Data : 0.0, Process ID : �, URLs : [], Type : Windows
+2016/01/30 15:51:23 Process Name : taskhostex, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 6116.0, Sent Data : 0.0, Received Data : 0.0, Process ID : �, URLs : [], Type : Windows
+2016/01/30 15:51:23 Process Name : uTorrent, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 16316.0, Sent Data : 0.0, Received Data : 0.0, Process ID : @, URLs : [], Type : Windows
+2016/01/30 15:51:23 Process Name : utorrentie, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 20888.0, Sent Data : 0.0, Received Data : 0.0, Process ID : , URLs : [], Type : Windows
+2016/01/30 15:51:23 Process Name : utorrentie#1, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 16992.0, Sent Data : 0.0, Received Data : 0.0, Process ID : �, URLs : [], Type : Windows
+2016/01/30 15:51:23 Process Name : utorrentie#2, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 5676.0, Sent Data : 0.0, Received Data : 0.0, Process ID : �, URLs : [], Type : Windows
+2016/01/30 15:59:19 Process Name : ActivateDesktop, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 1156.0, Sent Data : 0.0, Received Data : 0.0, Process ID : 2964, URLs : [], Type : Windows
+2016/01/30 15:59:19 Process Name : BtvStack, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 18632.0, Sent Data : 0.0, Received Data : 0.0, Process ID : 6016, URLs : [], Type : Windows
+2016/01/30 15:59:19 Process Name : CCC, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 190476.0, Sent Data : 0.0, Received Data : 0.0, Process ID : 1180, URLs : [], Type : Windows
+2016/01/30 15:59:19 Process Name : GoogleInputHandler, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 5192.0, Sent Data : 0.0, Received Data : 0.0, Process ID : 4600, URLs : [], Type : Windows
+2016/01/30 15:59:19 Process Name : IDMan, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 5476.0, Sent Data : 0.0, Received Data : 0.0, Process ID : 416, URLs : [], Type : Windows
+2016/01/30 15:59:19 Process Name : IEMonitor, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 1376.0, Sent Data : 0.0, Received Data : 0.0, Process ID : 3892, URLs : [], Type : Windows
+2016/01/30 15:59:19 Process Name : Project, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 18.588090298265982, RAM usage : 8652.0, Sent Data : 0.0, Received Data : 0.0, Process ID : 4360, URLs : [], Type : Windows
+2016/01/30 15:59:19 Process Name : SceneBuilder, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 369960.0, Sent Data : 0.0, Received Data : 0.0, Process ID : 4468, URLs : [], Type : Windows
+2016/01/30 15:59:19 Process Name : SearchFilterHost, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 2524.0, Sent Data : 0.0, Received Data : 0.0, Process ID : 5480, URLs : [], Type : Windows
+2016/01/30 15:59:19 Process Name : StikyNot, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 4012.0, Sent Data : 0.0, Received Data : 0.0, Process ID : 2932, URLs : [], Type : Windows
+2016/01/30 15:59:19 Process Name : chrome, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 97284.0, Sent Data : 0.0, Received Data : 0.0, Process ID : 3048, URLs : [], Type : Windows
+2016/01/30 15:59:19 Process Name : chrome#1, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 83488.0, Sent Data : 0.0, Received Data : 0.0, Process ID : 2700, URLs : [], Type : Windows
+2016/01/30 15:59:19 Process Name : chrome#2, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 60520.0, Sent Data : 0.0, Received Data : 0.0, Process ID : 3520, URLs : [], Type : Windows
+2016/01/30 15:59:19 Process Name : chrome#3, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 40140.0, Sent Data : 0.0, Received Data : 0.0, Process ID : 632, URLs : [], Type : Windows
+2016/01/30 15:59:19 Process Name : conhost, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 920.0, Sent Data : 0.0, Received Data : 0.0, Process ID : 5540, URLs : [], Type : Windows
+2016/01/30 15:59:19 Process Name : conhost#1, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 1032.0, Sent Data : 0.0, Received Data : 0.0, Process ID : 6392, URLs : [], Type : Windows
+2016/01/30 15:59:19 Process Name : eclipse, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 1284284.0, Sent Data : 0.0, Received Data : 0.0, Process ID : 4384, URLs : [], Type : Windows
+2016/01/30 15:59:19 Process Name : explorer, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.8771864820426313, RAM usage : 100804.0, Sent Data : 0.0, Received Data : 0.0, Process ID : 3640, URLs : [], Type : Windows
+2016/01/30 15:59:19 Process Name : javaw, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 29.380973840335983, RAM usage : 313204.0, Sent Data : 0.0, Received Data : 0.0, Process ID : 4416, URLs : [], Type : Windows
+2016/01/30 15:59:19 Process Name : notepad++, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 18996.0, Sent Data : 0.0, Received Data : 0.0, Process ID : 6708, URLs : [], Type : Windows
+2016/01/30 15:59:19 Process Name : powershell, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 68164.0, Sent Data : 0.0, Received Data : 0.0, Process ID : 4444, URLs : [], Type : Windows
+2016/01/30 15:59:19 Process Name : taskhost, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 4264.0, Sent Data : 0.0, Received Data : 0.0, Process ID : 6632, URLs : [], Type : Windows
+2016/01/30 15:59:19 Process Name : taskhostex, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 6180.0, Sent Data : 0.0, Received Data : 0.0, Process ID : 3284, URLs : [], Type : Windows
+2016/01/30 15:59:19 Process Name : uTorrent, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 16096.0, Sent Data : 0.0, Received Data : 0.0, Process ID : 4160, URLs : [], Type : Windows
+2016/01/30 15:59:19 Process Name : utorrentie, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 20884.0, Sent Data : 0.0, Received Data : 0.0, Process ID : 3084, URLs : [], Type : Windows
+2016/01/30 15:59:19 Process Name : utorrentie#1, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 16992.0, Sent Data : 0.0, Received Data : 0.0, Process ID : 3232, URLs : [], Type : Windows
+2016/01/30 15:59:19 Process Name : utorrentie#2, MAC ID : 74:86:7A:4D:CE:96, CPU usage : 0.0, RAM usage : 5676.0, Sent Data : 0.0, Received Data : 0.0, Process ID : 6132, URLs : [], Type : Windows
