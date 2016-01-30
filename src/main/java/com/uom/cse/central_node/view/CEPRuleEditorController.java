@@ -53,7 +53,7 @@ public class CEPRuleEditorController {
 			dialogStage.close();
 		}catch(EPStatementException e){
 			System.out.println(e.getMessage());
-			//need to put an alert
+			//need to put an alert window
 		}
 		
 	}
