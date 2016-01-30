@@ -1,15 +1,12 @@
 package com.uom.cse.central_node.view;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-
 import com.uom.cse.central_node.model.AllDeviceDetails;
 import com.uom.cse.central_node.model.Device;
 import com.uom.cse.central_node.util.LogFileReader;
-
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -130,12 +127,9 @@ public class AllDeviceFilterController {
 	}
 	
 	private List<AllDeviceDetails> filterDeviceDetails (List<AllDeviceDetails> detailList) {
+				
 		List<AllDeviceDetails> cpuFilterList = new ArrayList<AllDeviceDetails>();
-//		
-//		for (AllDeviceDetails detail : detailList) {
-//			returnList.add(detail);
-//		}
-//		
+		
 		if (DeviceOverviewController.isCpuChecked && !DeviceOverviewController.condCpu.equals("")) {
 			for (AllDeviceDetails detail : detailList) {
 				String cpu = detail.getCpu();

@@ -27,6 +27,9 @@ public class RegisterDeviceHandler implements RegisterDeviceService.Iface {
 	public static HydraCN hydraCN;
 
 	private static Executor executor;
+	
+	String ipAddress;
+	String name;
 
 	static {
 		executor = Executors.newSingleThreadExecutor(runnable -> {
@@ -66,7 +69,7 @@ public class RegisterDeviceHandler implements RegisterDeviceService.Iface {
 			hydraCN.getDeviceData().add(device);
 		}
 		
-
+		hydraCN.showInfoMessage(device.getIPAddress() + " " + device.getName() + " is connected.");
 		return true;
 	}
 	
@@ -76,6 +79,7 @@ public class RegisterDeviceHandler implements RegisterDeviceService.Iface {
 		
 		com.uom.cse.central_node.model.Device device = new com.uom.cse.central_node.model.Device(deviceDetails.deviceId,
 				deviceDetails.IPAddress, deviceDetails.type);
+		device.setName(deviceDetails.name);
 
 		Task<Filter> commandTask = new Task<Filter>() {
 			@Override
@@ -119,6 +123,9 @@ public class RegisterDeviceHandler implements RegisterDeviceService.Iface {
 
 		// run the task using a thread from the thread pool:
 		executor.execute(logCommandTask);
+		
+		hydraCN.showInfoMessage(device.getIPAddress() + " " + device.getName() + " is got command.");
+		
 		return true;
 	}
 
@@ -137,6 +144,8 @@ public class RegisterDeviceHandler implements RegisterDeviceService.Iface {
 			for (com.uom.cse.central_node.model.Device tempDevice : existingDeviceList) {
 				if (tempDevice.getDeviceId().equals(process.mac)) {
 					LogFileWritter.writeFile(process, tempDevice.getName());
+					ipAddress = tempDevice.getIPAddress();
+					name = tempDevice.getName();
 					break;
 				}
 			}
@@ -149,7 +158,9 @@ public class RegisterDeviceHandler implements RegisterDeviceService.Iface {
 				CommandManager.checkAndDeployCommandForAndorid(process);
 			}
 		});
-
+		
+		hydraCN.showInfoMessage(ipAddress + " " + name + " pushed processes information.");
+		
 		return true;
 
 	}
@@ -197,11 +208,15 @@ public class RegisterDeviceHandler implements RegisterDeviceService.Iface {
 			for (com.uom.cse.central_node.model.Device tempDevice : existingDeviceList) {
 				if (tempDevice.getDeviceId().equals(log.mac)) {
 					LogFileWritter.writeFileWindowsLog(log, tempDevice.getName());
+					name = tempDevice.getName();
+					ipAddress = tempDevice.getIPAddress();
 					break;
 				}
 			}
 			
 		});
+		
+		hydraCN.showInfoMessage(ipAddress + " " + name + " pushed windows log information.");
 		
 		return true;
 	}

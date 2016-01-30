@@ -72,6 +72,8 @@ public class DeviceOverviewController {
 	private Label ipAddressLabel;
 	@FXML
 	private Label macAddressLabel;
+	@FXML
+	private Label infoLabel;
 
 	@FXML
 	private ChoiceBox<String> commandChoiceBox;
@@ -560,6 +562,11 @@ public class DeviceOverviewController {
 		deviceTable.setItems(hydraCN.getDeviceData());
 	}
 
+	public void showInfoMessage (String message) {
+		Platform.runLater(
+				() -> infoLabel.setText(message));
+	}
+	
 	private void showDataViewer() {
 		hydraCN.showDataViewer();
 	}

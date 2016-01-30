@@ -7767,3 +7767,86 @@
 2016/01/30 15:22:00 Process Name : com.google.android.googlequicksearchbox:interactor, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5564.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
 2016/01/30 15:22:00 Process Name : System UI, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 6208.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
 2016/01/30 15:22:00 Process Name : Android System, MAC ID : 84:38:38:A1:79:87, CPU usage : 2.25, RAM usage : 4888.0, Sent Data : 1.0, Received Data : 6.0, Process ID : pid, Type : Android
+2016/01/30 21:44:52 Process Name : Android Agent, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5484.0, Sent Data : 2.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:52 Process Name : Google Play services, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5220.0, Sent Data : 3.0, Received Data : 3.0, Process ID : pid, Type : Android
+2016/01/30 21:44:52 Process Name : Samsung keyboard, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 6628.0, Sent Data : 1.0, Received Data : 6.0, Process ID : pid, Type : Android
+2016/01/30 21:44:52 Process Name : com.google.android.gms.persistent, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5256.0, Sent Data : 3.0, Received Data : 3.0, Process ID : pid, Type : Android
+2016/01/30 21:44:52 Process Name : TouchWiz Home, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5948.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:52 Process Name : GestureService, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5544.0, Sent Data : 1.0, Received Data : 6.0, Process ID : pid, Type : Android
+2016/01/30 21:44:52 Process Name : Nearby Service, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5548.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:52 Process Name : Chrome, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5296.0, Sent Data : 10.0, Received Data : 111.0, Process ID : pid, Type : Android
+2016/01/30 21:44:52 Process Name : com.google.android.googlequicksearchbox:search, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5356.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:52 Process Name : com.android.chrome:privileged_process2, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5564.0, Sent Data : 10.0, Received Data : 111.0, Process ID : pid, Type : Android
+2016/01/30 21:44:52 Process Name : com.sec.android.widgetapp.ap.hero.accuweather:SurfaceWidget, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5456.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:53 Process Name : Video Player, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 6040.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:53 Process Name : WhatsApp, MAC ID : 84:38:38:A1:79:87, CPU usage : 2.0, RAM usage : 5624.0, Sent Data : 1.0, Received Data : 1.0, Process ID : pid, Type : Android
+2016/01/30 21:44:53 Process Name : Messenger, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5632.0, Sent Data : 1.0, Received Data : 3.0, Process ID : pid, Type : Android
+2016/01/30 21:44:53 Process Name : Google Play Store, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5812.0, Sent Data : 1.0, Received Data : 36.0, Process ID : pid, Type : Android
+2016/01/30 21:44:53 Process Name : com.google.process.gapps, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5380.0, Sent Data : 3.0, Received Data : 3.0, Process ID : pid, Type : Android
+2016/01/30 21:44:53 Process Name : hike, MAC ID : 84:38:38:A1:79:87, CPU usage : 2.0, RAM usage : 5644.0, Sent Data : 3.0, Received Data : 4.0, Process ID : pid, Type : Android
+2016/01/30 21:44:53 Process Name : android.process.acore, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5400.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:53 Process Name : AASAservice, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 6140.0, Sent Data : 1.0, Received Data : 6.0, Process ID : pid, Type : Android
+2016/01/30 21:44:53 Process Name : Greeting Card Maker, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5712.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:53 Process Name : S Health, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5920.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:53 Process Name : com.sec.android.app.shealth:remote, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5288.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:53 Process Name : Calendar Storage, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5464.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:54 Process Name : Health Service, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5540.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:54 Process Name : S Planner, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 6036.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:54 Process Name : Favourite Contacts, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 6032.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:54 Process Name : Unified Daemon, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5492.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:54 Process Name : Weather, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5496.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:54 Process Name : com.cmcm.locker:service, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5756.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:54 Process Name : MyScript Resource Manager, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5472.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:54 Process Name : Context Service, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5460.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:54 Process Name : com.samsung.android.snote:provider, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5536.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:54 Process Name : Clock (Digital), MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5572.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:54 Process Name : Settings, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5424.0, Sent Data : 1.0, Received Data : 6.0, Process ID : pid, Type : Android
+2016/01/30 21:44:55 Process Name : Contacts, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5464.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:55 Process Name : Samsung Link Platform, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5736.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:55 Process Name : CloudAgent, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5412.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:55 Process Name : EasyTouch, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5508.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:55 Process Name : com.shere.easytouch.holo.service, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5312.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:55 Process Name : com.instagram.android:mqtt, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5916.0, Sent Data : 3.0, Received Data : 6.0, Process ID : pid, Type : Android
+2016/01/30 21:44:55 Process Name : com.cmcm.locker:locker, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5940.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:55 Process Name : BadgeProvider, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5620.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:55 Process Name : com.android.systemui.recentsactivity, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5428.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:55 Process Name : Factory Mode, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5960.0, Sent Data : 1.0, Received Data : 6.0, Process ID : pid, Type : Android
+2016/01/30 21:44:55 Process Name : android.process.media, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5712.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:55 Process Name : com.samsung.dcm:DCMService, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5556.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:55 Process Name : Dropbox, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5356.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:56 Process Name : Internet, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5868.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:56 Process Name : com.samsung.android.app.galaxyfinder:tagService, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5496.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:56 Process Name : Samsung Galaxy, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5608.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:56 Process Name : com.sec.android.app.chromecustomizations, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5620.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:56 Process Name : Gmail, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5352.0, Sent Data : 0.0, Received Data : 3.0, Process ID : pid, Type : Android
+2016/01/30 21:44:56 Process Name : Samsung Push Service, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5388.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:56 Process Name : Facebook, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5244.0, Sent Data : 9.0, Received Data : 141.0, Process ID : pid, Type : Android
+2016/01/30 21:44:56 Process Name : LogsProvider, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5448.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:56 Process Name : Memo, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5552.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:56 Process Name : Intelligence Service, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5524.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:57 Process Name : Car mode, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5424.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:57 Process Name : Samsung text-to-speech engine, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5456.0, Sent Data : 1.0, Received Data : 6.0, Process ID : pid, Type : Android
+2016/01/30 21:44:57 Process Name : Recommended apps, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5616.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:57 Process Name : Samsung Link Platform Connectivity, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5600.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:57 Process Name : Backup, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5560.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:57 Process Name : Fingerprints, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5420.0, Sent Data : 1.0, Received Data : 6.0, Process ID : pid, Type : Android
+2016/01/30 21:44:57 Process Name : com.android.browser.provider, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5612.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:57 Process Name : SecurityManagerService, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5588.0, Sent Data : 1.0, Received Data : 6.0, Process ID : pid, Type : Android
+2016/01/30 21:44:57 Process Name : Clock (Digital_easy), MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5612.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:57 Process Name : com.samsung.android.magazine.service, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5584.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:57 Process Name : com.samsung.android.internal.headlines, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5560.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:57 Process Name : OMACP, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5552.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:57 Process Name : Samsung Cloud Data Relay, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5392.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:58 Process Name : ﻿﻿Security policy updates, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5448.0, Sent Data : 1.0, Received Data : 6.0, Process ID : pid, Type : Android
+2016/01/30 21:44:58 Process Name : Bluetooth, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5412.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:58 Process Name : com.sec.phone, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5516.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:58 Process Name : Phone, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5461.333333333333, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:58 Process Name : com.sec.imsservice, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5308.0, Sent Data : 1.0, Received Data : 6.0, Process ID : pid, Type : Android
+2016/01/30 21:44:58 Process Name : org.simalliance.openmobileapi.service:remote, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5488.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:58 Process Name : Phone, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5461.333333333333, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:58 Process Name : Nfc Service, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5432.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:58 Process Name : Phone, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5461.333333333333, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:58 Process Name : com.android.systemui.imagewallpaper, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5500.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:59 Process Name : com.google.android.googlequicksearchbox:interactor, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 5524.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:59 Process Name : System UI, MAC ID : 84:38:38:A1:79:87, CPU usage : 0.0, RAM usage : 7048.0, Sent Data : 0.0, Received Data : 0.0, Process ID : pid, Type : Android
+2016/01/30 21:44:59 Process Name : Android System, MAC ID : 84:38:38:A1:79:87, CPU usage : 2.0, RAM usage : 4848.0, Sent Data : 1.0, Received Data : 6.0, Process ID : pid, Type : Android

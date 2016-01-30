@@ -121,6 +121,7 @@
                         </AnchorPane>
                     </content>
                   </TitledPane>
+                  <Label fx:id="infoLabel" layoutX="666.0" layoutY="576.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="6.0" />
                </children></AnchorPane>
         </items>
       </SplitPane>
