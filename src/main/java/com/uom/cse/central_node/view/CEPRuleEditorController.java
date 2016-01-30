@@ -13,8 +13,11 @@ import com.uom.cse.central_node.windows_agent_services.ProcessStatsClient;
 
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -39,6 +42,8 @@ public class CEPRuleEditorController {
 	private void initialize() {
 
 		lblErrorMsg.setText("");
+		txtRule.setWrapText(true);
+
 	}
 
 	@FXML
@@ -50,10 +55,22 @@ public class CEPRuleEditorController {
 	private void actionApplyRule(){
 		try{
 			EventFeeder.deployCEPRule(txtRule.getText(), txtAlertMsg.getText());
+			
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("HYDRA SUCCESS MESSAGE");
+			alert.setHeaderText(null);
+			alert.setContentText("Your CEP rule deployed successfully!!");
+
+			alert.showAndWait();
+			
 			dialogStage.close();
 		}catch(EPStatementException e){
-			System.out.println(e.getMessage());
-			//need to put an alert window
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("HYDRA ERROR MESSAGE");
+			alert.setHeaderText("CEP Rule Error!!");
+			alert.setContentText(e.getMessage());
+
+			alert.showAndWait();
 		}
 		
 	}

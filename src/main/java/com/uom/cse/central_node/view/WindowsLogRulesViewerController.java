@@ -11,9 +11,11 @@ import com.uom.cse.central_node.windows_agent_services.ProcessStatsClient;
 
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class WindowsLogRulesViewerController {
@@ -138,6 +140,13 @@ public class WindowsLogRulesViewerController {
 
 		// run the task using a thread from the thread pool:
 		exec.execute(logDataTask);
+		
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("HYDRA SUCCESS MESSAGE");
+		alert.setHeaderText(null);
+		alert.setContentText("Your Windows log rule applied successfully!!");
+
+		alert.showAndWait();
 		
 		btnShowAppliedRule.setDisable(false);
 		

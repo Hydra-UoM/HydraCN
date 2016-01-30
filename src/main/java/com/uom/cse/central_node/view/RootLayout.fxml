@@ -9,21 +9,17 @@
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
-          <Menu mnemonicParsing="false" text="Configure">
+          <Menu mnemonicParsing="false" text="Configure Agents">
             <items>
-                  <Menu mnemonicParsing="false" text="Agents">
-                    <items>
-                    <MenuItem mnemonicParsing="false" onAction="#showFilterList" text="Performance Rules" />
-                        <MenuItem mnemonicParsing="false" onAction="#showWindowsLogViewer" text="Log Rules" />
-                    </items>
-                  </Menu>
-                  <MenuItem mnemonicParsing="false" onAction="#showCepRuleEditor" text="Manage CEP Rules" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem mnemonicParsing="false" onAction="#showFilterList" text="Performance Rules" />
+                  <MenuItem mnemonicParsing="false" onAction="#showWindowsLogViewer" text="Log Rules" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Edit" />
-          <Menu mnemonicParsing="false" text="Help">
+          <Menu mnemonicParsing="false" text="Configure CEP">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#showCepRuleEditor" text="Manage CEP Rules" />
+               </items></Menu>
+          <Menu mnemonicParsing="false" text="About">
             <items>
               <MenuItem mnemonicParsing="false" text="About" />
             </items>
