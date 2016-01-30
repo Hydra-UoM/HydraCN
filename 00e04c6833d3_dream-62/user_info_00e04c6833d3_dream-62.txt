@@ -1,0 +1,73 @@
+2016/01/18 12:46:23 Computer Name : DREAM-62, Account Name : Administrator, Last logOn : 2015/12/10 12:08:10, Last logOff : 0, Last logOn hours : 0, Privilege : ADMIN, No Of logOns : , Current User : No
+2016/01/18 12:46:23 Computer Name : DREAM-62, Account Name : cse, Last logOn : 2016/01/18 11:42:49, Last logOff : 0, Last logOn hours : 0, Privilege : ADMIN, No Of logOns : , Current User : No
+2016/01/18 12:46:23 Computer Name : DREAM-62, Account Name : cyg_server, Last logOn : 2016/01/18 12:32:14, Last logOff : 0, Last logOn hours : 0, Privilege : ADMIN, No Of logOns : , Current User : No
+2016/01/18 12:46:23 Computer Name : DREAM-62, Account Name : Guest, Last logOn : 0, Last logOff : 0, Last logOn hours : 0, Privilege : GUEST, No Of logOns : , Current User : No
+2016/01/18 12:46:23 Computer Name : DREAM-62, Account Name : l2user, Last logOn : 2014/12/04 09:53:49, Last logOff : 0, Last logOn hours : 0, Privilege : USER, No Of logOns : , Current User : No
+2016/01/18 12:46:23 Computer Name : DREAM-62, Account Name : sshd, Last logOn : 0, Last logOff : 0, Last logOn hours : 0, Privilege : USER, No Of logOns : , Current User : No
+2016/01/18 12:46:23 Computer Name : DREAM-62, Account Name : Student, Last logOn : 2016/01/18 12:31:03, Last logOff : 0, Last logOn hours : 0, Privilege : USER, No Of logOns : , Current User : No
+2016/01/18 12:47:08 Computer Name : DREAM-62, Account Name : Administrator, Last logOn : 2015/12/10 12:08:10, Last logOff : 0, Last logOn hours : 0, Privilege : ADMIN, No Of logOns : , Current User : No
+2016/01/18 12:47:08 Computer Name : DREAM-62, Account Name : cse, Last logOn : 2016/01/18 11:42:49, Last logOff : 0, Last logOn hours : 0, Privilege : ADMIN, No Of logOns : , Current User : No
+2016/01/18 12:47:08 Computer Name : DREAM-62, Account Name : cyg_server, Last logOn : 2016/01/18 12:32:14, Last logOff : 0, Last logOn hours : 0, Privilege : ADMIN, No Of logOns : , Current User : No
+2016/01/18 12:47:08 Computer Name : DREAM-62, Account Name : Guest, Last logOn : 0, Last logOff : 0, Last logOn hours : 0, Privilege : GUEST, No Of logOns : , Current User : No
+2016/01/18 12:47:08 Computer Name : DREAM-62, Account Name : l2user, Last logOn : 2014/12/04 09:53:49, Last logOff : 0, Last logOn hours : 0, Privilege : USER, No Of logOns : , Current User : No
+2016/01/18 12:47:08 Computer Name : DREAM-62, Account Name : sshd, Last logOn : 0, Last logOff : 0, Last logOn hours : 0, Privilege : USER, No Of logOns : , Current User : No
+2016/01/18 12:47:08 Computer Name : DREAM-62, Account Name : Student, Last logOn : 2016/01/18 12:31:03, Last logOff : 0, Last logOn hours : 0, Privilege : USER, No Of logOns : , Current User : No
+2016/01/18 12:47:21 Computer Name : DREAM-62, Account Name : Administrator, Last logOn : 2015/12/10 12:08:10, Last logOff : 0, Last logOn hours : 0, Privilege : ADMIN, No Of logOns : , Current User : No
+2016/01/18 12:47:21 Computer Name : DREAM-62, Account Name : cse, Last logOn : 2016/01/18 11:42:49, Last logOff : 0, Last logOn hours : 0, Privilege : ADMIN, No Of logOns : , Current User : No
+2016/01/18 12:47:21 Computer Name : DREAM-62, Account Name : cyg_server, Last logOn : 2016/01/18 12:32:14, Last logOff : 0, Last logOn hours : 0, Privilege : ADMIN, No Of logOns : , Current User : No
+2016/01/18 12:47:21 Computer Name : DREAM-62, Account Name : Guest, Last logOn : 0, Last logOff : 0, Last logOn hours : 0, Privilege : GUEST, No Of logOns : , Current User : No
+2016/01/18 12:47:21 Computer Name : DREAM-62, Account Name : l2user, Last logOn : 2014/12/04 09:53:49, Last logOff : 0, Last logOn hours : 0, Privilege : USER, No Of logOns : , Current User : No
+2016/01/18 12:47:21 Computer Name : DREAM-62, Account Name : sshd, Last logOn : 0, Last logOff : 0, Last logOn hours : 0, Privilege : USER, No Of logOns : , Current User : No
+2016/01/18 12:47:21 Computer Name : DREAM-62, Account Name : Student, Last logOn : 2016/01/18 12:31:03, Last logOff : 0, Last logOn hours : 0, Privilege : USER, No Of logOns : , Current User : No
+2016/01/18 12:47:33 Computer Name : DREAM-62, Account Name : Administrator, Last logOn : 2015/12/10 12:08:10, Last logOff : 0, Last logOn hours : 0, Privilege : ADMIN, No Of logOns : , Current User : No
+2016/01/18 12:47:33 Computer Name : DREAM-62, Account Name : cse, Last logOn : 2016/01/18 11:42:49, Last logOff : 0, Last logOn hours : 0, Privilege : ADMIN, No Of logOns : , Current User : No
+2016/01/18 12:47:33 Computer Name : DREAM-62, Account Name : cyg_server, Last logOn : 2016/01/18 12:32:14, Last logOff : 0, Last logOn hours : 0, Privilege : ADMIN, No Of logOns : , Current User : No
+2016/01/18 12:47:33 Computer Name : DREAM-62, Account Name : Guest, Last logOn : 0, Last logOff : 0, Last logOn hours : 0, Privilege : GUEST, No Of logOns : , Current User : No
+2016/01/18 12:47:34 Computer Name : DREAM-62, Account Name : l2user, Last logOn : 2014/12/04 09:53:49, Last logOff : 0, Last logOn hours : 0, Privilege : USER, No Of logOns : , Current User : No
+2016/01/18 12:47:34 Computer Name : DREAM-62, Account Name : sshd, Last logOn : 0, Last logOff : 0, Last logOn hours : 0, Privilege : USER, No Of logOns : , Current User : No
+2016/01/18 12:47:34 Computer Name : DREAM-62, Account Name : Student, Last logOn : 2016/01/18 12:31:03, Last logOff : 0, Last logOn hours : 0, Privilege : USER, No Of logOns : , Current User : No
+2016/01/18 12:47:44 Computer Name : DREAM-62, Account Name : Administrator, Last logOn : 2015/12/10 12:08:10, Last logOff : 0, Last logOn hours : 0, Privilege : ADMIN, No Of logOns : , Current User : No
+2016/01/18 12:47:44 Computer Name : DREAM-62, Account Name : cse, Last logOn : 2016/01/18 11:42:49, Last logOff : 0, Last logOn hours : 0, Privilege : ADMIN, No Of logOns : , Current User : No
+2016/01/18 12:47:44 Computer Name : DREAM-62, Account Name : cyg_server, Last logOn : 2016/01/18 12:32:14, Last logOff : 0, Last logOn hours : 0, Privilege : ADMIN, No Of logOns : , Current User : No
+2016/01/18 12:47:44 Computer Name : DREAM-62, Account Name : Guest, Last logOn : 0, Last logOff : 0, Last logOn hours : 0, Privilege : GUEST, No Of logOns : , Current User : No
+2016/01/18 12:47:44 Computer Name : DREAM-62, Account Name : l2user, Last logOn : 2014/12/04 09:53:49, Last logOff : 0, Last logOn hours : 0, Privilege : USER, No Of logOns : , Current User : No
+2016/01/18 12:47:44 Computer Name : DREAM-62, Account Name : sshd, Last logOn : 0, Last logOff : 0, Last logOn hours : 0, Privilege : USER, No Of logOns : , Current User : No
+2016/01/18 12:47:44 Computer Name : DREAM-62, Account Name : Student, Last logOn : 2016/01/18 12:31:03, Last logOff : 0, Last logOn hours : 0, Privilege : USER, No Of logOns : , Current User : No
+2016/01/18 12:47:52 Computer Name : DREAM-62, Account Name : Administrator, Last logOn : 2015/12/10 12:08:10, Last logOff : 0, Last logOn hours : 0, Privilege : ADMIN, No Of logOns : , Current User : No
+2016/01/18 12:47:52 Computer Name : DREAM-62, Account Name : cse, Last logOn : 2016/01/18 11:42:49, Last logOff : 0, Last logOn hours : 0, Privilege : ADMIN, No Of logOns : , Current User : No
+2016/01/18 12:47:52 Computer Name : DREAM-62, Account Name : cyg_server, Last logOn : 2016/01/18 12:32:14, Last logOff : 0, Last logOn hours : 0, Privilege : ADMIN, No Of logOns : , Current User : No
+2016/01/18 12:47:52 Computer Name : DREAM-62, Account Name : Guest, Last logOn : 0, Last logOff : 0, Last logOn hours : 0, Privilege : GUEST, No Of logOns : , Current User : No
+2016/01/18 12:47:52 Computer Name : DREAM-62, Account Name : l2user, Last logOn : 2014/12/04 09:53:49, Last logOff : 0, Last logOn hours : 0, Privilege : USER, No Of logOns : , Current User : No
+2016/01/18 12:47:52 Computer Name : DREAM-62, Account Name : sshd, Last logOn : 0, Last logOff : 0, Last logOn hours : 0, Privilege : USER, No Of logOns : , Current User : No
+2016/01/18 12:47:52 Computer Name : DREAM-62, Account Name : Student, Last logOn : 2016/01/18 12:31:03, Last logOff : 0, Last logOn hours : 0, Privilege : USER, No Of logOns : , Current User : No
+2016/01/18 12:48:56 Computer Name : DREAM-62, Account Name : lication Information:
+	Process ID:		4
+	Application Name:	System
+
+Network Information:
+	Direction:		Inbound
+	Source Address:		224.0.0.1
+	Source Port:		0
+	Destination Address:	192.248.8.38
+	Destination Port:		0
+	Protocol:		2
+
+Filter Information:
+	Filter Run-Time ID:	0
+	Layer Name:		Receive/Accept
+	Layer Run-Time ID:	44, Last logOn : 2016/01/18 12:31:03, Last logOff : 0, Last logOn hours : 0, Privilege : USER, No Of logOns : , Current User : Yes
+2016/01/18 12:48:56 Computer Name : DREAM-62, Account Name : Administrator, Last logOn : 2015/12/10 12:08:10, Last logOff : 0, Last logOn hours : 0, Privilege : ADMIN, No Of logOns : , Current User : No
+2016/01/18 12:48:56 Computer Name : DREAM-62, Account Name : cse, Last logOn : 2016/01/18 11:42:49, Last logOff : 0, Last logOn hours : 0, Privilege : ADMIN, No Of logOns : , Current User : No
+2016/01/18 12:48:56 Computer Name : DREAM-62, Account Name : cyg_server, Last logOn : 2016/01/18 12:32:14, Last logOff : 0, Last logOn hours : 0, Privilege : ADMIN, No Of logOns : , Current User : No
+2016/01/18 12:48:56 Computer Name : DREAM-62, Account Name : Guest, Last logOn : 0, Last logOff : 0, Last logOn hours : 0, Privilege : GUEST, No Of logOns : , Current User : No
+2016/01/18 12:48:56 Computer Name : DREAM-62, Account Name : l2user, Last logOn : 2014/12/04 09:53:49, Last logOff : 0, Last logOn hours : 0, Privilege : USER, No Of logOns : , Current User : No
+2016/01/18 12:48:56 Computer Name : DREAM-62, Account Name : sshd, Last logOn : 0, Last logOff : 0, Last logOn hours : 0, Privilege : USER, No Of logOns : , Current User : No
+2016/01/18 12:48:56 Computer Name : DREAM-62, Account Name : Student, Last logOn : 2016/01/18 12:31:03, Last logOff : 0, Last logOn hours : 0, Privilege : USER, No Of logOns : , Current User : No
+2016/01/18 12:49:59 Computer Name : DREAM-62, Account Name : , Last logOn : 2016/01/18 12:31:03, Last logOff : 0, Last logOn hours : 0, Privilege : USER, No Of logOns : , Current User : Yes
+2016/01/18 12:49:59 Computer Name : DREAM-62, Account Name : Administrator, Last logOn : 2015/12/10 12:08:10, Last logOff : 0, Last logOn hours : 0, Privilege : ADMIN, No Of logOns : , Current User : No
+2016/01/18 12:49:59 Computer Name : DREAM-62, Account Name : cse, Last logOn : 2016/01/18 11:42:49, Last logOff : 0, Last logOn hours : 0, Privilege : ADMIN, No Of logOns : , Current User : No
+2016/01/18 12:49:59 Computer Name : DREAM-62, Account Name : cyg_server, Last logOn : 2016/01/18 12:32:14, Last logOff : 0, Last logOn hours : 0, Privilege : ADMIN, No Of logOns : , Current User : No
+2016/01/18 12:49:59 Computer Name : DREAM-62, Account Name : Guest, Last logOn : 0, Last logOff : 0, Last logOn hours : 0, Privilege : GUEST, No Of logOns : , Current User : No
+2016/01/18 12:49:59 Computer Name : DREAM-62, Account Name : l2user, Last logOn : 2014/12/04 09:53:49, Last logOff : 0, Last logOn hours : 0, Privilege : USER, No Of logOns : , Current User : No
+2016/01/18 12:49:59 Computer Name : DREAM-62, Account Name : sshd, Last logOn : 0, Last logOff : 0, Last logOn hours : 0, Privilege : USER, No Of logOns : , Current User : No
+2016/01/18 12:49:59 Computer Name : DREAM-62, Account Name : Student, Last logOn : 2016/01/18 12:31:03, Last logOff : 0, Last logOn hours : 0, Privilege : USER, No Of logOns : , Current User : No

@@ -1,0 +1,8 @@
+2016/01/18 12:46:23 Computer Name : DREAM-65, Account Name : a??, Last logOn : 2016/01/18 11:27:56, Last logOff : 0, Last logOn hours : 1970/01/01 05:36:13, Privilege : USER, No Of logOns : 55, Current User : Yes
+2016/01/18 12:46:23 Computer Name : DREAM-65, Account Name : Administrator, Last logOn : 2015/12/10 12:08:02, Last logOff : 0, Last logOn hours : 2106/02/07 11:58:15, Privilege : ADMIN, No Of logOns : 189, Current User : No
+2016/01/18 12:46:23 Computer Name : DREAM-65, Account Name : cse, Last logOn : 2016/01/18 11:48:08, Last logOff : 0, Last logOn hours : 2106/02/07 11:58:15, Privilege : ADMIN, No Of logOns : 6, Current User : No
+2016/01/18 12:46:23 Computer Name : DREAM-65, Account Name : cyg_server, Last logOn : 2016/01/18 11:06:57, Last logOff : 0, Last logOn hours : 2106/02/07 11:58:15, Privilege : ADMIN, No Of logOns : 31, Current User : No
+2016/01/18 12:46:23 Computer Name : DREAM-65, Account Name : Guest, Last logOn : 0, Last logOff : 0, Last logOn hours : 2106/02/07 11:58:15, Privilege : GUEST, No Of logOns : 0, Current User : No
+2016/01/18 12:46:23 Computer Name : DREAM-65, Account Name : l2user, Last logOn : 2014/12/04 09:53:49, Last logOff : 0, Last logOn hours : 2106/02/07 11:58:15, Privilege : USER, No Of logOns : 2, Current User : No
+2016/01/18 12:46:23 Computer Name : DREAM-65, Account Name : sshd, Last logOn : 0, Last logOff : 0, Last logOn hours : 2106/02/07 11:58:15, Privilege : USER, No Of logOns : 0, Current User : No
+2016/01/18 12:46:23 Computer Name : DREAM-65, Account Name : Student, Last logOn : 2016/01/18 11:27:56, Last logOff : 0, Last logOn hours : 2106/02/07 11:58:15, Privilege : USER, No Of logOns : 55, Current User : No

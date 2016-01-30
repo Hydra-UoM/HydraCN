@@ -76,6 +76,7 @@ public class LogFileWritter {
 				builder.append(", Sent Data : " + processInfo.sentData);
 				builder.append(", Received Data : " + processInfo.receiveData);
 				builder.append(", Process ID : " + processInfo.pid);
+				builder.append("URLs : " + processInfo.URLs.toString());
 				builder.append(", Type : " + processInfo.type);
 
 				String filename = getFileName(PERFORMANCE_LOG_FILE_NAME_PREFIX, processInfo.mac,

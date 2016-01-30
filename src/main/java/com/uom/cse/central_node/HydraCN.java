@@ -27,6 +27,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
@@ -80,6 +81,7 @@ public class HydraCN extends Application {
 		this.primaryStage = primaryStage;
 		//set title
         this.primaryStage.setTitle("HydraCN");
+        
 
         initRootLayout();
 
@@ -105,7 +107,9 @@ public class HydraCN extends Application {
 
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
+            primaryStage.getIcons().add(new Image("https://example.com/javaicon.png"));
             primaryStage.setScene(scene);
+            
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
