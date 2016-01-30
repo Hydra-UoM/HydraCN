@@ -43,6 +43,8 @@ public class ProcessInfoEventHandler implements InitializingBean{
         LOG.debug("Initializing Servcie ..");
         Configuration config = new Configuration();
        // config.addEventType("ApplicationEvent", ApplicationEvent.class.getName());
+        config.addPlugInSingleRowFunction("exceptThis", "com.uom.cse.central_node.event.ApplicationEvent", "exceptThis");
+        config.addPlugInSingleRowFunction("isAny", "com.uom.cse.central_node.event.ApplicationEvent", "isAny");
         config.addEventTypeAutoName("com.uom.cse.central_node.event");
         epService = EPServiceProviderManager.getDefaultProvider(config);
         

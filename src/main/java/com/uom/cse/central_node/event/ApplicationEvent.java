@@ -1,6 +1,7 @@
 package com.uom.cse.central_node.event;
 
 import java.util.Date;
+import java.util.List;
 
 import com.uom.cse.central_node.services.ThriftAgentProcessInfo;
 
@@ -23,11 +24,13 @@ public class ApplicationEvent {
 	private String type;
 	
 	private String mac;
+	
+	private List<String> urls;
     
     
     public ApplicationEvent(ThriftAgentProcessInfo agentProcessInfo) {
     	//String name,String packageName,double ramUsage,double cpuUsage,double sentData,double receiveData,String pid,String type,String mac
-        this.name = agentProcessInfo.name;
+        this.name = agentProcessInfo.name.trim();
         this.packageName = agentProcessInfo.packageName;
         this.ramUsage = agentProcessInfo.ramUsage;
         this.cpuUsage = agentProcessInfo.cpuUsage;
@@ -36,6 +39,7 @@ public class ApplicationEvent {
         this.pid = agentProcessInfo.pid;
         this.type = agentProcessInfo.type;
         this.mac = agentProcessInfo.mac;
+        this.urls = agentProcessInfo.URLs;
         
     }
 
@@ -135,5 +139,43 @@ public class ApplicationEvent {
     public void setMac(String mac) {
 		this.mac = mac;
 	}
+
+
+	public List<String> getUrls() {
+		return urls;
+	}
+
+
+	public void setUrls(List<String> urls) {
+		this.urls = urls;
+	}
+	
+	public static boolean exceptThis(List<String> list, String token) {
+
+		    // Check for list1 and list2 to contain same word
+			if(list.isEmpty()){
+				return false;
+			}else{
+				for (String s1 : list) {
+					String word = s1.split("//")[1].split("/")[0];
+				    if(!word.equals(token)){
+				    	return true;
+				    }  
+			    }
+			}
+			return false;  
+	}
+	
+	public static boolean isAny(String processName, String token) {
+
+	    // Check for list1 and list2 to contain same word
+		String []processlist = token.split(","); 
+		for(String process : processlist){
+			if(processName.equals(process)){
+				return true;
+			}
+		}
+		return false;
+}
 
 }
