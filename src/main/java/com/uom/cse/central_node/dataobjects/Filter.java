@@ -1,4 +1,4 @@
-package com.uom.cse.central_node.data_objects;
+package com.uom.cse.central_node.dataobjects;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -136,7 +136,7 @@ public class Filter {
 	}
 
 	public String[] getProcessesAsArray() {
-		if(processes != null && "".equals(processes)){
+		if(processes != null && !"".equals(processes)){
 			return processes.split(PROCESS_DELIMETER);
 		}
 		return null;

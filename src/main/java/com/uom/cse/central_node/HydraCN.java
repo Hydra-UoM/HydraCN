@@ -2,7 +2,7 @@ package com.uom.cse.central_node;
 
 import java.io.IOException;
 
-import com.uom.cse.central_node.data_objects.Filter;
+import com.uom.cse.central_node.dataobjects.Filter;
 import com.uom.cse.central_node.model.CEPRuleData;
 import com.uom.cse.central_node.model.Device;
 import com.uom.cse.central_node.model.FilterData;
@@ -100,10 +100,10 @@ public class HydraCN extends Application {
 
 				updateMessage("Loading...");
 				for (int i = 0; i < 4; i++) {
-                    Thread.sleep(100);
+                    Thread.sleep(800);
                 }
 				updateMessage("Done.");
-				Thread.sleep(50);
+				Thread.sleep(350);
 				return null;
 			}
 		};
@@ -127,9 +127,9 @@ public class HydraCN extends Application {
 				fadeSplash.play();
 
 				initCompletionHandler.complete();
-			} // todo add code to gracefully handle other task states.
+			} 
 		});
-
+		// todo add code to gracefully handle other task states.
 		Scene splashScene = new Scene(splashLayout);
 		initStage.initStyle(StageStyle.UNDECORATED);
 		initStage.getIcons().add(new Image("icon.png"));

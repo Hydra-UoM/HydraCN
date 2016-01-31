@@ -1,6 +1,6 @@
 package com.uom.cse.central_node.model;
 
-import com.uom.cse.central_node.data_objects.Filter;
+import com.uom.cse.central_node.dataobjects.Filter;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;

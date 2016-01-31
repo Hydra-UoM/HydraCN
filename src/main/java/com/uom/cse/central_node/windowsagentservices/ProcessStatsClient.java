@@ -1,4 +1,4 @@
-package com.uom.cse.central_node.windows_agent_services;
+package com.uom.cse.central_node.windowsagentservices;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -9,8 +9,8 @@ import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransport;
 
-import com.uom.cse.central_node.data_objects.Filter;
-import com.uom.cse.central_node.data_objects.LogRule;
+import com.uom.cse.central_node.dataobjects.Filter;
+import com.uom.cse.central_node.dataobjects.LogRule;
 import com.uom.cse.central_node.model.ProcessInfo;
 
 public class ProcessStatsClient {

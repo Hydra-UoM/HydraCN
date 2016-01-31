@@ -9,7 +9,7 @@ import com.uom.cse.central_node.model.Device;
 import com.uom.cse.central_node.services.ThriftAgentProcessInfo;
 import com.uom.cse.central_node.util.LogFileWritter;
 import com.uom.cse.central_node.view.DeviceOverviewController;
-import com.uom.cse.central_node.windows_agent_services.ProcessStatsClient;
+import com.uom.cse.central_node.windowsagentservices.ProcessStatsClient;
 
 import javafx.concurrent.Task;
 

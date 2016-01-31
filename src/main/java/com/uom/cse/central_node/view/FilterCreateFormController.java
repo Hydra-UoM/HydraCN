@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-import com.uom.cse.central_node.data_objects.Filter;
-import com.uom.cse.central_node.data_objects.FilterTable;
+import com.uom.cse.central_node.dataobjects.Filter;
+import com.uom.cse.central_node.dataobjects.FilterTable;
 import com.uom.cse.central_node.model.FilterData;
 
 import javafx.concurrent.Task;

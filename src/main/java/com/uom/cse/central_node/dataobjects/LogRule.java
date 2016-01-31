@@ -1,4 +1,4 @@
-package com.uom.cse.central_node.data_objects;
+package com.uom.cse.central_node.dataobjects;
 
 import java.util.ArrayList;
 import java.util.Arrays;

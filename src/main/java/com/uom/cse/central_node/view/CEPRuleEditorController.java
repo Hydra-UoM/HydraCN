@@ -5,11 +5,11 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 import com.espertech.esper.client.EPStatementException;
-import com.uom.cse.central_node.data_objects.LogRule;
-import com.uom.cse.central_node.data_objects.LogRuleTable;
+import com.uom.cse.central_node.dataobjects.LogRule;
+import com.uom.cse.central_node.dataobjects.LogRuleTable;
 import com.uom.cse.central_node.model.WindowsLogData;
 import com.uom.cse.central_node.util.EventFeeder;
-import com.uom.cse.central_node.windows_agent_services.ProcessStatsClient;
+import com.uom.cse.central_node.windowsagentservices.ProcessStatsClient;
 
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;

@@ -1,4 +1,4 @@
-package com.uom.cse.central_node.windows_agent_services;
+package com.uom.cse.central_node.windowsagentservices;
 
 public class WindowsDeviceOverallInfo {
 	

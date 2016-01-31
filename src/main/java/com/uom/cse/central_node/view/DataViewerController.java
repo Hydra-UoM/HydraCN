@@ -5,12 +5,12 @@ import java.util.Random;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-import com.uom.cse.central_node.android_agent_services.AndroidAgentServiceClient;
-import com.uom.cse.central_node.android_agent_services.TProcessInfo;
+import com.uom.cse.central_node.androidagentservices.AndroidAgentServiceClient;
+import com.uom.cse.central_node.androidagentservices.TProcessInfo;
 import com.uom.cse.central_node.model.Device;
 import com.uom.cse.central_node.model.ProcessInfo;
 import com.uom.cse.central_node.util.LogFileReader;
-import com.uom.cse.central_node.windows_agent_services.ProcessStatsClient;
+import com.uom.cse.central_node.windowsagentservices.ProcessStatsClient;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;

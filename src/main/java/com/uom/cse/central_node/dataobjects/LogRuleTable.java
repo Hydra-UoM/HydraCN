@@ -1,4 +1,4 @@
-package com.uom.cse.central_node.data_objects;
+package com.uom.cse.central_node.dataobjects;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -9,16 +9,18 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CEPRuleTable {
+public class LogRuleTable {
 	private static String dbURL = "jdbc:derby:filterDB;create=true;";
-	private static String TABLE_NAME = "cepRules";
+	private static String TABLE_NAME = "windowsLogRules";
 	// jdbc Connection
 	private static Connection conn = null;
 
 	// queries
 	private static String CREATE_LOG_RULE_TABLE_QUERY = "CREATE TABLE " + TABLE_NAME
 			+ " (ID INTEGER not null primary key " + "GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
-			+ "NAME VARCHAR(30),RULE VARCHAR(1000),MESSAGE VARCHAR(500) APPLY VARCHAR(1))";
+			+ "FILTERNAME VARCHAR(30),TIMEBOUND VARCHAR(5),LOGTYPE VARCHAR(100),SUMMARIZATIONLEVEL INTEGER,"
+			+ "ISPROCESSENABLE BOOLEAN, PROCESSNAME VARCHAR(30), TYPE VARCHAR(30), SECURITYLEVEL VARCHAR(30),"
+			+ "APPLY VARCHAR(1))";
 	
 	
 	static {
@@ -135,7 +137,6 @@ public class CEPRuleTable {
 	public static List<LogRule> getAllLogRules() {
 		List<LogRule> returnRules = new ArrayList<LogRule>();
 		
-		
 		try {
 			Statement stmt = conn.createStatement();
 			ResultSet results = stmt.executeQuery("select * from " + TABLE_NAME);
@@ -185,7 +186,6 @@ public class CEPRuleTable {
 			sqlExcept.printStackTrace();
 		}
 	}
-
 
 
 }

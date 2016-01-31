@@ -5,14 +5,14 @@ import java.util.Date;
 import java.util.List;
 
 import com.uom.cse.central_node.HydraCN;
-import com.uom.cse.central_node.android_agent_services.AndroidAgentServiceClient;
-import com.uom.cse.central_node.android_agent_services.DeviceOverallInfo;
-import com.uom.cse.central_node.android_agent_services.SensorDetails;
+import com.uom.cse.central_node.androidagentservices.AndroidAgentServiceClient;
+import com.uom.cse.central_node.androidagentservices.DeviceOverallInfo;
+import com.uom.cse.central_node.androidagentservices.SensorDetails;
 import com.uom.cse.central_node.commands.CommandStrings;
 import com.uom.cse.central_node.model.Device;
 import com.uom.cse.central_node.model.Sensor;
-import com.uom.cse.central_node.windows_agent_services.ProcessStatsClient;
-import com.uom.cse.central_node.windows_agent_services.WindowsDeviceOverallInfo;
+import com.uom.cse.central_node.windowsagentservices.ProcessStatsClient;
+import com.uom.cse.central_node.windowsagentservices.WindowsDeviceOverallInfo;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -28,6 +28,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.ImageView;
 
 public class DeviceOverviewController {
 	@FXML
@@ -90,6 +91,8 @@ public class DeviceOverviewController {
 	private TextField ramTxt;
 	@FXML
 	private TextField processTxt;
+	@FXML
+	private ImageView centralImageView;
 
 	@FXML
 	private CheckBox cpuCheck;
@@ -184,6 +187,9 @@ public class DeviceOverviewController {
 
 		// hide sensortable
 		hideSensorTable();
+		
+		//hide front image
+		hideCentralImageView();
 
 		// change selected device
 		this.selectedDevice = device;
@@ -193,6 +199,10 @@ public class DeviceOverviewController {
 
 		// show filterbox
 		showFilter();
+	}
+	
+	public void hideCentralImageView(){
+		centralImageView.setVisible(false);
 	}
 
 	public void showCommandBox() {

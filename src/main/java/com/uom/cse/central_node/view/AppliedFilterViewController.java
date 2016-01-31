@@ -1,6 +1,6 @@
 package com.uom.cse.central_node.view;
 
-import com.uom.cse.central_node.data_objects.Filter;
+import com.uom.cse.central_node.dataobjects.Filter;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

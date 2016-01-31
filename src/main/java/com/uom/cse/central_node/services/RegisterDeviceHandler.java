@@ -7,17 +7,17 @@ import java.util.concurrent.Executors;
 import org.apache.thrift.TException;
 
 import com.uom.cse.central_node.HydraCN;
-import com.uom.cse.central_node.android_agent_services.AndroidAgentServiceClient;
+import com.uom.cse.central_node.androidagentservices.AndroidAgentServiceClient;
 import com.uom.cse.central_node.commands.CommandManager;
-import com.uom.cse.central_node.data_objects.Filter;
-import com.uom.cse.central_node.data_objects.FilterTable;
-import com.uom.cse.central_node.data_objects.LogRule;
-import com.uom.cse.central_node.data_objects.LogRuleTable;
+import com.uom.cse.central_node.dataobjects.Filter;
+import com.uom.cse.central_node.dataobjects.FilterTable;
+import com.uom.cse.central_node.dataobjects.LogRule;
+import com.uom.cse.central_node.dataobjects.LogRuleTable;
 import com.uom.cse.central_node.model.Device;
 import com.uom.cse.central_node.util.EventFeeder;
 import com.uom.cse.central_node.util.LogFileWritter;
 import com.uom.cse.central_node.view.DeviceOverviewController;
-import com.uom.cse.central_node.windows_agent_services.ProcessStatsClient;
+import com.uom.cse.central_node.windowsagentservices.ProcessStatsClient;
 
 import javafx.application.Platform;
 import javafx.concurrent.Task;

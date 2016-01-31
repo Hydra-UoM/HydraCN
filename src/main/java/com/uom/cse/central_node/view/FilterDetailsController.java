@@ -4,12 +4,12 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-import com.uom.cse.central_node.android_agent_services.AndroidAgentServiceClient;
-import com.uom.cse.central_node.data_objects.Filter;
-import com.uom.cse.central_node.data_objects.FilterTable;
+import com.uom.cse.central_node.androidagentservices.AndroidAgentServiceClient;
+import com.uom.cse.central_node.dataobjects.Filter;
+import com.uom.cse.central_node.dataobjects.FilterTable;
 import com.uom.cse.central_node.model.Device;
 import com.uom.cse.central_node.model.FilterData;
-import com.uom.cse.central_node.windows_agent_services.ProcessStatsClient;
+import com.uom.cse.central_node.windowsagentservices.ProcessStatsClient;
 
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;

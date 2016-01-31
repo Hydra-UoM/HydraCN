@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.uom.cse.central_node.windows_agent_services;
+package com.uom.cse.central_node.windowsagentservices;
 
 import java.util.List;
 import org.apache.thrift.TException;

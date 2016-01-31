@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.uom.cse.central_node.data_objects.Filter;
+import com.uom.cse.central_node.dataobjects.Filter;
 import com.uom.cse.central_node.event.ApplicationEvent;
 
 import javafx.application.Platform;

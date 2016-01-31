@@ -1,4 +1,4 @@
-package com.uom.cse.central_node.android_agent_services;
+package com.uom.cse.central_node.androidagentservices;
 
 import java.util.Date;
 import java.util.List;
@@ -9,7 +9,7 @@ import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransport;
 
-import com.uom.cse.central_node.data_objects.Filter;
+import com.uom.cse.central_node.dataobjects.Filter;
 
 public class AndroidAgentServiceClient {
 	public static List<TProcessInfo> getRunningProcess(String IPAddress) {

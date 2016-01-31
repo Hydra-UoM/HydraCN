@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.uom.cse.central_node.subscriber.StatementSubscriber;
-import com.uom.cse.central_node.data_objects.Filter;
+import com.uom.cse.central_node.dataobjects.Filter;
 import com.uom.cse.central_node.event.ApplicationEvent;
 import com.espertech.esper.client.Configuration;
 import com.espertech.esper.client.EPServiceProvider;
