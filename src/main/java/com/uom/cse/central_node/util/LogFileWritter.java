@@ -80,6 +80,7 @@ public class LogFileWritter {
 				
 				if(!Device.TYPE_ANDROID.equals(processInfo.type)){
 					builder.append(", URLs : " + processInfo.URLs.toString());
+					builder.append(", Total Received Data : " + processInfo.totalReceivedData);
 				}
 				
 				builder.append(", Type : " + processInfo.type);

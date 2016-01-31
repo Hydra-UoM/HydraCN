@@ -159,7 +159,6 @@ public class LogRule {
 			Arrays.asList(logType.split(",")).forEach((type) -> {
 				returnValue.add(Long.parseLong(type.trim()));
 			});
-			
 		}
 		
 		return returnValue;
