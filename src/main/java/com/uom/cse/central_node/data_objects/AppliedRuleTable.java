@@ -264,19 +264,5 @@ public class AppliedRuleTable {
 
 		return returnFilters;
 	}
-	
-//	private static void shutdown() {
-//		Statement stmt = conn.createStatement();
-//		try {
-//			if (stmt != null) {
-//				stmt.close();
-//			}
-//			if (conn != null) {
-//				DriverManager.getConnection(dbURL + ";shutdown=true");
-//				conn.close();
-//			}
-//		} catch (SQLException sqlExcept) {
-//
-//		}
-//	}
+
 }

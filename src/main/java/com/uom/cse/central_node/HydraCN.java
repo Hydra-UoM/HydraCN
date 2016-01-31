@@ -100,10 +100,10 @@ public class HydraCN extends Application {
 
 				updateMessage("Loading...");
 				for (int i = 0; i < 4; i++) {
-                    Thread.sleep(800);
+                    Thread.sleep(100);
                 }
 				updateMessage("Done.");
-				Thread.sleep(350);
+				Thread.sleep(50);
 				return null;
 			}
 		};

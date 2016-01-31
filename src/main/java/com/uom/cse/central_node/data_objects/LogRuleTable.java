@@ -187,18 +187,5 @@ public class LogRuleTable {
 		}
 	}
 
-//	private static void shutdown() {
-//		try {
-//			if (stmt != null) {
-//				stmt.close();
-//			}
-//			if (conn != null) {
-//				DriverManager.getConnection(dbURL + ";shutdown=true");
-//				conn.close();
-//			}
-//		} catch (SQLException sqlExcept) {
-//
-//		}
-//	}
 
 }

@@ -75,13 +75,13 @@ public class CommandManager {
 		if (command == 0) {
 			commandStr = "USER_DEFINE_COMMAND";
 		} else if (command == 1) {
-			commandStr = "FULL_DATA_COMMAND";
+			commandStr = "FULL_DATA_WITHOUT_PREPROCESSING_COMMAND";
 		} else if (command == 2) {
-			commandStr = "CRITICAL_DATA_WITHOUT_PREPROCESSING_COMMAND";
+			commandStr = "PRE_DEFINED_DATA_WITHOUT_PREPROCESSING_COMMAND";
 		} else if (command == 3) {
-			commandStr = "CRITICAL_DATA_WITHOUT_PREPROCESSING_COMMAND";
+			commandStr = "CRITICAL_DATA_WITH_PREPROCESSING_COMMAND";
 		}
-		
+		DeviceOverviewController.hydraCN.showInfoMessage(commandStr + " is sent to " + ipAddress + "  (Windows)");
 		LogFileWritter.writeCommandFile(ipAddress, commandStr, Device.TYPE_WINDOWS);
 	}
 
@@ -155,13 +155,13 @@ public class CommandManager {
 		if (command == 0) {
 			commandStr = "USER_DEFINE_COMMAND";
 		} else if (command == 1) {
-			commandStr = "FULL_DATA_COMMAND";
+			commandStr = "FULL_DATA_WITHOUT_PREPROCESSING_COMMAND";
 		} else if (command == 2) {
-			commandStr = "CRITICAL_DATA_WITHOUT_PREPROCESSING_COMMAND";
+			commandStr = "PRE_DEFINED_DATA_WITHOUT_PREPROCESSING_COMMAND";
 		} else if (command == 3) {
-			commandStr = "CRITICAL_DATA_WITHOUT_PREPROCESSING_COMMAND";
+			commandStr = "CRITICAL_DATA_WITH_PREPROCESSING_COMMAND";
 		}
-		
+		DeviceOverviewController.hydraCN.showInfoMessage(commandStr + " is sent to " + ipAddress + "  (Android)");
 		LogFileWritter.writeCommandFile(ipAddress, commandStr, Device.TYPE_ANDROID);
 	}
 
