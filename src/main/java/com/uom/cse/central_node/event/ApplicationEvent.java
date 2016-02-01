@@ -26,6 +26,8 @@ public class ApplicationEvent {
 	private String mac;
 	
 	private List<String> urls;
+	
+	private double totalReceivedData;
     
     
     public ApplicationEvent(ThriftAgentProcessInfo agentProcessInfo) {
@@ -40,6 +42,7 @@ public class ApplicationEvent {
         this.type = agentProcessInfo.type;
         this.mac = agentProcessInfo.mac;
         this.urls = agentProcessInfo.URLs;
+        this.totalReceivedData = agentProcessInfo.totalReceivedData;
         
     }
 
@@ -152,7 +155,6 @@ public class ApplicationEvent {
 	
 	public static boolean exceptThis(List<String> list, String token) {
 
-		    // Check for list1 and list2 to contain same word
 			if(list.isEmpty()){
 				return false;
 			}else{
@@ -168,7 +170,6 @@ public class ApplicationEvent {
 	
 	public static boolean isAny(String processName, String token) {
 
-	    // Check for list1 and list2 to contain same word
 		String []processlist = token.split(","); 
 		for(String process : processlist){
 			if(processName.equals(process)){
@@ -177,5 +178,15 @@ public class ApplicationEvent {
 		}
 		return false;
 }
+
+
+	public double getTotalReceivedData() {
+		return totalReceivedData;
+	}
+
+
+	public void setTotalReceivedData(double totalReceivedData) {
+		this.totalReceivedData = totalReceivedData;
+	}
 
 }

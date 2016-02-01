@@ -1,6 +1,7 @@
 package com.uom.cse.central_node.subscriber;
 
 import java.util.Map;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,7 +41,12 @@ public class CriticalEventSubscriber implements StatementSubscriber {
 	}
 
 	public void update(Map<String, ApplicationEvent> eventMap) {
-
+		Set<String> mykeyset = eventMap.keySet();
+		String descriptionMessage = "";
+		for(String key : mykeyset){
+			descriptionMessage += key + " - " + eventMap.get(key) + "\n";
+		}
+		final String description = descriptionMessage;
 		StringBuilder sb = new StringBuilder();
 		sb.append("************************************************");
 		sb.append("\n* [ALERT] : CRITICAL EVENT DETECTED BY ESPER! ");
@@ -57,9 +63,9 @@ public class CriticalEventSubscriber implements StatementSubscriber {
 		Platform.runLater(() -> {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("HYDRA ALERT");
-			alert.setHeaderText("CRITICAL EVENT DETECTED BY HYDRA" + "\n" + "at device with MAC - " + eventMap.get("mac"));
-			alert.setContentText(alertMessage + "\n" + "Unintended Processes in Use - " + eventMap.get("name") + "\n"
-					+ "Unintended URLs accessed - " + eventMap.get("urls"));
+			alert.setHeaderText("CRITICAL EVENT DETECTED BY HYDRA" + "\n" + "at device with MAC - " + eventMap.get("Detected_Device_MAC_ID"));
+			
+			alert.setContentText(alertMessage + "\n" + description);
 
 			// Add a custom icon.
 			Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
