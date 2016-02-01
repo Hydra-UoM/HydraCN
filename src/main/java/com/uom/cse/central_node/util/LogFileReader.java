@@ -133,7 +133,6 @@ public class LogFileReader {
 
 					if (returnedList != null) {
 						returnList = returnedList;
-						break;
 					}
 					
 					line = br.readLine();
@@ -236,7 +235,13 @@ public class LogFileReader {
 			}
 
 			if ("Last logOn".equals(infoArray[0].trim())) {
-				lastLogOn = new Sensor("Last logOn", infoArray[1].trim());
+				if (infoArray.length > 3) {
+					lastLogOn = new Sensor("Last logOn", infoArray[1].trim() + ":" + infoArray[2].trim() + 
+							":" + infoArray[3].trim());
+				}else{
+					lastLogOn = new Sensor("Last logOn", "N/A");
+				}
+				
 			}
 
 			if ("Privilege".equals(infoArray[0].trim())) {
@@ -248,7 +253,7 @@ public class LogFileReader {
 			}
 			
 			if ("Current User".equals(infoArray[0].trim())) {
-				if ("Yes".equals(infoArray[0].trim())) {
+				if ("Yes".equals(infoArray[1].trim())) {
 					currentUser = new ArrayList<Sensor>();
 					currentUser.add(accountName);
 					currentUser.add(lastLogOn);

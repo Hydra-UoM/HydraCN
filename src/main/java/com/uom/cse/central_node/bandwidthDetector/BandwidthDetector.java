@@ -34,7 +34,9 @@ public class BandwidthDetector {
 					str2 = str2.trim();
 					int avg = Integer.parseInt(str2.substring(str2.indexOf("Average") + 9,
 									str2.length()).replace("ms", "").trim());
-					
+					if(avg == 0){
+						avg = 1;
+					}
 					bandwidth = (size * 1000000 / (avg)) / 1024;
 				} else {
 					

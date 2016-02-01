@@ -233,7 +233,10 @@ public class HydraCN extends Application {
 	}
 
 	public void showInfoMessage(String message) {
-		deviceOverviewController.showInfoMessage(message);
+		if (!message.contains("null")){
+			deviceOverviewController.showInfoMessage(message);
+		}
+		
 	}
 
 	public void showDataViewer() {

@@ -498,8 +498,6 @@ public class DeviceOverviewController {
 		loggedInUserData = FXCollections.observableArrayList();
 		loggedInUserTable.setItems(loggedInUserData);
 
-		loggedInUserData.add(new Sensor("loading..", false));
-
 		Thread thread = new Thread() {
 			@Override
 			public void run() {
