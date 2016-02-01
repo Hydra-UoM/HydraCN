@@ -153,6 +153,7 @@ public class FilterTable {
 
 	public static Filter getFilter(int id) {
 		List<Filter> returnFilters = new ArrayList<Filter>();
+		Filter returnFilter = new Filter();
 		
 		try {
 			Statement stmt = conn.createStatement();
@@ -174,6 +175,7 @@ public class FilterTable {
 				filter.setMessage(results.getString(10));
 
 				returnFilters.add(filter);
+				returnFilter = filter;
 			}
 
 			results.close();
@@ -183,7 +185,7 @@ public class FilterTable {
 			sqlExcept.printStackTrace();
 		}
 		//shutdown();
-		return null;
+		return returnFilter;
 	}
 
 	public static List<Filter> getAllFilters() {

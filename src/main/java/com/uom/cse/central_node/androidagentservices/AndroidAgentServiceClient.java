@@ -27,7 +27,7 @@ public class AndroidAgentServiceClient {
 
 			transport.close();
 		} catch (TException x) {
-			x.printStackTrace();
+			//x.printStackTrace();
 		}
 
 		return processes;
@@ -48,7 +48,7 @@ public class AndroidAgentServiceClient {
 
 			transport.close();
 		} catch (TException x) {
-			x.printStackTrace();
+			//x.printStackTrace();
 		}
 
 		return processes;
@@ -69,7 +69,7 @@ public class AndroidAgentServiceClient {
 
 			transport.close();
 		} catch (TException x) {
-			x.printStackTrace();
+			//x.printStackTrace();
 		}
 
 		return processes;
@@ -90,7 +90,7 @@ public class AndroidAgentServiceClient {
 
 			transport.close();
 		} catch (TException x) {
-			x.printStackTrace();
+			//x.printStackTrace();
 		}
 
 		return overallInfo;
@@ -111,7 +111,7 @@ public class AndroidAgentServiceClient {
 
 			transport.close();
 		} catch (TException x) {
-			x.printStackTrace();
+			//x.printStackTrace();
 		}
 
 		return info;
@@ -133,7 +133,7 @@ public class AndroidAgentServiceClient {
 
 			transport.close();
 		} catch (TException x) {
-			x.printStackTrace();
+			//x.printStackTrace();
 		}
 
 		return info;
@@ -154,7 +154,7 @@ public class AndroidAgentServiceClient {
 
 			transport.close();
 		} catch (TException x) {
-			x.printStackTrace();
+			//x.printStackTrace();
 		}
 
 		return processes;
@@ -176,7 +176,7 @@ public class AndroidAgentServiceClient {
 
 			transport.close();
 		} catch (TException x) {
-			x.printStackTrace();
+			//x.printStackTrace();
 		}
 
 		return processes;
@@ -200,7 +200,7 @@ public class AndroidAgentServiceClient {
 
 			transport.close();
 		} catch (TException x) {
-			x.printStackTrace();
+			//x.printStackTrace();
 		}
 
 		return processes;

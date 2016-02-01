@@ -114,7 +114,7 @@ public class LogRuleTest {
 	public void testGetLogTypeNames() {
 		LogRule rule = new LogRule();
 		rule.setLogType("17,25,29,36");
-		assertEquals("Logons Failures,Success Login Information,Group Policy Editors,Application Crash Events"
+		assertEquals("Logons Failures,Success Login Information,Group Policy Editors,Application Crash Events,"
 				, rule.getLogTypeNames());
 	}
 
@@ -167,37 +167,59 @@ public class LogRuleTest {
 
 	@Test
 	public void testSetSummarizationLevel() {
-		fail("Not yet implemented");
+		LogRule rule = new LogRule();
+		rule.setSummarizationLevel(0);
+		assertEquals(0, rule.getSummarizationLevel());
+		rule.setSummarizationLevel(1);
+		assertEquals(1, rule.getSummarizationLevel());
+		rule.setSummarizationLevel(2);
+		assertEquals(2, rule.getSummarizationLevel());
 	}
 
 	@Test
 	public void testIsProcessLogEnable() {
-		fail("Not yet implemented");
+		LogRule rule = new LogRule();
+		rule.setProcessLogEnable(true);
+		assertEquals(true, rule.isProcessLogEnable());
+		rule.setProcessLogEnable(false);
+		assertEquals(false, rule.isProcessLogEnable());
 	}
 
 	@Test
 	public void testSetProcessLogEnable() {
-		fail("Not yet implemented");
+		LogRule rule = new LogRule();
+		rule.setProcessLogEnable(true);
+		assertEquals(true, rule.isProcessLogEnable());
+		rule.setProcessLogEnable(false);
+		assertEquals(false, rule.isProcessLogEnable());
 	}
 
 	@Test
 	public void testGetProcessName() {
-		fail("Not yet implemented");
+		LogRule rule = new LogRule();
+		rule.setProcessName("Process Name");
+		assertEquals("Process Name", rule.getProcessName());
 	}
 
 	@Test
 	public void testSetProcessName() {
-		fail("Not yet implemented");
+		LogRule rule = new LogRule();
+		rule.setProcessName("Process Name");
+		assertEquals("Process Name", rule.getProcessName());
 	}
 
 	@Test
 	public void testGetType() {
-		fail("Not yet implemented");
+		LogRule rule = new LogRule();
+		rule.setType("Type");
+		assertEquals("Type", rule.getType());
 	}
 
 	@Test
 	public void testSetType() {
-		fail("Not yet implemented");
+		LogRule rule = new LogRule();
+		rule.setType("Type");
+		assertEquals("Type", rule.getType());
 	}
 
 }

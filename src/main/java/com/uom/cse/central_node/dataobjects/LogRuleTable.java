@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LogRuleTable {
-	private static String dbURL = "jdbc:derby:filterDB;create=true;";
+	private static String dbURL = "jdbc:derby:logRuleDB;create=true;";
 	private static String TABLE_NAME = "windowsLogRules";
 	// jdbc Connection
 	private static Connection conn = null;

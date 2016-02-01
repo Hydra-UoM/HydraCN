@@ -26,48 +26,49 @@ public class CommandManager {
 	}
 
 	public static void checkAndDeployCommandForWindows(ThriftAgentProcessInfo process) {
+		
+		if (process != null) {
+			DeviceOverviewController.deviceOverviewController.deviceTable.getItems().forEach((device) -> {
 
-		DeviceOverviewController.deviceOverviewController.deviceTable.getItems().forEach((device) -> {
+				if (device.getDeviceId().equals(process.mac)) {
 
-			if (device.getDeviceId().equals(process.mac)) {
+					Date d1 = new Date();
+					long currentTimestamp = d1.getTime();
 
-				Date d1 = new Date();
-				long currentTimestamp = d1.getTime();
+					if (device.isTimeStampExpired(currentTimestamp)) {
 
-				if (device.isTimeStampExpired(currentTimestamp)) {
+						device.setLastCommandTimeStamp(currentTimestamp);
 
-					device.setLastCommandTimeStamp(currentTimestamp);
+						Task<Double> bandwidthTask = new Task<Double>() {
+							@Override
+							public Double call() throws Exception {
+								double bandwidth = BandwidthDetector.calculate(device.getIPAddress(), 4, 100);
+								return bandwidth;
+							}
+						};
 
-					Task<Double> bandwidthTask = new Task<Double>() {
-						@Override
-						public Double call() throws Exception {
-							double bandwidth = BandwidthDetector.calculate(device.getIPAddress(), 4, 100);
-							return bandwidth;
-						}
-					};
+						bandwidthTask.setOnSucceeded((e) -> {
+							double bandwidth = bandwidthTask.getValue();
 
-					bandwidthTask.setOnSucceeded((e) -> {
-						double bandwidth = bandwidthTask.getValue();
+							double cpu = ProcessStatsClient.getTotalCpu(device.getIPAddress());
+							double ram = ProcessStatsClient.getTotalRam(device.getIPAddress());
 
-						double cpu = ProcessStatsClient.getTotalCpu(device.getIPAddress());
-						double ram = ProcessStatsClient.getTotalRam(device.getIPAddress());
+							int command = determineCommandForWindows(bandwidth, cpu, ram);
 
-						int command = determineCommandForWindows(bandwidth, cpu, ram);
+							if (device.getCommandType() != command) {
+								device.setCommandType(command);
+								deployCommandForWindows(command, device.getIPAddress());
+							}
 
-						if (device.getCommandType() != command) {
-							device.setCommandType(command);
-							deployCommandForWindows(command, device.getIPAddress());
-						}
+						});
 
-					});
-
-					// run the task using a thread from the thread pool:
-					executor.execute(bandwidthTask);
+						// run the task using a thread from the thread pool:
+						executor.execute(bandwidthTask);
+					}
 				}
-			}
 
-		});
-
+			});
+		}
 	}
 
 	private static void deployCommandForWindows(int command, String ipAddress) {
@@ -106,48 +107,50 @@ public class CommandManager {
 
 	public static void checkAndDeployCommandForAndorid(ThriftAgentProcessInfo process) {
 		
-		DeviceOverviewController.deviceOverviewController.deviceTable.getItems().forEach((device) -> {
+		if (process != null) {
+			DeviceOverviewController.deviceOverviewController.deviceTable.getItems().forEach((device) -> {
 
-			if (device.getDeviceId().equals(process.mac)) {
+				if (device.getDeviceId().equals(process.mac)) {
 
-				Date d1 = new Date();
-				long currentTimestamp = d1.getTime();
+					Date d1 = new Date();
+					long currentTimestamp = d1.getTime();
 
-				if (device.isTimeStampExpired(currentTimestamp)) {
+					if (device.isTimeStampExpired(currentTimestamp)) {
 
-					device.setLastCommandTimeStamp(currentTimestamp);
+						device.setLastCommandTimeStamp(currentTimestamp);
 
-					Task<Double> bandwidthTask = new Task<Double>() {
-						@Override
-						public Double call() throws Exception {
-							double bandwidth = BandwidthDetector.calculate(device.getIPAddress(), 4, 100);
-							return bandwidth;
-						}
-					};
+						Task<Double> bandwidthTask = new Task<Double>() {
+							@Override
+							public Double call() throws Exception {
+								double bandwidth = BandwidthDetector.calculate(device.getIPAddress(), 4, 100);
+								return bandwidth;
+							}
+						};
 
-					bandwidthTask.setOnSucceeded((e) -> {
-						double bandwidth = bandwidthTask.getValue();
-						
-						//DeviceOverallInfo info = AndroidAgentServiceClient.getDeviceOverallInfo(device.getIPAddress());
-						//double ram = info.ramFreeMemory/(info.ramFreeMemory + info.ramUsedMemory);
-						double ram = 0.0;
-						double cpu = 0.0;
-						
-						int command = determineCommandForAndroid(bandwidth, cpu, ram);
+						bandwidthTask.setOnSucceeded((e) -> {
+							double bandwidth = bandwidthTask.getValue();
+							
+							//DeviceOverallInfo info = AndroidAgentServiceClient.getDeviceOverallInfo(device.getIPAddress());
+							//double ram = info.ramFreeMemory/(info.ramFreeMemory + info.ramUsedMemory);
+							double ram = 0.0;
+							double cpu = 0.0;
+							
+							int command = determineCommandForAndroid(bandwidth, cpu, ram);
 
-						if (device.getCommandType() != command) {
-							device.setCommandType(command);
-							deployCommandForAndroid(command, device.getIPAddress());
-						}
+							if (device.getCommandType() != command) {
+								device.setCommandType(command);
+								deployCommandForAndroid(command, device.getIPAddress());
+							}
 
-					});
+						});
 
-					// run the task using a thread from the thread pool:
-					executor.execute(bandwidthTask);
+						// run the task using a thread from the thread pool:
+						executor.execute(bandwidthTask);
+					}
 				}
-			}
 
-		});
+			});
+		}
 	}
 
 	private static void deployCommandForAndroid(int command, String ipAddress) {

@@ -525,7 +525,7 @@ public class LogFileWritter {
 		}
 	}
 
-	private static List<String> getPerformanceDataFilenames() {
+	public static List<String> getPerformanceDataFilenames() {
 
 		List<String> returnList = new ArrayList<String>();
 
@@ -551,7 +551,7 @@ public class LogFileWritter {
 		return returnList;
 	}
 
-	private static List<String> getUserInfoFilenames() {
+	public static List<String> getUserInfoFilenames() {
 
 		List<String> returnList = new ArrayList<String>();
 

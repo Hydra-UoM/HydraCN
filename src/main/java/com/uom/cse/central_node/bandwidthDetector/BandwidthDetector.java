@@ -18,12 +18,10 @@ public class BandwidthDetector {
 			for (String x : str)
 				sbx.append(x);
 
-			System.out.println(sbx.toString());
-
 			BufferedReader br = new BufferedReader(new InputStreamReader(
 					p.getInputStream()));
 			while ((str1 = br.readLine()) != null) {
-				System.out.println(str1);
+				
 				if (str1.contains("Minimum")) {
 					str2 = str1;
 					break;
@@ -36,17 +34,13 @@ public class BandwidthDetector {
 					str2 = str2.trim();
 					int avg = Integer.parseInt(str2.substring(str2.indexOf("Average") + 9,
 									str2.length()).replace("ms", "").trim());
-					System.out.println("Average: " + avg);
+					
 					bandwidth = (size * 1000000 / (avg)) / 1024;
 				} else {
-					System.out.println("Exception ONE");
-					System.out.println("Could not reach target server. Try to increase interval number.");
-					System.out.println("Please retry");
+					
 				}
 			} else {
-				System.out.println("Exception TWO");
-				System.out.println("Could not reach target server. Try to increase interval number.");
-				System.out.println("Please retry");
+				
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

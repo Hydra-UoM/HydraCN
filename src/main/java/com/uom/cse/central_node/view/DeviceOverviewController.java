@@ -100,11 +100,11 @@ public class DeviceOverviewController {
 	private CheckBox ramCheck;
 	@FXML
 	private CheckBox processesCheck;
-	
+
 	public static boolean isCpuChecked;
 	public static boolean isRamChecked;
 	public static boolean isProcessChecked;
-	
+
 	public static String condCpu;
 	public static String condRam;
 	public static String condProcess;
@@ -187,9 +187,12 @@ public class DeviceOverviewController {
 
 		// hide sensortable
 		hideSensorTable();
-		
-		//hide front image
+
+		// hide front image
 		hideCentralImageView();
+
+		// hide logged in user table
+		hideLoggedInUserTable();
 
 		// change selected device
 		this.selectedDevice = device;
@@ -200,8 +203,8 @@ public class DeviceOverviewController {
 		// show filterbox
 		showFilter();
 	}
-	
-	public void hideCentralImageView(){
+
+	public void hideCentralImageView() {
 		centralImageView.setVisible(false);
 	}
 
@@ -266,7 +269,7 @@ public class DeviceOverviewController {
 				condProcess = processTxt.getText();
 				condRam = ramTxt.getText();
 				showFilterViewer();
-				
+
 			}
 		}
 	}
@@ -502,61 +505,62 @@ public class DeviceOverviewController {
 
 				List<String> details = ProcessStatsClient.getCurrentLoggedInUser(selectedDevice.getIPAddress());
 
-				loggedInUserTable.getItems().remove(0);
+				if (details != null && details.size() > 0) {
+					loggedInUserTable.getItems().remove(0);
 
-				loggedInUserData.add(new Sensor("Name", details.get(0)));
+					loggedInUserData.add(new Sensor("Name", details.get(0)));
 
-				String privStr = details.get(2);
-				String priv = "";
+					String privStr = details.get(2);
+					String priv = "";
 
-				if (privStr.equals("0")) {
-					priv = "GUEST";
+					if (privStr.equals("0")) {
+						priv = "GUEST";
+					}
+
+					if (privStr.equals("1")) {
+						priv = "USER";
+					}
+
+					if (privStr.equals("2")) {
+						priv = "ADMIN";
+					}
+
+					loggedInUserData.add(new Sensor("Privillages", priv));
+
+					long dateLong = Long.parseLong(details.get(7));
+					Timestamp stamp = new Timestamp(dateLong * 1000);
+					long millis2 = stamp.getTime();
+					Date date = new Date(millis2);
+
+					loggedInUserData.add(new Sensor("Last LogOn", date + ""));
+
+					String accExpire = "";
+					if (details.get(9).equals("-1")) {
+						accExpire = "NO EXPIRE";
+					}
+
+					loggedInUserData.add(new Sensor("Account Expires", accExpire));
+
+					String maxStorage = "";
+					if (details.get(9).equals("-1")) {
+						maxStorage = "NO LIMIT";
+					}
+
+					loggedInUserData.add(new Sensor("Maximum storage", maxStorage));
+					loggedInUserData.add(new Sensor("Bad password count", details.get(12)));
+					loggedInUserData.add(new Sensor("No Of LoggOns", details.get(13)));
+
+					String passExpire = "";
+					if (details.get(17).equals("0")) {
+						passExpire = "NO";
+					}
+
+					if (details.get(17).equals("1")) {
+						passExpire = "YES";
+					}
+
+					loggedInUserData.add(new Sensor("Password Expired", passExpire));
 				}
-
-				if (privStr.equals("1")) {
-					priv = "USER";
-				}
-
-				if (privStr.equals("2")) {
-					priv = "ADMIN";
-				}
-
-				loggedInUserData.add(new Sensor("Privillages", priv));
-
-				long dateLong = Long.parseLong(details.get(7));
-				Timestamp stamp = new Timestamp(dateLong * 1000);
-				long millis2 = stamp.getTime();
-				Date date = new Date(millis2);
-
-				loggedInUserData.add(new Sensor("Last LogOn", date + ""));
-				
-				String accExpire = "";
-				if (details.get(9).equals("-1")) {
-					accExpire = "NO EXPIRE";
-				}
-
-				loggedInUserData.add(new Sensor("Account Expires", accExpire));
-
-				String maxStorage = "";
-				if (details.get(9).equals("-1")) {
-					maxStorage = "NO LIMIT";
-				}
-
-				loggedInUserData.add(new Sensor("Maximum storage", maxStorage));
-				loggedInUserData.add(new Sensor("Bad password count", details.get(12)));
-				loggedInUserData.add(new Sensor("No Of LoggOns", details.get(13)));
-
-				String passExpire = "";
-				if (details.get(17).equals("0")) {
-					passExpire = "NO";
-				}
-				
-				if (details.get(17).equals("1")) {
-					passExpire = "YES";
-				}
-				
-				loggedInUserData.add(new Sensor("Password Expired", passExpire));
-
 			}
 		};
 
@@ -572,11 +576,10 @@ public class DeviceOverviewController {
 		deviceTable.setItems(hydraCN.getDeviceData());
 	}
 
-	public void showInfoMessage (String message) {
-		Platform.runLater(
-				() -> infoLabel.setText(message));
+	public void showInfoMessage(String message) {
+		Platform.runLater(() -> infoLabel.setText(message));
 	}
-	
+
 	private void showDataViewer() {
 		hydraCN.showDataViewer();
 	}
@@ -588,7 +591,7 @@ public class DeviceOverviewController {
 		command.add(CommandStrings.GET_PROCESSES_WITH_INFORMATION);
 		command.add(CommandStrings.FILTER_PROCESS_ALL_DEVICES);
 
-		if(selectedDevice != null){
+		if (selectedDevice != null) {
 			if (Device.TYPE_ANDROID.equals(selectedDevice.getType())) {
 				command.add(CommandStrings.GET_SENSOR_DETAILS);
 			}
@@ -597,7 +600,7 @@ public class DeviceOverviewController {
 				command.add(CommandStrings.GET_CURRENT_LOGGEDIN_USER_INFORMATION);
 			}
 		}
-		
+
 		commandChoiceBox.setItems(command);
 	}
 
@@ -612,7 +615,7 @@ public class DeviceOverviewController {
 
 			final Tooltip tooltip = new Tooltip("Enable CPU Filter");
 			cpuCheck.setTooltip(tooltip);
-			
+
 			isCpuChecked = false;
 
 		} else {
@@ -623,7 +626,7 @@ public class DeviceOverviewController {
 
 			final Tooltip tooltip = new Tooltip("Disable CPU Filter");
 			cpuCheck.setTooltip(tooltip);
-			
+
 			isCpuChecked = true;
 		}
 	}
@@ -639,7 +642,7 @@ public class DeviceOverviewController {
 
 			final Tooltip tooltip = new Tooltip("Enable RAM Filter");
 			ramCheck.setTooltip(tooltip);
-			
+
 			isRamChecked = false;
 
 		} else {
@@ -650,7 +653,7 @@ public class DeviceOverviewController {
 
 			final Tooltip tooltip = new Tooltip("Disable RAM Filter");
 			ramCheck.setTooltip(tooltip);
-			
+
 			isRamChecked = true;
 		}
 	}
@@ -666,7 +669,7 @@ public class DeviceOverviewController {
 
 			final Tooltip tooltip = new Tooltip("Enable Process Filter");
 			processesCheck.setTooltip(tooltip);
-			
+
 			isProcessChecked = false;
 
 		} else {
@@ -677,7 +680,7 @@ public class DeviceOverviewController {
 
 			final Tooltip tooltip = new Tooltip("Disable Process Filter");
 			processesCheck.setTooltip(tooltip);
-			
+
 			isProcessChecked = true;
 		}
 	}

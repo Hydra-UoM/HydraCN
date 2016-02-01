@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CEPRuleTable {
-	private static String dbURL = "jdbc:derby:filterDB;create=true;";
+	private static String dbURL = "jdbc:derby:cepRuleDB;create=true;";
 	private static String TABLE_NAME = "cepRules";
 	// jdbc Connection
 	private static Connection conn = null;

@@ -180,7 +180,7 @@ public class RegisterDeviceHandler implements RegisterDeviceService.Iface {
 			}
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			
 		}
 
 		return true;

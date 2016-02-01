@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AppliedRuleTable {
-	private static String dbURL = "jdbc:derby:filterDB;create=true;";
+	private static String dbURL = "jdbc:derby:appliedRuleDB;create=true;";
 	private static String TABLE_NAME = "appliedRules";
 	
 	public static final String LOG_RULE = "LOG_RULE";
@@ -26,7 +26,7 @@ public class AppliedRuleTable {
 	private static String CREATE_APPLIED_RULE_TABLE_QUERY = "CREATE TABLE " + TABLE_NAME
 			+ " (ID INTEGER not null primary key "
 			+ "GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
-			+ "TARGET_TYPE VARCHAR(40), RULE_TYPE VARCHAR(40), RULE_ID INTEGER, GROUP_ID INTEGER, MAC VARCHAR(40)"
+			+ "TARGET_TYPE VARCHAR(40), RULE_TYPE VARCHAR(40), RULE_ID INTEGER, GROUP_ID INTEGER, MAC VARCHAR(40),"
 			+ " ACTIVE VARCHAR(1))";
 	
 	static {
@@ -68,7 +68,7 @@ public class AppliedRuleTable {
 //			
 //			stmt.execute(updateStatement);
 			
-			String insertStatement = "insert into " + TABLE_NAME + " TARGET_TYPE, RULE_TYPE, RULE_ID, GROUP_ID, MAC) "
+			String insertStatement = "insert into " + TABLE_NAME + " (TARGET_TYPE, RULE_TYPE, RULE_ID, GROUP_ID, MAC, ACTIVE) "
 					+ " values ('"+ rule.getTargetType() + "','" + rule.getRuleType() + "'," + rule.getRuleId() 
 					+ "," + rule.getGroupId() + ",'" + rule.getMac() + "','Y')";
 			
@@ -95,7 +95,7 @@ public class AppliedRuleTable {
 		try {
 			Statement stmt = conn.createStatement();
 			
-			ResultSet results = stmt.executeQuery("select * from " + TABLE_NAME + " where APPLY = 'Y' and GROUP_ID = " 
+			ResultSet results = stmt.executeQuery("select * from " + TABLE_NAME + " where ACTIVE = 'Y' and GROUP_ID = " 
 			+ groupId);
 			
 			while (results.next()) {
