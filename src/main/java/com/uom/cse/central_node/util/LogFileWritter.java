@@ -670,4 +670,32 @@ public class LogFileWritter {
 
 		return returnList;
 	}
+	
+	public static String getUserInfoFilename(Device device) {
+
+
+		try (BufferedReader br = new BufferedReader(new FileReader("LogFileConfig/" + LOG_FILES_NAMES_FILE))) {
+
+			String line = br.readLine();
+
+			while (line != null) {
+
+				if (line.toLowerCase().contains(USER_INFO_LOG_FILE_NAME_PREFIX.toLowerCase())) {
+					String macWithoutColon = device.getDeviceId().replace(":", "");
+					if(line.toLowerCase().contains(macWithoutColon.toLowerCase())){
+						return line;
+					}
+				}
+
+				line = br.readLine();
+			}
+
+		} catch (FileNotFoundException e) {
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
 }

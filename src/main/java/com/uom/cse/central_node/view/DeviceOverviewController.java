@@ -11,6 +11,7 @@ import com.uom.cse.central_node.androidagentservices.SensorDetails;
 import com.uom.cse.central_node.commands.CommandStrings;
 import com.uom.cse.central_node.model.Device;
 import com.uom.cse.central_node.model.Sensor;
+import com.uom.cse.central_node.util.LogFileReader;
 import com.uom.cse.central_node.windowsagentservices.ProcessStatsClient;
 import com.uom.cse.central_node.windowsagentservices.WindowsDeviceOverallInfo;
 
@@ -503,63 +504,10 @@ public class DeviceOverviewController {
 			@Override
 			public void run() {
 
-				List<String> details = ProcessStatsClient.getCurrentLoggedInUser(selectedDevice.getIPAddress());
+				List<Sensor> sensors = LogFileReader.readUserInfoData(selectedDevice);
 
-				if (details != null && details.size() > 0) {
-					loggedInUserTable.getItems().remove(0);
-
-					loggedInUserData.add(new Sensor("Name", details.get(0)));
-
-					String privStr = details.get(2);
-					String priv = "";
-
-					if (privStr.equals("0")) {
-						priv = "GUEST";
-					}
-
-					if (privStr.equals("1")) {
-						priv = "USER";
-					}
-
-					if (privStr.equals("2")) {
-						priv = "ADMIN";
-					}
-
-					loggedInUserData.add(new Sensor("Privillages", priv));
-
-					long dateLong = Long.parseLong(details.get(7));
-					Timestamp stamp = new Timestamp(dateLong * 1000);
-					long millis2 = stamp.getTime();
-					Date date = new Date(millis2);
-
-					loggedInUserData.add(new Sensor("Last LogOn", date + ""));
-
-					String accExpire = "";
-					if (details.get(9).equals("-1")) {
-						accExpire = "NO EXPIRE";
-					}
-
-					loggedInUserData.add(new Sensor("Account Expires", accExpire));
-
-					String maxStorage = "";
-					if (details.get(9).equals("-1")) {
-						maxStorage = "NO LIMIT";
-					}
-
-					loggedInUserData.add(new Sensor("Maximum storage", maxStorage));
-					loggedInUserData.add(new Sensor("Bad password count", details.get(12)));
-					loggedInUserData.add(new Sensor("No Of LoggOns", details.get(13)));
-
-					String passExpire = "";
-					if (details.get(17).equals("0")) {
-						passExpire = "NO";
-					}
-
-					if (details.get(17).equals("1")) {
-						passExpire = "YES";
-					}
-
-					loggedInUserData.add(new Sensor("Password Expired", passExpire));
+				for (Sensor sensor : sensors) {
+					loggedInUserData.add(sensor);
 				}
 			}
 		};

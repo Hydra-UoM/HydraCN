@@ -12,6 +12,7 @@ import org.apache.thrift.transport.TTransport;
 import com.uom.cse.central_node.dataobjects.Filter;
 import com.uom.cse.central_node.dataobjects.LogRule;
 import com.uom.cse.central_node.model.ProcessInfo;
+import com.uom.cse.central_node.windowsagentservices.ProcessStats.Client;
 
 public class ProcessStatsClient {
 	public static WindowsDeviceOverallInfo getDeviceOverallInfo(String IPAddress) {
@@ -116,10 +117,10 @@ public class ProcessStatsClient {
 			transport = new TSocket(IPAddress, 9090);
 			transport.open();
 
-			//TProtocol protocol = new TBinaryProtocol(transport);
-			//ProcessStats.Client client = new ProcessStats.Client(protocol);
+			TProtocol protocol = new TBinaryProtocol(transport);
+			ProcessStats.Client client = new ProcessStats.Client(protocol);
 
-			//overallInfo = getCurrentLoggedInUserFromService(client);
+			overallInfo = getCurrentLoggedInUserFromService(client);
 
 			transport.close();
 		} catch (TException x) {
@@ -239,6 +240,12 @@ public class ProcessStatsClient {
 		return true;
 	}
 
+
+	private static List<String> getCurrentLoggedInUserFromService(Client client) {
+		
+		return null;
+	}
+	
 	private static void stopWindowsLogInfoFromService(ProcessStats.Client client) {
 		
 		try {
