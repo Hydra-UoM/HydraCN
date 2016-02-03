@@ -1,5 +1,6 @@
 package com.uom.cse.central_node.subscriber;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -28,25 +29,11 @@ public class CriticalEventSubscriber implements StatementSubscriber {
 	private static Logger LOG = LoggerFactory.getLogger(CriticalEventSubscriber.class);
 
 	public String getStatement() {
-
-		// String crtiticalEventExpression = "select avg(cpuUsage) as avgCpu
-		// from ApplicationEvent.win:time_batch(10) having avg(cpuUsage) > 20";
-
-		// String criticalEventExpression = "select
-		// mac,cpuUsage,ramUsage,sentData,receiveData from ApplicationEvent
-		// where cpuUsage > "+ filter.getCpuUsage() +" and ramUsage > " +
-		// filter.getRamUsage() + " and sentData > " + filter.getSentData()+"
-		// and receiveData > " + filter.getReceivedData();
 		return "";
 	}
 
 	public void update(Map<String, ApplicationEvent> eventMap) {
-		Set<String> mykeyset = eventMap.keySet();
-		String descriptionMessage = "";
-		for(String key : mykeyset){
-			descriptionMessage += key + " - " + eventMap.get(key) + "\n";
-		}
-		final String description = descriptionMessage;
+		
 		StringBuilder sb = new StringBuilder();
 		sb.append("************************************************");
 		sb.append("\n* [ALERT] : CRITICAL EVENT DETECTED BY ESPER! ");
@@ -55,12 +42,33 @@ public class CriticalEventSubscriber implements StatementSubscriber {
 		sb.append("\n**********************************************");
 		System.out.println(sb.toString());
 
+		
+		Set<String> mykeyset = eventMap.keySet();
+		
+		
 		Platform.runLater(() -> {
+			String descriptionMessage = "";
+			for(String key : mykeyset){
+				if (key.equals("Unintended_URLs_Accessed")){
+					descriptionMessage += key + " - ";
+					String urls = eventMap.get(key) + "";
+					if(!urls.equals("[]")){
+						String []urlArray = urls.split(",");
+						for(String url : urlArray){
+							if(!url.contains(ApplicationEvent.token)){
+								descriptionMessage += url + ",";
+							}
+						}
+					}
+				}else{
+					descriptionMessage += key + " - " + eventMap.get(key) + "\n";
+				}
+			}
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("HYDRA ALERT");
 			alert.setHeaderText("CRITICAL EVENT DETECTED BY HYDRA" + "\n" + "at device with MAC - " + eventMap.get("Detected_Device_MAC_ID"));
 			
-			alert.setContentText(alertMessage + "\n" + description);
+			alert.setContentText(alertMessage + "\n" + descriptionMessage);
 
 			// Add a custom icon.
 			Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();

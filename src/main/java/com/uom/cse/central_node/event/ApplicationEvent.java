@@ -28,6 +28,8 @@ public class ApplicationEvent {
 	private List<String> urls;
 	
 	private double totalReceivedData;
+	
+	public static String token;
     
     
     public ApplicationEvent(ThriftAgentProcessInfo agentProcessInfo) {
@@ -154,6 +156,8 @@ public class ApplicationEvent {
 	}
 	
 	public static boolean exceptThis(List<String> list, String token) {
+		
+			ApplicationEvent.token = token;
 
 			if(list.isEmpty()){
 				return false;
