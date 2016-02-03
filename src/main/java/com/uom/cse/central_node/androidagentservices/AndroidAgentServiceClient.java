@@ -264,13 +264,11 @@ public class AndroidAgentServiceClient {
 
 	private static float testNetworkFromService(AndroidAgentService.Client client) throws TException {
 
-		java.nio.ByteBuffer buff = java.nio.ByteBuffer.allocate(1024);
 		int sizeOfBytes = 100;
 
 		long totalDiff = 0;
 		for (int i = 0; i < sizeOfBytes; i++) {
 			Date d1 = new Date();
-			boolean response = client.testNetwork(buff);
 			Date d2 = new Date();
 			long diff = (d2.getTime() - d1.getTime());
 			totalDiff += diff;

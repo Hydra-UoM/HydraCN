@@ -1,7 +1,5 @@
 package com.uom.cse.central_node.view;
 
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 
 import com.uom.cse.central_node.HydraCN;

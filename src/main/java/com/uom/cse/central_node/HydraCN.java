@@ -416,7 +416,7 @@ public class HydraCN extends Application {
 
 			// Create the filter Stage.
 			Stage newFilterStage = new Stage();
-			newFilterStage.setTitle("Performance Data");
+			newFilterStage.setTitle("Windows Log Rules");
 			newFilterStage.initModality(Modality.WINDOW_MODAL);
 			newFilterStage.initOwner(windowsLogRuleViewer);
 			newFilterStage.getIcons().add(new Image("icon.png"));

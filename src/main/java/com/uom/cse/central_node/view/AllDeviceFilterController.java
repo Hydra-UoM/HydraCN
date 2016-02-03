@@ -176,7 +176,7 @@ public class AllDeviceFilterController {
 			for (AllDeviceDetails detail : ramFilterList) {
 				String processName = detail.getProcessName().trim();
 				String condProcessName = deviceOverviewController.condProcess.trim();
-				if (!detail.getProcessName().toLowerCase().equals(condProcessName.toLowerCase())) {
+				if (detail.getProcessName().toLowerCase().equals(condProcessName.toLowerCase())) {
 					processFilterList.add(detail);
 				}
 			}
