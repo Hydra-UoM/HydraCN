@@ -19,6 +19,11 @@
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#showCepRuleEditor" text="Manage CEP Rules" />
                </items></Menu>
+            <Menu mnemonicParsing="false" text="Action">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#showInterationDataViewer" text="Action Viewer" />
+              </items>
+            </Menu>
           <Menu mnemonicParsing="false" text="About">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#showAbout" text="About" />

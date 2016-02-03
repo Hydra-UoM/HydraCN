@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uom.cse.central_node.view.DeviceInteractionViewerController">
+   <children>
+      <TableView fx:id="dataTable" layoutX="89.0" layoutY="40.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="50.0">
+        <columns>
+          <TableColumn fx:id="timeColumn" prefWidth="75.0" text="Time" />
+          <TableColumn fx:id="IPAddressColumn" prefWidth="75.0" text="Device IP" />
+            <TableColumn fx:id="deviceNameColumn" prefWidth="75.0" text="Device Name" />
+            <TableColumn fx:id="actionColumn" minWidth="150.0" prefWidth="150.0" text="Action" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <Button layoutX="534.0" layoutY="561.0" mnemonicParsing="false" onAction="#actionClose" text="Cancel" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+      <Label layoutX="14.0" layoutY="14.0" text="Device Interaction Data" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

@@ -22,4 +22,9 @@ public class RootLayoutController {
 	private void showAbout(){
 		DeviceOverviewController.hydraCN.showAbout();
 	}
+	
+	@FXML
+	private void showInterationDataViewer(){
+		DeviceOverviewController.hydraCN.showInterationDataViewer();
+	}
 }

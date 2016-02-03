@@ -28,9 +28,6 @@ public class RegisterDeviceHandler implements RegisterDeviceService.Iface {
 
 	private static Executor executor;
 	
-	String ipAddress;
-	String name;
-
 	static {
 		executor = Executors.newSingleThreadExecutor(runnable -> {
 			Thread t = new Thread(runnable);
@@ -69,7 +66,8 @@ public class RegisterDeviceHandler implements RegisterDeviceService.Iface {
 			hydraCN.getDeviceData().add(device);
 		}
 		
-		hydraCN.showInfoMessage(device.getIPAddress() + " " + device.getName() + " is connected.");
+		hydraCN.showInfoMessage(device.getIPAddress(), device.getName(), "connected",
+				deviceDetails.IPAddress + " " + deviceDetails.name + " connected");
 		return true;
 	}
 	
@@ -124,13 +122,15 @@ public class RegisterDeviceHandler implements RegisterDeviceService.Iface {
 		// run the task using a thread from the thread pool:
 		executor.execute(logCommandTask);
 		
-		hydraCN.showInfoMessage(device.getIPAddress() + " " + device.getName() + " is got command.");
+		hydraCN.showInfoMessage(device.getIPAddress(), device.getName(), "connected and got command",
+				deviceDetails.IPAddress + " " + deviceDetails.name + " got command");
 		
 		return true;
 	}
 
 	@Override
 	public boolean pushProcessesInfo(List<ThriftAgentProcessInfo> processes) throws TException {
+		final String[] details = new String[2];
 		
 		if(EventFeeder.isHandlerset){
 			EventFeeder.pushToCEP(processes);
@@ -144,8 +144,8 @@ public class RegisterDeviceHandler implements RegisterDeviceService.Iface {
 			for (com.uom.cse.central_node.model.Device tempDevice : existingDeviceList) {
 				if (tempDevice.getDeviceId().equals(process.mac)) {
 					LogFileWritter.writeFile(process, tempDevice.getName());
-					ipAddress = tempDevice.getIPAddress();
-					name = tempDevice.getName();
+					details[0] = tempDevice.getIPAddress();
+					details[1] = tempDevice.getName();
 					break;
 				}
 			}
@@ -159,7 +159,8 @@ public class RegisterDeviceHandler implements RegisterDeviceService.Iface {
 			}
 		});
 		
-		hydraCN.showInfoMessage(ipAddress + " " + name + " pushed processes information.");
+		hydraCN.showInfoMessage(details[0], details[1], "pushed processes information",
+				details[0] + " " + details[1] + " pushed processes information");
 		
 		return true;
 
@@ -200,6 +201,7 @@ public class RegisterDeviceHandler implements RegisterDeviceService.Iface {
 
 	@Override
 	public boolean pushLogInfoTest1(List<myLogStructure> logInfo) throws TException {
+		final String[] details = new String[2];
 		
 		logInfo.forEach((log) -> {
 			List<com.uom.cse.central_node.model.Device> existingDeviceList = DeviceOverviewController.deviceOverviewController.deviceTable
@@ -208,15 +210,16 @@ public class RegisterDeviceHandler implements RegisterDeviceService.Iface {
 			for (com.uom.cse.central_node.model.Device tempDevice : existingDeviceList) {
 				if (tempDevice.getDeviceId().equals(log.mac)) {
 					LogFileWritter.writeFileWindowsLog(log, tempDevice.getName());
-					name = tempDevice.getName();
-					ipAddress = tempDevice.getIPAddress();
+					details[0] = tempDevice.getIPAddress();
+					details[1] = tempDevice.getName();
 					break;
 				}
 			}
 			
 		});
 		
-		hydraCN.showInfoMessage(ipAddress + " " + name + " pushed windows log information.");
+		hydraCN.showInfoMessage(details[0], details[1], "pushed log information",
+				details[0] + " " + details[1] + " pushed log information");
 		
 		return true;
 	}

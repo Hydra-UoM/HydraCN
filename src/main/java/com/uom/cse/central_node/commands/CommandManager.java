@@ -82,7 +82,9 @@ public class CommandManager {
 		} else if (command == 3) {
 			commandStr = "CRITICAL_DATA_WITH_PREPROCESSING_COMMAND";
 		}
-		DeviceOverviewController.hydraCN.showInfoMessage(commandStr + " is sent to " + ipAddress + "  (Windows)");
+		DeviceOverviewController.hydraCN.showInfoMessage("N/A", "CENTRAL NODE", 
+				commandStr + " is sent to " + ipAddress + "  (Windows)", "");
+		
 		LogFileWritter.writeCommandFile(ipAddress, commandStr, Device.TYPE_WINDOWS);
 	}
 
@@ -164,7 +166,10 @@ public class CommandManager {
 		} else if (command == 3) {
 			commandStr = "CRITICAL_DATA_WITH_PREPROCESSING_COMMAND";
 		}
-		DeviceOverviewController.hydraCN.showInfoMessage(commandStr + " is sent to " + ipAddress + "  (Android)");
+		
+		DeviceOverviewController.hydraCN.showInfoMessage("N/A", "CENTRAL NODE",
+				commandStr + " is sent to " + ipAddress + "  (Android)", "");
+		
 		LogFileWritter.writeCommandFile(ipAddress, commandStr, Device.TYPE_ANDROID);
 	}
 

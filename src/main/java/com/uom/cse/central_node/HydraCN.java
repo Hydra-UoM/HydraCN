@@ -6,6 +6,7 @@ import com.uom.cse.central_node.dataobjects.Filter;
 import com.uom.cse.central_node.model.CEPRuleData;
 import com.uom.cse.central_node.model.Device;
 import com.uom.cse.central_node.model.FilterData;
+import com.uom.cse.central_node.model.InteractionData;
 import com.uom.cse.central_node.model.ProcessInfo;
 import com.uom.cse.central_node.model.WindowsLogData;
 import com.uom.cse.central_node.services.RegisterDeviceHandler;
@@ -17,6 +18,7 @@ import com.uom.cse.central_node.view.AppliedFilterViewController;
 import com.uom.cse.central_node.view.AppliedLogRuleViewController;
 import com.uom.cse.central_node.view.CEPRuleEditorController;
 import com.uom.cse.central_node.view.DataViewerController;
+import com.uom.cse.central_node.view.DeviceInteractionViewerController;
 import com.uom.cse.central_node.view.DeviceOverviewController;
 import com.uom.cse.central_node.view.FilterCreateFormController;
 import com.uom.cse.central_node.view.FilterDetailsController;
@@ -61,6 +63,7 @@ public class HydraCN extends Application {
 	private ObservableList<FilterData> filterData = FXCollections.observableArrayList();
 	private ObservableList<WindowsLogData> windowsLogData = FXCollections.observableArrayList();
 	private ObservableList<CEPRuleData> cepRuleData = FXCollections.observableArrayList();
+	private ObservableList<InteractionData> interationData = FXCollections.observableArrayList();
 
 	public static final String APPLICATION_ICON = "http://cdn1.iconfinder.com/data/icons/Copenhagen/PNG/32/people.png";
 	public static final String SPLASH_IMAGE = "splash.png";
@@ -175,6 +178,10 @@ public class HydraCN extends Application {
 		return cepRuleData;
 	}
 
+	public ObservableList<InteractionData> getInterationData() {
+		return interationData;
+	}
+
 	public void setInfoData(ObservableList<ProcessInfo> infoData) {
 		this.infoData = infoData;
 	}
@@ -232,9 +239,9 @@ public class HydraCN extends Application {
 		}
 	}
 
-	public void showInfoMessage(String message) {
-		if (!message.contains("null")){
-			deviceOverviewController.showInfoMessage(message);
+	public void showInfoMessage(String ipAddress, String deviceName, String message, String shortInfo) {
+		if (!message.contains("null") && ipAddress != null && deviceName != null){
+			deviceOverviewController.showInfoMessage(ipAddress, deviceName, message, shortInfo);
 		}
 		
 	}
@@ -257,6 +264,34 @@ public class HydraCN extends Application {
 
 			// Set the person into the controller.
 			DataViewerController controller = loader.getController();
+			controller.setDialogStage(dialogStage);
+
+			// Show the dialog and wait until the user closes it
+			dialogStage.showAndWait();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void showInterationDataViewer() {
+		try {
+			// Load the fxml file and create a new stage for the popup dialog.
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(HydraCN.class.getResource("view/DeviceInteractionDataViewer.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
+
+			// Create the dialog Stage.
+			Stage dialogStage = new Stage();
+			dialogStage.setTitle("Device Interaction Data Viewer");
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			dialogStage.initOwner(primaryStage);
+			dialogStage.getIcons().add(new Image("icon.png"));
+			Scene scene = new Scene(page);
+			dialogStage.setScene(scene);
+
+			// Set the person into the controller.
+			DeviceInteractionViewerController controller = loader.getController();
 			controller.setDialogStage(dialogStage);
 
 			// Show the dialog and wait until the user closes it

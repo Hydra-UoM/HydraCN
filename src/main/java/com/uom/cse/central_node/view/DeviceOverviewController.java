@@ -8,8 +8,10 @@ import com.uom.cse.central_node.androidagentservices.DeviceOverallInfo;
 import com.uom.cse.central_node.androidagentservices.SensorDetails;
 import com.uom.cse.central_node.commands.CommandStrings;
 import com.uom.cse.central_node.model.Device;
+import com.uom.cse.central_node.model.InteractionData;
 import com.uom.cse.central_node.model.Sensor;
 import com.uom.cse.central_node.util.LogFileReader;
+import com.uom.cse.central_node.util.LogFileWritter;
 import com.uom.cse.central_node.windowsagentservices.ProcessStatsClient;
 import com.uom.cse.central_node.windowsagentservices.WindowsDeviceOverallInfo;
 
@@ -520,8 +522,22 @@ public class DeviceOverviewController {
 		deviceTable.setItems(hydraCN.getDeviceData());
 	}
 
-	public void showInfoMessage(String message) {
-		Platform.runLater(() -> infoLabel.setText(message));
+	public void showInfoMessage(String ipAddress, String deviceName, String message, String shortInfo) {
+		Platform.runLater(() -> 
+			{
+				if ("N/A".equals(ipAddress)){
+					infoLabel.setText(message);
+				}else {
+					infoLabel.setText(shortInfo);
+				}
+				if (!"connected".equals(message)){
+					InteractionData data = new InteractionData(LogFileWritter.getDateAndTime(), ipAddress,
+							deviceName, message);
+					
+					DeviceOverviewController.hydraCN.getInterationData().add(data);
+				}
+			}
+		);
 	}
 
 	private void showDataViewer() {
