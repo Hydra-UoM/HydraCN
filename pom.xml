@@ -119,13 +119,13 @@
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>0.9.28</version>
+			<version>1.2.0</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-core</artifactId>
-			<version>0.9.28</version>
+			<version>1.2.0</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
@@ -163,7 +163,7 @@
 				<version>8.1.2</version>
 				<configuration>
 					<mainClass>com.uom.cse.central_node.HydraCN</mainClass>
-					<nativeInstallers />
+					<nativeInstallers/>
 				</configuration>
 			</plugin>
 		</plugins>
